@@ -1,0 +1,99 @@
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -o-appearance: none !important;
+    -ms-appearance: none !important;
+    margin: 0; }
+      
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -o-box-shadow: none !important;
+    -ms-box-shadow: none !important; }
+    
+input:-webkit-autofill {
+    box-shadow: 0 0 0 30px transparent inset;
+    -moz-box-shadow: 0 0 0 30px transparent inset;
+    -webkit-box-shadow: 0 0 0 30px transparent inset;
+    -o-box-shadow: 0 0 0 30px transparent inset;
+    -ms-box-shadow: 0 0 0 30px transparent inset;
+    background-color: transparent !important; }
+      
+body {
+    font-size: 16px;
+    color: #222;
+    font-weight: 500;
+    font-family: 'Poppins';
+    margin: 0px; }
+
+.register-form {
+    padding: 75px 100px 75px 100px; }
+
+.form-row {
+    margin: 0 -30px; }
+
+.form-row .form-group {
+    width: 50%;
+    padding: 0 100px; }
+  
+.form-row {
+    margin: 0 -30px; }
+
+.form-input, .form-select, .form-radio {
+    margin-bottom: 25px; }
+
+label, input {
+    display: block;
+    width: 100%; }
+    
+label {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 7px; }
+
+input {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 14px 20px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Poppins'; }
+    
+input:focus {
+    border: 1px solid #03a678; }
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 11px 15px;
+    cursor: pointer;
+}
+
+.submit {
+    display: inline-block;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px; }
+
+#submit {
+    background: #03a678;
+    color: #fff;
+    margin-right: 25px; }
+
+#submit:hover {
+    background-color: #025b42; }
