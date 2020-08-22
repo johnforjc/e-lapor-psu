@@ -20,39 +20,21 @@ input:focus, select:focus, textarea:focus {
     -ms-box-shadow: none !important; }
       
 body {
-    font-size: 14px;
+    font-size: 16px;
     color: #222;
     font-weight: 500;
+    font-family: 'Poppins';
     margin: 0px; }
-
-h1 {
-    color: #222;
-    font-size: 26px;
-    text-transform: uppercase;
-    margin: 0 10px 40px; }
-
-h4 {
-    color: #222;
-    text-decoration: underline;
-    text-decoration-color: #03a678;
-    text-underline-position: under;
-    text-transform: uppercase;
-    margin: 70px 0 30px; 
-    font-size: 25px; }
-
-.vertical { 
-    border-left: 2px solid #03a678; ; 
-    height: 91%;
-    position: absolute; 
-    left: 50%; 
-} 
 
 .register-form {
     padding: 75px 100px 75px 100px; }
 
+.form-row {
+    margin: 0 -30px; }
+
 .form-row .form-group {
     width: 50%;
-    padding: 0 40px; }
+    padding: 0 100px; }
   
 .form-row {
     margin: 0 -30px; }
@@ -78,7 +60,8 @@ input {
     -webkit-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
-    font-size: 14px; }
+    font-size: 14px;
+    font-family: 'Poppins'; }
     
 input:focus {
     border: 1px solid #03a678; }
@@ -86,14 +69,14 @@ input:focus {
 select {
     appearance: none;
     border: 1px solid #ccc; 
-    font-size: 14px; 
+    font-size: 14px;
+    font-family: 'Poppins'; 
     width: 100%; 
     height: 100%;  
     cursor: pointer;
     padding: 14px 20px; 
     border-radius:5px;
-    background: url('../images/arrow.png') no-repeat 95% 50%;
-    background-size: 14px 15px; 
+    background: url('images/arrow.png') no-repeat 97% 50% #ffffff; 
 }
 
 .custom-file-upload {
@@ -104,6 +87,7 @@ select {
 
 .submit {
     display: inline-block;
+    font-family: 'Poppins';
     font-weight: bold;
     font-size: 14px;
     padding: 10px;
