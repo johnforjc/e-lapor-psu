@@ -123,3 +123,66 @@ select {
 
 #submit:hover {
     background-color: #025b42; }
+
+
+.section-generate
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+}
+
+.form-box
+{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.generate-form
+{
+    width: 100%;
+    padding: 40px;
+}
+
+.title-form-generate
+{
+    padding-bottom: 30px;
+}
+
+.generate_input
+{
+    margin: 10px 0;
+}
+
+.password-section
+{
+    display: flex;
+}
+
+.submit
+{
+    background: #03a678;
+}
+
+.generate_btn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    background: #03a678;
+    margin:  10px 0px 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#generate_input_password{
+    width: 70%;
+}
