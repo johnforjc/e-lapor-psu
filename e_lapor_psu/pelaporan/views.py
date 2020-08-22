@@ -28,4 +28,10 @@ def isi_data_perusahaan(request):
     return HttpResponse('Success')
 
 def generate_username(request):
-    return render(request, 'generate_username.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        return render(request, 'generate_username.html')
+        
+    else:
+        return render(request, 'generate_username.html')

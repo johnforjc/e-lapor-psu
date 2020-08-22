@@ -142,7 +142,13 @@ select {
     justify-content: center;
     align-items: center;
     width: 50%;
-    height: 100%;
+}
+
+.form-content
+{
+    padding: 20px 40px;
+    border-radius: 10px;
+    border-color: #025b42;
 }
 
 .generate-form
