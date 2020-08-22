@@ -76,16 +76,12 @@ WSGI_APPLICATION = 'e_lapor_psu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
-        # MySQL
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'djangodatabase',
-        # 'USER': 'dbadmin',
-        # 'PASSWORD': '12345',
-        # 'HOST': 'localhost',
-        # 'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'e-lapor-psu',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

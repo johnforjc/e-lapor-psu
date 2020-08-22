@@ -16,7 +16,10 @@ def form_data_perusahaan(request):
         email = request.POST['email']
         website = request.POST['website']
 
+        testing = nama_perusahaan + ' ' + nama_pemilik + ' ' + bentuk_perusahaan + ' ' + alamat_perusahaan + ' ' + tahun_berdiri + ' ' + email + ' ' + website
+
         # POST data upload here
+        return HttpResponse(testing)
 
     else:
         return render(request, 'form_data_perusahaan.html')
