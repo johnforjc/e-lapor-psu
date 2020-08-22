@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="section-generate">
+
+        <div class="form-box">
+
+            <form action="" method="post" class="generate-form">
+
+                <h3 class="title-form-generate">Generate Username Pengembang</h3>
+
+                <label for="">Username</label>
+                <input type="text" name="username" id="username" class="generate_input">
+
+                <label for="">Password</label>
+                <div class="password-section">
+                    <input type="text" name="password" readonly=""  class="generate_input" id="generate_input_password">
+
+                    <div class="generate_btn" onclick="getPassword();">Generate Password</div>
+                </div>
+                
+
+                <input type="submit" value="Submit" class="submit generate_input">
+
+            </form>
+
+            <script>
+                function getPassword()
+                {
+                    var chars="qwertyuiop[]asdfghjkl;!@#$%^&()_+|zxcvbnm/1234567890-=QWERTYUIOP{}ASDFGHJKL:ZXCVBNM<>?";
+                    var passwordLength = 8;
+                    var password="";
+
+                    for(let i=0; i<passwordLength; i++)
+                    {
+                        var randomNumber = Math.floor(Math.random() * chars.length);
+                        password+=chars.substring(randomNumber, randomNumber+1);
+                    }
+                    console.log(password);
+
+                    document.getElementById("generate_input_password").value=password;
+
+                }
+            </script>
+            
+        </div>
+
+    </div>
+    
+    
+{% endblock %}
