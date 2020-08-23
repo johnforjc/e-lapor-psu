@@ -31,7 +31,7 @@ class DataPerizinan(models.Model):
     site_plan = models.FileField(upload_to='site_plan')
     ukl_upl = models.FileField(upload_to='ukl_upl')
     izin_mendirikan_bangunan = models.FileField(upload_to='izin_mendirikan_bangunan')
-    izin_penggunaam_bangunan = models.FileField(upload_to='izin_penggunaan_bangunan')
+    izin_penggunaan_bangunan = models.FileField(upload_to='izin_penggunaan_bangunan')
 
 class JenisPsu(models.Model):
     id_data_proyek = models.OneToOneField(DataProyek, on_delete=models.CASCADE, primary_key=True)

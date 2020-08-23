@@ -124,22 +124,22 @@ select {
 #submit:hover {
     background-color: #025b42; }
 
-/* Data Proyek & Data Perizinan */
+/* Data Perizinan */
 
-.form-row-single .form-group-single {
+.form-row-perizinan .form-group-perizinan {
     width: 70%;
     padding: 0 40px; }
   
-.form-row-single {
+.form-row-perizinan {
     margin: 0 -30px; }
 
-#submit-single {
+#submit-perizinan {
     background: #03a678;
     color: #fff; 
     margin: 20px 13px;
     width: 65%}
 
-#submit-single:hover {
+#submit-perizinan:hover {
     background-color: #025b42; }
 
 /* Generate Username*/

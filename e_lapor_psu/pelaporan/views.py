@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import DataPerusahaan
+from .models import DataPerizinan
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -45,9 +46,28 @@ def form_data_perusahaan(request):
     else:
         return render(request, 'form_data_perusahaan.html')
 
-def form_data_perizinan(request):
+def form_data_proyek(request):
     if request.method == 'POST':
 
+        # POST data upload here
+        return HttpResponse('Hello')
+
+    else:
+        return render(request, 'form_data_proyek.html')
+
+def form_data_perizinan(request):
+    if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
+        site_plan = request.FILES['site_plan']
+        ukl_upl = request.FILES['ukl_upl']
+        izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
+        izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
+
+        dataPerizinan = DataPerizinan.objects.create(
+            site_plan = site_plan,
+            ukl_upl = ukl_upl,
+            izin_mendirikan_bangunan = izin_mendirikan_bangunan,
+            izin_penggunaan_bangunan = izin_penggunaan_bangunan,
+        )
         # POST data upload here
         return HttpResponse('Hello')
 
@@ -63,3 +83,5 @@ def generate_username(request):
         
     else:
         return render(request, 'generate_username.html')
+
+    

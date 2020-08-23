@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <form action="" method="POST" enctype="multipart/form-data" class="register-form" id="register-form">
+
+                        {% csrf_token %}
+
+                        <h1> Data Proyek </h1>
+
+                        <div class="form-row-single">
+                            <div class="form-group-single">
+                                
+                                <div class="form-input">
+                                    <label for="lokasi">Lokasi</label>
+                                    <input type="text" name="lokasi" id="lokasi" />
+                                </div>
+
+                                <input
+                                id="pac-input"
+                                class="controls"
+                                type="text"
+                                placeholder="Search Box"
+                                />
+                                <div id="map"></div>
+
+                                <div class="form-input">
+                                    <label for="luas_total_area_proyek">Luas Total Area Proyek</label>
+                                    <input type="text" name="luas_total_area_proyek" id="luas_total_area_proyek" />
+                                </div>
+                                
+                                <div class="form-input">
+                                    <label for="jumlah_total_unit_yang_akan_dibangun">Jumlah Total Unit yang akan dibangun</label>
+                                    <input type="text" name="jumlah_total_unit_yang_akan_dibangun" id="jumlah_total_unit_yang_akan_dibangun" />
+                                </div>
+
+                                <div class="form-select">
+                                    <div class="label-flex">
+                                        <label for="jenis_produk">Jenis Produk</label>
+                                    </div>
+                                    <div class="select-list">
+                                        <select name="jenis_produk" id="jenis_produk">
+                                            <option value="rumah_tapak">Rumah Tapak</option>
+                                            <option value="rumah_susun">Rumah Susun (Apartemen)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-input">
+                                    <label for="tipe_rumah">Tipe Rumah</label>
+                                    <input type="text" name="tipe_rumah" id="tipe_rumah" />
+                                </div>
+
+                                <div class="form-select">
+                                    <div class="label-flex">
+                                        <label for="jenis_psu">Jenis PSU yang dibangun berdasarkan Rencana Tapak (Site Plan) yang sudah disetujui oleh Pemerintah</label>
+                                    </div>
+                                    <div class="select-list">
+                                        <select name="jenis_psu" id="jenis_psu">
+                                            <option value="jenis_prasarana">Jenis Prasarana</option>
+                                            <option value="jenis_sarana">Jenis Sarana</option>
+                                            <option value="jenis_utilitas">Jenis Utilitas</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-input">
+                                    <label for="target_pembangunan">Target Pembangunan</label>
+                                    <input type="text" name="target_pembangunan" id="target_pembangunan" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-submit">
+                            <input type="submit" value="Submit" class="submit" id="submit-single" name="submit" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
