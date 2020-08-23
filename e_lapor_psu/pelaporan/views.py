@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import DataPerusahaan
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
@@ -18,12 +19,16 @@ def form_data_perusahaan(request):
         website = request.POST['website']
         nomor_telp = request.POST['no_telp']
 
+        foto_pemilik = request.FILES['foto_pemilik']
+        ktp_pemilik = request.FILES['ktp_pemilik']
+        akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
+
         dataPerusahaan = DataPerusahaan.objects.create(
             nama_perusahaan= nama_perusahaan,
-            akta_pendirian_badan_usaha = "",
+            akta_pendirian_badan_usaha = akta,
             nama_pemilik   = nama_pemilik,
-            foto_pemilik   = "",
-            ktp_pemilik= "",
+            foto_pemilik   = foto_pemilik,
+            ktp_pemilik= ktp_pemilik,
             bentuk_perusahaan  = bentuk_perusahaan,
             alamat_perusahaan  = alamat_perusahaan,
             tahun_berdiri  = tahun_berdiri,
