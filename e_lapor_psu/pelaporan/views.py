@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import DataPerusahaan
 
 # Create your views here.
 
@@ -15,6 +16,21 @@ def form_data_perusahaan(request):
         tahun_berdiri = request.POST['tahun_berdiri']
         email = request.POST['email']
         website = request.POST['website']
+        nomor_telp = request.POST['no_telp']
+
+        dataPerusahaan = DataPerusahaan.objects.create(
+            nama_perusahaan= nama_perusahaan,
+            akta_pendirian_badan_usaha = "",
+            nama_pemilik   = nama_pemilik,
+            foto_pemilik   = "",
+            ktp_pemilik= "",
+            bentuk_perusahaan  = bentuk_perusahaan,
+            alamat_perusahaan  = alamat_perusahaan,
+            tahun_berdiri  = tahun_berdiri,
+            no_telp= nomor_telp,
+            email  = email,
+            website= website,
+        )
 
         testing = nama_perusahaan + ' ' + nama_pemilik + ' ' + bentuk_perusahaan + ' ' + alamat_perusahaan + ' ' + tahun_berdiri + ' ' + email + ' ' + website
 
@@ -37,6 +53,7 @@ def generate_username(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        print(username+' '+password)
         return render(request, 'generate_username.html')
         
     else:
