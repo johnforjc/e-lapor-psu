@@ -1,3 +1,4 @@
+/* Data Perusahaan */
 list-type-ulli, ul {
     list-style-type: none;
     margin: 0;
@@ -118,13 +119,30 @@ select {
 
 #submit {
     background: #03a678;
-    color: #fff;
-    margin-right: 25px; }
+    color: #fff; }
 
 #submit:hover {
     background-color: #025b42; }
 
+/* Data Perizinan */
 
+.form-row-perizinan .form-group-perizinan {
+    width: 70%;
+    padding: 0 40px; }
+  
+.form-row-perizinan {
+    margin: 0 -30px; }
+
+#submit-perizinan {
+    background: #03a678;
+    color: #fff; 
+    margin: 20px 13px;
+    width: 65%}
+
+#submit-perizinan:hover {
+    background-color: #025b42; }
+
+/* Generate Username*/
 .section-generate
 {
     display: flex;
