@@ -48,8 +48,6 @@ def form_data_perusahaan(request):
 
 def form_data_proyek(request):
     if request.method == 'POST':
-
-        # POST data upload here
         return HttpResponse('Hello')
 
     else:
