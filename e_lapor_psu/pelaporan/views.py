@@ -24,8 +24,14 @@ def form_data_perusahaan(request):
     else:
         return render(request, 'form_data_perusahaan.html')
 
-def isi_data_perusahaan(request):
-    return HttpResponse('Success')
+def form_data_perizinan(request):
+    if request.method == 'POST':
+
+        # POST data upload here
+        return HttpResponse('Hello')
+
+    else:
+        return render(request, 'form_data_perizinan.html')
 
 def generate_username(request):
     if request.method == 'POST':
