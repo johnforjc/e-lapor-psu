@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <form action="" method="POST" enctype="multipart/form-data" class="register-form" id="register-form">
+
+                        {% csrf_token %}
+
+                        <h1> Tipe Rumah Susun </h1>
+
+                        <div class="form-row-single">
+                            <div class="form-group-single">
+
+                                <div class="form-input">
+                                    <label for="tipe_rumah_susun">Tipe Rumah Susun</label>
+                                    <input type="text" name="tipe_rumah_susun" id="tipe_rumah_susun" />
+                                </div>
+                                
+                                <div class="form-input">
+                                    <label for="lb_rumah_susun">Luas Bangunan</label>
+                                    <input type="text" name="lb_rumah_susun" id="lb_rumah_susun" />
+                                </div>
+
+                                <div class="form-input">
+                                    <label for="jumlah_unit_rumah_susun">Jumlah Unit</label>
+                                    <input type="text" name="jumlah_unit_rumah_susun" id="jumlah_unit_rumah_susun" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-submit">
+                            <input type="submit" value="Next" class="submit" id="submit-single" name="submit" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -44,8 +44,10 @@
                         Pelaporan
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Ajukan Laporan</a>
-                        <a class="dropdown-item" href="#">Cek Status</a>
+                        <a class="dropdown-item" href="{% url 'index_lapor_pengembang' %}">Beranda Pelaporan</a>
+                        <a class="dropdown-item" href="{% url 'form_data_perusahaan' %}">Tambah Data Perusahaan</a>
+                        <a class="dropdown-item" href="{% url 'form_data_proyek' %}">Tambah Data Proyek</a>
+                        <a class="dropdown-item" href="#">Cek Notifikasi</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
