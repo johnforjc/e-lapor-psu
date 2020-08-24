@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import DataPerusahaan
 from .models import DataPerizinan
+from .models import DataProyek
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -48,7 +49,23 @@ def form_data_perusahaan(request):
 
 def form_data_proyek(request):
     if request.method == 'POST':
-        return HttpResponse('Hello')
+        lokasi_proyek = request.POST['lokasi']
+        luas_total_area_proyek = request.POST['luas_total_area_proyek']
+        jumlah_total_unit = request.POST['jumlah_total_unit_yang_akan_dibangun']
+        jenis_produk = request.POST['jenis_produk']
+        jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
+        target_pembangunan = request.POST['target_pembangunan']
+        
+        dataProyek = DataProyek.objects.create(
+            lokasi_proyek = lokasi_proyek,
+            luas_total_area_proyek = luas_total_area_proyek,
+            jumlah_total_unit = jumlah_total_unit,
+            jenis_produk = jenis_produk,
+            jumlah_tipe_rumah = jumlah_tipe_rumah,
+            target_pembangunan = target_pembangunan,
+        )
+
+        return HttpResponse('Sukses')
 
     else:
         return render(request, 'form_data_proyek.html')
