@@ -12,31 +12,32 @@
 
                         <h1> Tipe Rumah Tapak </h1>
 
+                        {% for iterasi in jumlah_tipe|get_range %}
                         <div class="form-row-single">
                             <div class="form-group-single">
 
                                 <div class="form-input">
                                     <label for="tipe_rumah_tapak">Tipe Rumah Tapak</label>
-                                    <input type="text" name="tipe_rumah_tapak" id="tipe_rumah_tapak" />
+                                    <input type="text" name="tipe_rumah_tapak{{iterasi}}" id="tipe_rumah_tapak" />
                                 </div>
                                 
                                 <div class="form-input">
                                     <label for="lb_rumah_tapak">Luas Bangunan</label>
-                                    <input type="text" name="lb_rumah_tapak" id="lb_rumah_tapak" />
+                                    <input type="text" name="lb_rumah_tapak{{iterasi}}" id="lb_rumah_tapak" />
                                 </div>
 
                                 <div class="form-input">
                                     <label for="lt_rumah_tapak">Luas Tanah</label>
-                                    <input type="text" name="lt_rumah_tapak" id="lt_rumah_tapak" />
+                                    <input type="text" name="lt_rumah_tapak{{iterasi}}" id="lt_rumah_tapak" />
                                 </div>
 
                                 <div class="form-input">
                                     <label for="jumlah_unit_rumah_tapak">Jumlah Unit</label>
-                                    <input type="text" name="jumlah_unit_rumah_tapak" id="jumlah_unit_rumah_tapak" />
+                                    <input type="text" name="jumlah_unit_rumah_tapak{{iterasi}}" id="jumlah_unit_rumah_tapak" />
                                 </div>
-
                             </div>
                         </div>
+                        {% endfor %}
 
                         <div class="form-submit">
                             <input type="submit" value="Next" class="submit" id="submit-single" name="submit" />

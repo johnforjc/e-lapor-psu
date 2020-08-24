@@ -4,6 +4,11 @@ from .models import DataPerusahaan
 from .models import DataPerizinan
 from .models import DataProyek
 from django.core.files.storage import FileSystemStorage
+from django.template.defaulttags import register
+
+@register.filter
+def get_range(value):
+    return range(value)
 
 # Create your views here.
 
@@ -98,8 +103,8 @@ def tipe_rumah_tapak(request):
         return HttpResponse('Hello')
 
     else:
-
-        return render(request, 'tipe_rumah_tapak.html')
+        jumlah_tipe = 5
+        return render(request, 'tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
 
 def tipe_rumah_susun(request):
     if request.method == 'POST':
