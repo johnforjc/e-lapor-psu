@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import DataPerusahaan
 from .models import DataPerizinan
 from .models import DataProyek
+from .models import RumahTapak
+from .models import RumahSusun
 from django.core.files.storage import FileSystemStorage
 from django.template.defaulttags import register
 
@@ -13,7 +15,7 @@ def get_range(value):
 # Create your views here.
 
 def index_lapor_pengembang(request):
-    return render(request, 'index_lapor_pengembang.html')
+    return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html')
 
 def form_data_perusahaan(request):
     if request.method == 'POST':
@@ -47,7 +49,7 @@ def form_data_perusahaan(request):
         return redirect('/')
 
     else:
-        return render(request, 'form_data_perusahaan.html')
+        return render(request, 'pengembang_pelaporan/form_data_perusahaan.html')
 
 def form_data_proyek(request):
     if request.method == 'POST':
@@ -58,8 +60,11 @@ def form_data_proyek(request):
         jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
         target_pembangunan = request.POST['target_pembangunan']
         
+        id_data_perusahaan = 1
+        
         # POST data upload here
         dataProyek = DataProyek.objects.create(
+            id_data_perusahaan_id = id_data_perusahaan,
             lokasi_proyek = lokasi_proyek,
             luas_total_area_proyek = luas_total_area_proyek,
             jumlah_total_unit = jumlah_total_unit,
@@ -67,11 +72,14 @@ def form_data_proyek(request):
             jumlah_tipe_rumah = jumlah_tipe_rumah,
             target_pembangunan = target_pembangunan,
         )
-
-        return HttpResponse('Sukses')
+        
+        if jenis_produk == "rumah_tapak":
+            return redirect('tipe_rumah_tapak', id=dataProyek.id_data_proyek)
+        elif jenis_produk == "rumah_susun":
+            return redirect('tipe_rumah_susun', id=dataProyek.id_data_proyek)
 
     else:
-        return render(request, 'form_data_proyek.html')
+        return render(request, 'pengembang_pelaporan/form_data_proyek.html')
 
 def form_data_perizinan(request):
     if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
@@ -90,34 +98,64 @@ def form_data_perizinan(request):
         return HttpResponse('Hello')
 
     else:
-        return render(request, 'form_data_perizinan.html')
+        return render(request, 'pengembang_pelaporan/form_data_perizinan.html')
 
-def tipe_rumah_tapak(request):
+def tipe_rumah_tapak(request, id):
     if request.method == 'POST':
-        tipe_rumah_tapak = request.POST['tipe_rumah_tapak']
-        lb_rumah_tapak = request.POST['lb_rumah_tapak']
-        lt_rumah_tapak = request.POST['lt_rumah_tapak']
-        jumlah_unit_rumah_tapak = request.POST['jumlah_unit_rumah_tapak']
+        jumlah_tipe = int(request.POST['jumlah_tipe'])
+        rumahTapak = []
+
+        for iterasi in range(1,jumlah_tipe+1):
+            tipe_rumah_tapak = request.POST['tipe_rumah_tapak'+str(iterasi)]
+            lb_rumah_tapak = request.POST['lb_rumah_tapak'+str(iterasi)]
+            lt_rumah_tapak = request.POST['lt_rumah_tapak'+str(iterasi)]
+            jumlah_unit_rumah_tapak = request.POST['jumlah_unit_rumah_tapak'+str(iterasi)]
+
+            rumahTapak.append(
+                RumahTapak.objects.create(
+                    tipe_rumah_tapak = tipe_rumah_tapak,
+                    lb_rumah_tapak = lb_rumah_tapak,
+                    lt_rumah_tapak = lt_rumah_tapak,
+                    jumlah_unit_rumah_tapak = jumlah_unit_rumah_tapak,
+                    id_data_proyek_id = id,
+                )
+            )
+
+        # POST data upload here
+        return HttpResponse('sukses')
+
+    else:
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        jumlah_tipe = dataProyek.jumlah_tipe_rumah
+        return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
+
+def tipe_rumah_susun(request, id):
+    if request.method == 'POST':
+        jumlah_tipe = int(request.POST['jumlah_tipe'])
+        rumahSusun = []
+
+        for iterasi in range(1,jumlah_tipe+1):
+                
+            tipe_rumah_susun = request.POST['tipe_rumah_susun'+str(iterasi)]
+            lb_rumah_susun = request.POST['lb_rumah_susun'+str(iterasi)]
+            jumlah_unit_rumah_susun = request.POST['jumlah_unit_rumah_susun'+str(iterasi)]
+
+            rumahSusun.append(
+                RumahSusun.objects.create(
+                    tipe_rumah_susun = tipe_rumah_susun,
+                    lb_rumah_susun = lb_rumah_susun,
+                    jumlah_unit_rumah_susun = jumlah_unit_rumah_susun,
+                    id_data_proyek_id = id,
+                )
+            )
 
         # POST data upload here
         return HttpResponse('Hello')
 
     else:
-        jumlah_tipe = 5
-        return render(request, 'tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
-
-def tipe_rumah_susun(request):
-    if request.method == 'POST':
-        tipe_rumah_susun = request.POST['tipe_rumah_susun']
-        lb_rumah_susun = request.POST['lb_rumah_susun']
-        jumlah_unit_rumah_susun = request.POST['jumlah_unit_rumah_susun']
-
-        # POST data upload here
-        return HttpResponse('Hello')
-
-    else:
-        jumlah_tipe = 5
-        return render(request, 'tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        jumlah_tipe = dataProyek.jumlah_tipe_rumah
+        return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
 
 def generate_username(request):
     if request.method == 'POST':

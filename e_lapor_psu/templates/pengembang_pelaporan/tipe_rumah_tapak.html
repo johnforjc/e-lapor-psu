@@ -23,8 +23,7 @@
                             <div class="form-group" id="tipe">
                                 
                                 <div class="form-input">
-                                    <label for="tipe_rumah_tapak">Tipe Rumah Tapak</label>
-                                    <input type="text" name="tipe_rumah_tapak{{iterasi}}" id="tipe_rumah_tapak" />
+                                    <input type="text" name="tipe_rumah_tapak{{iterasi}}" id="tipe_rumah_tapak" value="{{iterasi}}" hidden/>
                                 </div>
                                 
                                 <div class="form-input">
@@ -49,6 +48,7 @@
                         {% endfor %}
 
                         <div class="form-submit">
+                            <input type="text" name="jumlah_tipe" id="jumlah_tipe" value="{{jumlah_tipe}}" hidden/>
                             <input type="submit" value="Next" class="submit" id="submit-tipe" name="submit" />
                         </div>
 
