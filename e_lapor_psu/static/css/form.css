@@ -127,7 +127,7 @@ select {
 /* Data Proyek & Data Perizinan */
 
 .form-row-single .form-group-single {
-    width: 70%;
+    width: 80%;
     padding: 0 40px; }
   
 .form-row-single {
@@ -136,8 +136,8 @@ select {
 #submit-single {
     background: #03a678;
     color: #fff; 
-    margin: 20px 13px;
-    width: 65%; }
+    margin: 20px 14px;
+    width: 75%; }
 
 #submit-single:hover {
     background-color: #025b42; }
