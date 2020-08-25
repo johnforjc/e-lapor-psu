@@ -119,14 +119,4 @@ def tipe_rumah_susun(request):
         jumlah_tipe = 5
         return render(request, 'pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
 
-def generate_username(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        print(username+' '+password)
-        return render(request, 'pelaporan/generate_username.html')
-        
-    else:
-        return render(request, 'pelaporan/generate_username.html')
-
     
