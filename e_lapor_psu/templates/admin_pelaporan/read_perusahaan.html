@@ -1,0 +1,9 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+    <h1>Detail Data Perusahaan A</h1>
+
+    {% if entry%}
+        <p>{{entry.id_data_perusahaan}}</p>
+    {% endif %}
+{% endblock %}
