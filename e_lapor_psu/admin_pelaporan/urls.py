@@ -9,7 +9,7 @@ urlpatterns=[
     path('listing_rumah_tapak/', views.listing_rumah_tapak, name='listing_rumah_tapak'),
     path('listing_rumah_susun/', views.listing_rumah_susun, name='listing_rumah_susun'),
     path('generate_username/', views.generate_username, name="ganerate_username"),
-    path('read_proyek/', views.read_proyek, name="read_proyek"),
-    path('read_perusahaan/', views.read_perusahaan, name="read_perusahaan"),
-    path('read_perizinan/', views.read_perizinan, name="read_perizinan"),
+    path('read_proyek/<int:id>/', views.read_proyek, name="read_proyek"),
+    path('read_perusahaan/<int:id>/', views.read_perusahaan, name="read_perusahaan"),
+    path('read_perizinan/<int:id>/', views.read_perizinan, name="read_perizinan"),
 ]
