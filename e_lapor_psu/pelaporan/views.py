@@ -13,7 +13,7 @@ def get_range(value):
 # Create your views here.
 
 def index_lapor_pengembang(request):
-    return render(request, 'index_lapor_pengembang.html')
+    return render(request, 'pelaporan/index_lapor_pengembang.html')
 
 def form_data_perusahaan(request):
     if request.method == 'POST':
@@ -47,7 +47,7 @@ def form_data_perusahaan(request):
         return redirect('/')
 
     else:
-        return render(request, 'form_data_perusahaan.html')
+        return render(request, 'pelaporan/form_data_perusahaan.html')
 
 def form_data_proyek(request):
     if request.method == 'POST':
@@ -71,7 +71,7 @@ def form_data_proyek(request):
         return HttpResponse('Sukses')
 
     else:
-        return render(request, 'form_data_proyek.html')
+        return render(request, 'pelaporan/form_data_proyek.html')
 
 def form_data_perizinan(request):
     if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
@@ -90,7 +90,7 @@ def form_data_perizinan(request):
         return HttpResponse('Hello')
 
     else:
-        return render(request, 'form_data_perizinan.html')
+        return render(request, 'pelaporan/form_data_perizinan.html')
 
 def tipe_rumah_tapak(request):
     if request.method == 'POST':
@@ -104,7 +104,7 @@ def tipe_rumah_tapak(request):
 
     else:
         jumlah_tipe = 5
-        return render(request, 'tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
+        return render(request, 'pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
 
 def tipe_rumah_susun(request):
     if request.method == 'POST':
@@ -117,16 +117,16 @@ def tipe_rumah_susun(request):
 
     else:
         jumlah_tipe = 5
-        return render(request, 'tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
+        return render(request, 'pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
 
 def generate_username(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         print(username+' '+password)
-        return render(request, 'generate_username.html')
+        return render(request, 'pelaporan/generate_username.html')
         
     else:
-        return render(request, 'generate_username.html')
+        return render(request, 'pelaporan/generate_username.html')
 
     

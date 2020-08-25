@@ -1,0 +1,10 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+    <h1>Daftar pelaporan</h1>
+
+    {% for entry in all_entries%}
+        <p>{{entry.id_data_perusahaan}}</p>
+    {% endfor %}
+    
+{% endblock %}
