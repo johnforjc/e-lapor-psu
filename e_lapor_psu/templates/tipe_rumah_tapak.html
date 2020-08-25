@@ -10,12 +10,18 @@
 
                         {% csrf_token %}
 
-                        <h1> Tipe Rumah Tapak </h1>
-
+                        <h1 id="judul-tipe"> Tipe Rumah Tapak </h1>
+                        
                         {% for iterasi in jumlah_tipe|get_range %}
-                        <div class="form-row-single">
-                            <div class="form-group-single">
+                        <div class="form-row">
+                            <div class="form-group" id="number">
 
+                                <h1> {{iterasi}} </h1>
+
+                            </div>
+
+                            <div class="form-group" id="tipe">
+                                
                                 <div class="form-input">
                                     <label for="tipe_rumah_tapak">Tipe Rumah Tapak</label>
                                     <input type="text" name="tipe_rumah_tapak{{iterasi}}" id="tipe_rumah_tapak" />
@@ -35,12 +41,15 @@
                                     <label for="jumlah_unit_rumah_tapak">Jumlah Unit</label>
                                     <input type="text" name="jumlah_unit_rumah_tapak{{iterasi}}" id="jumlah_unit_rumah_tapak" />
                                 </div>
+
                             </div>
                         </div>
+                        <hr>
+
                         {% endfor %}
 
                         <div class="form-submit">
-                            <input type="submit" value="Next" class="submit" id="submit-single" name="submit" />
+                            <input type="submit" value="Next" class="submit" id="submit-tipe" name="submit" />
                         </div>
 
                     </form>
