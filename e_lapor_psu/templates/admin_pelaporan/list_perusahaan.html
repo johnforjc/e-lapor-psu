@@ -1,10 +1,45 @@
 {% extends '../layout.html' %}
 
 {% block content %}
-    <h1>Daftar pelaporan</h1>
+    
+    <div class="main">
+        <div class="container">
+            <div class="content">
 
-    {% for entry in all_entries%}
-        <p>{{entry.id_data_perusahaan}}</p>
-    {% endfor %}
+                <h1>Daftar Perusahaan</h1>
+                
+                {# Template Testing 1#}
+                <a class="item" href="#">
+                    <div class="col-md-12">
+                        <div class="listing listing-radius">
+                            <div class="listing-content">
+                                <h3 class="nama_perusahaan">Patrick Industries</h3>
+                                <h6 class="jenis_perusahaan">CV</h6>
+                                <p class="alamat_perusahaan">Galaxy Bumi Permai Z3-92</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                {# Template Testing 2#}
+                <a class="item" href="#">
+                    <div class="col-md-12">
+                        <div class="listing listing-radius">
+                            <div class="listing-content">
+                                <h3 class="nama_perusahaan">Fandi Jona Jago</h3>
+                                <h6 class="jenis_perusahaan">Firma</h6>
+                                <p class="alamat_perusahaan">Galaxy Bumi Permai Z4-92</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                {% for entry in all_entries%}
+                    <p>{{entry.id_data_perusahaan}}</p>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
     
 {% endblock %}

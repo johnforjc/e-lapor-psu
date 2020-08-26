@@ -1,0 +1,48 @@
+/* Daftar Perusahaan */
+
+.content {
+    padding: 75px 100px 75px 100px; 
+}
+
+.item {
+    color: #000;
+    text-decoration: none;
+}
+
+.item:hover {
+    color: #03a678;
+    text-decoration: none;
+}
+
+.listing {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px -5px 30px;
+}
+
+.listing:hover {
+    border: 1px solid #03a678;
+}
+
+.listing-radius {
+    border-radius: 10px;
+}
+
+.listing-content {
+    padding: 20px 20px 10px;
+}
+
+.nama_perusahaan {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.jenis_perusahaan {
+    font-size: 16px;
+}
+
+.alamat_perusahaan {
+    font-size: 14px;
+    font-weight: 400;
+}
