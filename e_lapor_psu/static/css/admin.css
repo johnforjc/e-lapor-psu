@@ -29,20 +29,26 @@
 }
 
 .listing-content {
-    padding: 20px 20px 10px;
+    padding: 20px 20px 75px;
 }
+
+#group {
+    width: 50%; 
+    float: left; }
+
+#group-bottom {
+    width: 50%; 
+    float: left; }
 
 .nama_perusahaan {
     font-size: 22px;
     font-weight: 700;
     text-transform: uppercase;
+    margin-bottom: 15px;
 }
 
-.jenis_perusahaan {
-    font-size: 16px;
-}
-
-.alamat_perusahaan {
-    font-size: 14px;
+#details {
+    font-size: 13px;
     font-weight: 400;
+    margin-right: 3px;
 }
