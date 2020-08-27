@@ -5,6 +5,7 @@ from .models import DataPerizinan
 from .models import DataProyek
 from .models import RumahTapak
 from .models import RumahSusun
+from .models import JenisPsu
 from django.core.files.storage import FileSystemStorage
 from django.template.defaulttags import register
 
@@ -81,7 +82,7 @@ def form_data_proyek(request):
     else:
         return render(request, 'pengembang_pelaporan/form_data_proyek.html')
 
-def form_data_perizinan(request):
+def form_data_perizinan(request, id):
     if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
         site_plan = request.FILES['site_plan']
         ukl_upl = request.FILES['ukl_upl']
@@ -93,9 +94,10 @@ def form_data_perizinan(request):
             ukl_upl = ukl_upl,
             izin_mendirikan_bangunan = izin_mendirikan_bangunan,
             izin_penggunaan_bangunan = izin_penggunaan_bangunan,
+            id_data_proyek_id = id,
         )
-        # POST data upload here
-        return HttpResponse('Hello')
+        
+        return redirect('/')
 
     else:
         return render(request, 'pengembang_pelaporan/form_data_perizinan.html')
@@ -121,8 +123,7 @@ def tipe_rumah_tapak(request, id):
                 )
             )
 
-        # POST data upload here
-        return HttpResponse('sukses')
+        return redirect('jenis_psu', id=id)
 
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
@@ -149,22 +150,63 @@ def tipe_rumah_susun(request, id):
                 )
             )
 
-        # POST data upload here
-        return HttpResponse('Hello')
+        return redirect('jenis_psu', id=id)
 
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
         jumlah_tipe = dataProyek.jumlah_tipe_rumah
         return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
 
-def generate_username(request):
+def jenis_psu(request, id):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        print(username+' '+password)
-        return render(request, 'generate_username.html')
-        
-    else:
-        return render(request, 'generate_username.html')
+        jaringan_jalan = request.POST['jaringan_jalan']
+        jaringan_saluran_pembuangan_air_hujan = request.POST['jaringan_saluran_pembuangan_air_hujan']
+        sanitasi = request.POST['sanitasi']
+        jaringan_saluran_pembuangan_air_limbah = request.POST['jaringan_saluran_pembuangan_air_limbah']
+        tempat_pembuangan_sampah = request.POST['tempat_pembuangan_sampah']
+        sarana_perniagaan = request.POST['sarana_perniagaan']
+        sarana_pelayanan_umum_dan_pemerintahan = request.POST['sarana_pelayanan_umum_dan_pemerintahan']
+        sarana_pendidikan = request.POST['sarana_pendidikan']
+        sarana_kesehatan = request.POST['sarana_kesehatan']
+        sarana_peribadatan = request.POST['sarana_peribadatan']
+        sarana_rekreasi_dan_olahraga = request.POST['sarana_rekreasi_dan_olahraga']
+        sarana_pemakaman = request.POST['sarana_pemakaman']
+        sarana_pertanaman_dan_ruang_terbuka_hijau = request.POST['sarana_pertanaman_dan_ruang_terbuka_hijau']
+        sarana_parkir = request.POST['sarana_parkir']
+        jaringan_air_bersih = request.POST['jaringan_air_bersih']
+        jaringan_listrik = request.POST['jaringan_listrik']
+        jaringan_telepon = request.POST['jaringan_telepon']
+        jaringan_gas = request.POST['jaringan_gas']
+        jaringan_transportasi = request.POST['jaringan_transportasi']
+        pemadam_kebakaran = request.POST['pemadam_kebakaran']
+        sarana_penerangan_jalan_umum = request.POST['sarana_penerangan_jalan_umum']
 
-    
+        jenisPsu = JenisPsu.objects.create(
+            jaringan_jalan = jaringan_jalan,
+            jaringan_saluran_pembuangan_air_hujan = jaringan_saluran_pembuangan_air_hujan,
+            sanitasi = sanitasi,
+            jaringan_saluran_pembuangan_air_limbah = jaringan_saluran_pembuangan_air_limbah,
+            tempat_pembuangan_sampah = tempat_pembuangan_sampah,
+            sarana_perniagaan = sarana_perniagaan,
+            sarana_pelayanan_umum_dan_pemerintahan = sarana_pelayanan_umum_dan_pemerintahan,
+            sarana_pendidikan = sarana_pendidikan,
+            sarana_kesehatan = sarana_kesehatan,
+            sarana_peribadatan = sarana_peribadatan,
+            sarana_rekreasi_dan_olahraga = sarana_rekreasi_dan_olahraga,
+            sarana_pemakaman = sarana_pemakaman,
+            sarana_pertanaman_dan_ruang_terbuka_hijau = sarana_pertanaman_dan_ruang_terbuka_hijau,
+            sarana_parkir = sarana_parkir,
+            jaringan_air_bersih = jaringan_air_bersih,
+            jaringan_listrik = jaringan_listrik,
+            jaringan_telepon = jaringan_telepon,
+            jaringan_gas = jaringan_gas,
+            jaringan_transportasi = jaringan_transportasi,
+            pemadam_kebakaran = pemadam_kebakaran,
+            sarana_penerangan_jalan_umum = sarana_penerangan_jalan_umum,
+            id_data_proyek_id = id,
+        )
+
+        return redirect('form_data_perizinan', id=id)
+
+    else:
+        return render(request, 'pengembang_pelaporan/jenis_psu.html')

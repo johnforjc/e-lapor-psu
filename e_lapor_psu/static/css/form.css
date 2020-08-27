@@ -32,6 +32,15 @@ h1 {
     text-transform: uppercase;
     margin: 0 10px 40px; }
 
+h2 {
+    color: #222;
+    font-size: 18px;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
+    text-transform: uppercase;
+    margin: 40px 0 40px; }
+
 h4 {
     color: #222;
     text-decoration: underline;
