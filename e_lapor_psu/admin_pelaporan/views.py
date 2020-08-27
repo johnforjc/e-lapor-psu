@@ -50,3 +50,7 @@ def generate_username(request):
         
     else:
         return render(request, 'admin_pelaporan/generate_username.html')
+
+# read perusahaan
+def read_perusahaan(request):
+    return render(request, 'admin_pelaporan/read_perusahaan.html')

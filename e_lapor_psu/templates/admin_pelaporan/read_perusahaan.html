@@ -1,9 +1,78 @@
 {% extends '../layout.html' %}
 
 {% block content %}
-    <h1>Detail Data Perusahaan A</h1>
 
-    {% if entry%}
-        <p>{{entry.id_data_perusahaan}}</p>
-    {% endif %}
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-details">
+
+                        <h1 class="header"> Detail Perusahaan </h1>
+
+                        <div class="form-row">
+                            <div class="form-group">
+
+                                <div class="detail-text">
+                                    <label for="nama_perusahaan" class="detail-title">Nama Perusahaan</label>
+                                    <p class="read-details"> Patrick Industries</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="nama_pemilik" class="detail-title">Nama Pemilik</label>
+                                    <p class="read-details">Patrick</p>
+                                </div>
+                                
+                                <div class="detail-text">
+                                    <label for="bentuk_perusahaan" class="detail-title">Bentuk Perusahaan</label>
+                                    <p class="read-details">CV</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="alamat_perusahaan" class="detail-title">Alamat Perusahaan</label>
+                                    <p class="read-details">Galaxy Bumi Permai Z3-92</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class = "vertical-detail"></div> 
+
+                            <div class="form-group">
+
+                                <div class="detail-text">
+                                    <label for="tahun_berdiri" class="detail-title"> Tahun Berdiri</label>
+                                    <p class="read-details">1999</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="no_telp" class="detail-title">No Telp</label>
+                                    <p class="read-details">0819384449999</p>
+                                </div>
+                                
+                                <div class="detail-text">
+                                    <label for="email" class="detail-title">Email</label>
+                                    <p class="read-details">pi@industries.com</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="website" class="detail-title">Website</label>
+                                    <p class="read-details">www.patrickindustries.com</p>
+                                </div>
+
+                            </div>
+                        </div>
+                            
+                        <div class="detail-text-bottom">
+                            <label for="foto_pemilik" class="detail-title">Foto Pemilik</label>
+                            <img src="{% static 'images/testing.jpg' %}">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

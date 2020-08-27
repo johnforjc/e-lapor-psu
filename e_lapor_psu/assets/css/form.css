@@ -43,7 +43,7 @@ h4 {
 
 .vertical { 
     border-left: 2px solid #03a678; ; 
-    height: 91%;
+    height: 63vh;
     position: absolute; 
     left: 50%; 
 } 
@@ -124,22 +124,61 @@ select {
 #submit:hover {
     background-color: #025b42; }
 
-/* Data Perizinan */
+/* Data Proyek & Data Perizinan */
 
-.form-row-perizinan .form-group-perizinan {
-    width: 70%;
+.form-row-single .form-group-single {
+    width: 80%;
     padding: 0 40px; }
   
-.form-row-perizinan {
+.form-row-single {
     margin: 0 -30px; }
 
-#submit-perizinan {
+#submit-single {
     background: #03a678;
     color: #fff; 
-    margin: 20px 13px;
-    width: 65%}
+    margin: 20px 14px;
+    width: 75%; }
 
-#submit-perizinan:hover {
+#submit-single:hover {
+    background-color: #025b42; }
+
+ /* Tipe Rumah */
+
+#judul-tipe {
+    margin-bottom: 70px;
+}
+
+#number h1 {
+    font-size: 80px;
+    margin-left: 150px;
+    margin-top: 150px;
+    color: #03a678;
+}
+
+#number-susun h1 {
+    font-size: 80px;
+    margin-left: 150px;
+    margin-top: 100px;
+    color: #03a678;
+}
+
+#tipe {
+    margin: 0 -110px; 
+}
+
+hr {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 1px solid #03a678;
+}
+
+#submit-tipe {
+    background: #03a678;
+    color: #fff; 
+    margin: 30px 230px;
+    width: 50%; }
+
+#submit-tipe:hover {
     background-color: #025b42; }
 
 /* Generate Username*/
