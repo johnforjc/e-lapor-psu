@@ -74,9 +74,9 @@ def form_data_proyek(request):
             target_pembangunan = target_pembangunan,
         )
         
-        if jenis_produk == "rumah_tapak":
+        if jenis_produk == "Rumah Tapak":
             return redirect('tipe_rumah_tapak', id=dataProyek.id_data_proyek)
-        elif jenis_produk == "rumah_susun":
+        elif jenis_produk == "Rumah Susun":
             return redirect('tipe_rumah_susun', id=dataProyek.id_data_proyek)
 
     else:
@@ -210,3 +210,8 @@ def jenis_psu(request, id):
 
     else:
         return render(request, 'pengembang_pelaporan/jenis_psu.html')
+
+def detail_perusahaan(request):
+    id = 6
+    dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+    return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan})

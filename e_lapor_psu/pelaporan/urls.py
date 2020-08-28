@@ -9,4 +9,5 @@ urlpatterns = [
     path('tipe_rumah_tapak/<int:id>/', views.tipe_rumah_tapak, name='tipe_rumah_tapak'),
     path('tipe_rumah_susun/<int:id>/', views.tipe_rumah_susun, name='tipe_rumah_susun'),
     path('jenis_psu/<int:id>/', views.jenis_psu, name='jenis_psu'),
+    path('detail_perusahaan/', views.detail_perusahaan, name='detail_perusahaan'),
 ]
