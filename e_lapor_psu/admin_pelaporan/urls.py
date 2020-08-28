@@ -15,4 +15,5 @@ urlpatterns=[
 
     # testing
     path('read_perusahaan/', views.read_perusahaan, name="read_perusahaan"),
+    path('read_proyek/', views.read_proyek, name="read_proyek"),
 ]
