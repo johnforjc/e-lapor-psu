@@ -54,3 +54,6 @@ def generate_username(request):
 # read perusahaan
 def read_perusahaan(request):
     return render(request, 'admin_pelaporan/read_perusahaan.html')
+
+def read_proyek(request):
+    return render(request, 'admin_pelaporan/read_proyek.html')
