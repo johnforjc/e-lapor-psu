@@ -73,9 +73,25 @@
     font-size: 18px;
     font-weight: 400; }
 
+.form-group.vert
+{
+    position: relative;
+}
+
+.form-group.vert::after
+{
+    border-left: 2px solid #03a678; ; 
+    height: 100%;
+    width: 100%;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    content: "";
+    z-index: 1;
+}
 .vertical-detail { 
     border-left: 2px solid #03a678; ; 
-    height: 35vh;
+    height: 100%;
     position: absolute; 
     left: 50%; } 
 
