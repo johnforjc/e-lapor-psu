@@ -5,7 +5,7 @@
     border: 1px solid #ccc !important;
 }
 
-/* Daftar Perusahaan */
+/* listing perusahaan */
 .content {
     padding: 75px 100px 75px 100px; 
 }
@@ -57,6 +57,21 @@
     font-size: 13px;
     font-weight: 400;
     margin-left: 3px;
+}
+
+/* listing proyek*/
+.listing-content-proyek {
+    padding: 20px 20px 50px 20px;
+}
+
+#group-proyek {
+    width: 33%; 
+    float: left; }
+
+#details-proyek {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 8px 0 0 3px;
 }
 
 /* Read Perusahaan */
@@ -127,20 +142,15 @@
     padding-bottom: 25px;
 }
 
-/* listing proyek */
-.listing-content-proyek {
-    padding: 20px 20px 50px 20px;
+/* read proyek */
+.sub-header{
+    font-size: 20px;
+    padding: 30px 0 30px;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
 }
 
-#group-proyek {
-    width: 33%; 
-    float: left; }
-
-#details-proyek {
-    font-size: 13px;
-    font-weight: 400;
-    margin: 8px 0 0 3px;
-}
 
     
 

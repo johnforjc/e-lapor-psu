@@ -51,9 +51,10 @@ def generate_username(request):
     else:
         return render(request, 'admin_pelaporan/generate_username.html')
 
-# read perusahaan
+# Testing
 def read_perusahaan(request):
     return render(request, 'admin_pelaporan/read_perusahaan.html')
 
 def read_proyek(request):
-    return render(request, 'admin_pelaporan/read_proyek.html')
+    jumlah_tipe = 3
+    return render(request, 'admin_pelaporan/read_proyek.html', {'jumlah_tipe' : jumlah_tipe})
