@@ -61,12 +61,94 @@
 
                             </div>
                         </div>
+
+                        <div class="row">
                             
-                        <div class="detail-text-bottom">
-                            <label for="foto_pemilik" class="detail-title">Foto Pemilik</label>
-                            <img src="{% static 'images/testing.jpg' %}">
+                            {# col 1 #}
+                            <div class="col">
+                                <label for="foto_pemilik" class="detail-title">Foto Pemilik</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#foto_pemilik">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="foto_pemilik" tabindex="-1" role="dialog" aria-labelledby="foto_pemilik_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="foto_pemilik_label">Foto Pemilik</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{% static 'images/testing.jpg' %}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {# col 2 #}
+                            <div class="col">
+                                <label for="ktp_pemilik" class="detail-title">KTP Pemilik</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ktp_pemilik">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="ktp_pemilik" tabindex="-1" role="dialog" aria-labelledby="ktp_pemilik_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="ktp_pemilik_label">KTP Pemilik</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{% static 'images/testing.jpg' %}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="row">
+
+                            <div class="col">
+                                <label for="akta_pendirian_badan_usaha_atau_badan_hukum" class="detail-title">Akta pendirian Badan Usaha / Badan Hukum</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#akta_pendirian_badan_usaha_atau_badan_hukum">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="akta_pendirian_badan_usaha_atau_badan_hukum" tabindex="-1" role="dialog" aria-labelledby="akta_pendirian_badan_usaha_atau_badan_hukum_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="akta_pendirian_badan_usaha_atau_badan_hukum_label">Akta pendirian Badan Usaha / Badan Hukum</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{% static 'images/testing.jpg' %}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -1,3 +1,10 @@
+/* Bootstrap Button Color Change */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:focus:active,.btn-primary:visited {
+    background-color: #03a678 !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+}
+
 /* Daftar Perusahaan */
 .content {
     padding: 75px 100px 75px 100px; 
@@ -64,6 +71,7 @@
 .detail-title {
     font-size: 18px;
     text-transform: initial;
+    padding-bottom: 5px;
 }
 
 .detail-text{
@@ -80,9 +88,9 @@
 
 .form-group.vert::after
 {
-    height: 100%;
+    height: 97%;
     width: 2px;
-    background-color:#03a678;;
+    background-color:#03a678;
     position: absolute; 
     top: 0;
     left: 0;
@@ -90,7 +98,7 @@
     z-index: 1;
 }
 .vertical-detail { 
-    border-left: 2px solid #03a678; ; 
+    border-left: 2px solid #03a678; 
     height: 100%;
     position: absolute; 
     left: 50%; } 
@@ -108,6 +116,16 @@
 
 .detail-text-bottom{
     margin: 10px 0 30px 10px; }
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col {
+    padding-bottom: 25px;
+}
 
 /* listing proyek */
 .listing-content-proyek {
