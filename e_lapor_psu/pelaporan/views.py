@@ -212,9 +212,15 @@ def jenis_psu(request, id):
         return render(request, 'pengembang_pelaporan/jenis_psu.html')
 
 def detail_perusahaan(request):
-    id = 6
+    id = 7
     dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
-    return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan})
+    ktpCheck = 0
+    aktaCheck = 0
+    if dataPerusahaan.ktp_pemilik.url[-4:] == ".pdf":
+        ktpCheck = 1
+    if dataPerusahaan.akta_pendirian_badan_usaha.url[-4:] == ".pdf":
+        aktaCheck = 1
+    return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan, 'ktpCheck' : ktpCheck, 'aktaCheck' : aktaCheck})
 
 def list_proyek(request):
     id = 1

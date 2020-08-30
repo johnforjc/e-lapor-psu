@@ -109,16 +109,11 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <!-- <img src="{{dataPerusahaan.ktp_pemilik.url}}"> -->
-
-                                        <!--
-                                        {% if typecheck == 1 %}
+                                        {% if ktpCheck == 1 %}
                                             <embed src="{{dataPerusahaan.ktp_pemilik.url}}" type="application/pdf" width="100%" height="600px" />
                                         {% else %}
-                                             <img src="{% static 'images/testing.jpg' %}">
+                                            <img src="{{dataPerusahaan.ktp_pemilik.url}}">
                                         {% endif %}
-                                        -->
-                                       
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -132,22 +127,26 @@
 
                             <div class="col">
                                 <label for="akta_pendirian_badan_usaha" class="detail-title">Akta pendirian Badan Usaha / Badan Hukum</label>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#akta_pendirian_badan_usaha_atau_badan_hukum">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#akta_pendirian_badan_usaha">
                                     Lihat Gambar
                                   </button>
                             </div>
     
-                            <div class="modal fade" id="akta_pendirian_badan_usaha_atau_badan_hukum" tabindex="-1" role="dialog" aria-labelledby="akta_pendirian_badan_usaha_atau_badan_hukum_label" aria-hidden="true">
+                            <div class="modal fade" id="akta_pendirian_badan_usaha" tabindex="-1" role="dialog" aria-labelledby="akta_pendirian_badan_usaha_label" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="akta_pendirian_badan_usaha_atau_badan_hukum_label">Akta pendirian Badan Usaha / Badan Hukum</h5>
+                                            <h5 class="modal-title" id="akta_pendirian_badan_usaha_label">Akta pendirian Badan Usaha / Badan Hukum</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{dataPerusahaan.akta_pendirian_badan_usaha.url}}">
+                                        {% if aktaCheck == 1 %}
+                                            <embed src="{{dataPerusahaan.akta_pendirian_badan_usaha.url}}" type="application/pdf" width="100%" height="600px" />
+                                        {% else %}
+                                            <img src="{{dataPerusahaan.akta_pendirian_badan_usaha.url}}">
+                                        {% endif %}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
