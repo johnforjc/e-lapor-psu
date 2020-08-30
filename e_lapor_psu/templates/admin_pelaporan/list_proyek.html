@@ -7,57 +7,30 @@
             <div class="content">
 
                 <h1>Daftar Proyek</h1>
-                
-                {# Template Testing 1#}
-                <a class="item" href="#">
-                    <div class="col-md-12">
-                        <div class="listing listing-radius">
-                            <div class="listing-content-proyek">
-                                <h3 class="list-title">Galaxy Bumi Permai E3/21</h3>
-
-                                <div id="group-proyek">
-                                    <h6 id="details-proyek"><b>Jenis Produk: </b>Rumah Tapak</h6>
-                                </div>
-
-                                <div id="group-proyek">
-                                    <h6 id="details-proyek"><b>Jumlah Unit: </b>3 Unit</h6>
-                                </div>
-
-                                <div id="group-proyek">
-                                    <h6 id="details-proyek"><b>Target Pembangunan: </b>24 Bulan</h6>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                {# Template Testing 2#}
-                <a class="item" href="#">
-                    <div class="col-md-12">
-                        <div class="listing listing-radius">
-                            <div class="listing-content-proyek">
-                                <h3 class="list-title">Galaxy Bumi Permai E3/21</h3>
-
-                                <div id="group-proyek">
-                                    <h6 id="details-proyek"><b>Jenis Produk: </b>Rumah Tapak</h6>
-                                </div>
-
-                                <div id="group-proyek">
-                                    <h6 id="details-proyek"><b>Jumlah Unit: </b>3 Unit</h6>
-                                </div>
-
-                                <div id="group-proyek">
-                                    <h6 id="details-proyek"><b>Target Pembangunan: </b>24 Bulan</h6>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
 
                 {% for entry in all_entries%}
-                    <p>{{entry.id_data_perusahaan}}</p>
+                    <a class="item" href="#">
+                        <div class="col-md-12">
+                            <div class="listing listing-radius">
+                                <div class="listing-content-proyek">
+                                    <h3 class="list-title">{{entry.lokasi_proyek}}</h3>
+
+                                    <div id="group-proyek">
+                                        <h6 id="details-proyek"><b>Jenis Produk: </b>{{entry.jenis_produk}}</h6>
+                                    </div>
+
+                                    <div id="group-proyek">
+                                        <h6 id="details-proyek"><b>Jumlah Unit: </b>{{entry.jumlah_total_unit}}</h6>
+                                    </div>
+
+                                    <div id="group-proyek">
+                                        <h6 id="details-proyek"><b>Target Pembangunan: </b>{{entry.target_pembangunan}}</h6>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 {% endfor %}
 
             </div>
