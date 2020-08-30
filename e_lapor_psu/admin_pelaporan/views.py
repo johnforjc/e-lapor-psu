@@ -4,6 +4,7 @@ from pelaporan.models import DataPerusahaan
 from pelaporan.models import DataPerizinan
 from pelaporan.models import RumahTapak
 from pelaporan.models import RumahSusun
+import os
 
 # Create your views here.
 def index(request):
@@ -35,7 +36,16 @@ def read_proyek(request, id):
 
 def read_perusahaan(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
-    return render(request, 'admin_pelaporan/read_perusahaan.html', {'entry' : entry})
+    
+    ktpPDF = 0
+    aktaPDF = 0   
+
+    if entry.ktp_pemilik.url[-4:] == ".pdf":
+        ktpPDF = 1
+    if entry.akta_pendirian_badan_usaha.url[-4:] == ".pdf":
+        aktaPDF = 1
+
+    return render(request, 'admin_pelaporan/read_perusahaan.html', {'entry' : entry, 'ktpPDF' : ktpPDF, 'aktaPDF' : aktaPDF})
 
 def read_perizinan(request, id):
     entry = DataPerizinan.objects.get(id_data_proyek = id)
