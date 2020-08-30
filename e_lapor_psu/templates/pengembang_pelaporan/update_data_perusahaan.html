@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+            <form action="" method="PUT" enctype="multipart/form-data" class="register-form" id="register-form">
+
+                {% csrf_token %}
+
+                <h1> Data Perusahaan </h1>
+
+                <div class="form-row">
+                    <div class="form-group">
+
+                        <div class="form-input">
+                            <label for="nama_perusahaan">Nama Perusahaan</label>
+                            <input type="text" name="nama_perusahaan" id="nama_perusahaan" value={{dataPerusahaan.nama_perusahaan}}/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="nama_pemilik">Nama Pemilik</label>
+                            <input type="text" name="nama_pemilik" id="nama_pemilik" value={{dataPerusahaan.nama_pemilik}}/>
+                        </div>
+                        
+                        <div class="form-select">
+                            <div class="label-flex">
+                                <label for="bentuk_perusahaan">Bentuk Perusahaan</label>
+                            </div>
+                            <div class="select-list">
+                                <select name="bentuk_perusahaan" id="bentuk_perusahaan">
+                                    <option value="CV">CV</option>
+                                    <option value="Firma">Firma</option>
+                                    <option value="PT">PT</option>
+                                    <option value="UD">UD</option>
+                                    <option value="BUMN">BUMN</option>
+                                    <option value="BUMD">BUMD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="alamat_perusahaan">Alamat Perusahaan</label>
+                            <input type="text" name="alamat_perusahaan" id="alamat_perusahaan" value={{dataPerusahaan.alamat_perusahaan}}/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="tahun_berdiri"> Tahun Berdiri</label>
+                            <input type="text" name="tahun_berdiri" id="tahun_berdiri" value={{dataPerusahaan.tahun_berdiri}}/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="no_telp">No Telp</label>
+                            <input type="text" name="no_telp" id="no_telp" value={{dataPerusahaan.no_telp}}/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group vert">
+
+                        <div class="form-input">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" value={{dataPerusahaan.email}}/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="website">Website</label>
+                            <input type="text" name="website" id="website" value={{dataPerusahaan.website}}/>
+                        </div>
+
+                        <h4> Upload File </h4>
+
+                        <div class="form-input">
+                            <label for="foto_pemilik">Foto Pemilik</label>
+                            <input type="file" name="foto_pemilik" id="foto_pemilik" class="custom-file-upload" />
+                        </div>
+
+                        <div class="form-input">
+                            <label for="ktp_pemilik" >KTP Pemilik</label>
+                            <input type="file" name="ktp_pemilik" id="ktp_pemilik" class="custom-file-upload"/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="akta_pendirian_badan_usaha_atau_badan_hukum">Akta pendirian Badan Usaha / Badan Hukum</label>
+                            <input type="file" name="akta_pendirian_badan_usaha_atau_badan_hukum" id="akta_pendirian_badan_usaha_atau_badan_hukum" class="custom-file-upload" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-submit">
+                    <input type="submit" value="Submit" class="submit" id="submit" name="submit" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
