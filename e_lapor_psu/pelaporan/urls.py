@@ -10,4 +10,6 @@ urlpatterns = [
     path('tipe_rumah_susun/<int:id>/', views.tipe_rumah_susun, name='tipe_rumah_susun'),
     path('jenis_psu/<int:id>/', views.jenis_psu, name='jenis_psu'),
     path('detail_perusahaan/', views.detail_perusahaan, name='detail_perusahaan'),
+    path('list_proyek/', views.list_proyek, name='list_proyek'),
+    path('detail_proyek/<int:id>/', views.detail_proyek, name='detail_proyek'),
 ]

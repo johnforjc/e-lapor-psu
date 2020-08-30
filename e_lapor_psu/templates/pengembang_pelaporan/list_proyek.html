@@ -1,0 +1,41 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+    
+    <div class="main">
+        <div class="container">
+            <div class="content">
+
+                <h1>Daftar Proyek</h1>
+                {% for dataProyek in dataProyeks %}
+
+                <a class="item" href="{% url 'detail_proyek' dataProyek.id_data_proyek %}">
+                    <div class="col-md-12">
+                        <div class="listing listing-radius">
+                            <div class="listing-content-proyek">
+                                <h3 class="list-title">{{dataProyek.lokasi_proyek}}</h3>
+
+                                <div id="group-proyek">
+                                    <h6 id="details-proyek"><b>Jenis Produk: </b>{{dataProyek.jenis_produk}}</h6>
+                                </div>
+
+                                <div id="group-proyek">
+                                    <h6 id="details-proyek"><b>Jumlah Total Unit: </b>{{dataProyek.jumlah_total_unit}} Unit</h6>
+                                </div>
+
+                                <div id="group-proyek">
+                                    <h6 id="details-proyek"><b>Target Pembangunan: </b>{{dataProyek.target_pembangunan}} Bulan</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

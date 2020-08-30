@@ -215,3 +215,26 @@ def detail_perusahaan(request):
     id = 6
     dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan})
+
+def list_proyek(request):
+    id = 1
+    query = DataProyek.objects.filter(id_data_perusahaan_id=id)
+    dataProyeks = []
+    for temp in query.all():
+        dataProyeks.append(temp)
+    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : dataProyeks})
+
+def detail_proyek(request, id):
+    dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    if dataProyek.jenis_produk == "Rumah Tapak":
+        query = RumahTapak.objects.filter(id_data_proyek_id=id)
+        rumahTapaks = []
+        for temp in query.all():
+            rumahTapaks.append(temp)
+        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'rumahTapaks': rumahTapaks})
+    elif dataProyek.jenis_produk == "Rumah Susun":
+        query = RumahSusun.objects.filter(id_data_proyek_id=id)
+        rumahSusuns = []
+        for temp in query.all():
+            rumahSusuns.append(temp)
+        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'rumahSusuns': rumahSusuns})

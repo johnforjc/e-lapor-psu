@@ -1,0 +1,123 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-details">
+
+                        <h1 class="header"> Detail Proyek </h1>
+
+                        <div class="form-row">
+                            <div class="form-group">
+
+                                <div class="detail-text">
+                                    <label for="lokasi_proyek" class="detail-title">Lokasi Proyek</label>
+                                    <p class="read-details">{{dataProyek.lokasi_proyek}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="luas_total_area_proyek" class="detail-title">Luas Total Area Proyek</label>
+                                    <p class="read-details">{{dataProyek.luas_total_area_proyek}} Hektar(Ha)</p>
+                                </div>
+                                
+                                <div class="detail-text">
+                                    <label for="jumlah_total_unit" class="detail-title">Jumlah total unit yang akan dibangun</label>
+                                    <p class="read-details">{{dataProyek.jumlah_total_unit}} Unit</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group vert">
+
+                                <div class="detail-text">
+                                    <label for="jenis_produk" class="detail-title">Jenis Produk</label>
+                                    <p class="read-details">{{dataProyek.jenis_produk}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="target_pembangunan" class="detail-title">Target Pembangunan</label>
+                                    <p class="read-details">{{dataProyek.target_pembangunan}} Bulan</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {% if dataProyek.jenis_produk == "Rumah Tapak" %}
+
+                        <h1 class="sub-header"> Rincian Rumah Tapak </h1>
+
+                        {% for rumahTapak in rumahTapaks %}
+                        <div class="form-row">
+                            <div class="form-group" id="number-susun">
+
+                                <h1> {{rumahTapak.tipe_rumah_tapak}} </h1>
+
+                            </div>
+
+                            <div class="form-group">
+                                
+                                <div class="detail-text">
+                                    <label for="lb_rumah_tapak" class="detail-title">Luas Bangunan</label>
+                                    <p class="read-details">{{rumahTapak.lb_rumah_tapak}} Hektar(Ha)</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="lt_rumah_tapak" class="detail-title">Luas Tanah</label>
+                                    <p class="read-details">{{rumahTapak.lt_rumah_tapak}} Hektar(Ha)</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="jumlah_unit_rumah_tapak" class="detail-title">Jumlah Unit</label>
+                                    <p class="read-details">{{rumahTapak.jumlah_unit_rumah_tapak}} Unit</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <h1 class="sub-header"> Rincian Rumah Susun </h1>
+
+                        {% for rumahSusun in rumahSusuns %}
+                        <div class="form-row">
+                            <div class="form-group" id="number-susun">
+
+                                <h1> {{rumahSusun.tipe_rumah_susun}} </h1>
+
+                            </div>
+
+                            <div class="form-group">
+                                
+                                <div class="detail-text">
+                                    <label for="lb_rumah_tapak" class="detail-title">Luas Bangunan</label>
+                                    <p class="read-details">{{rumahSusun.lb_rumah_susun}} Hektar(Ha)</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="jumlah_unit_rumah_tapak" class="detail-title">Jumlah Unit</label>
+                                    <p class="read-details">{{rumahSusun.jumlah_unit_rumah_susun}} Unit</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+
+                        {% endfor %}
+
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
