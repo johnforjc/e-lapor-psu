@@ -82,7 +82,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{% static 'images/testing.jpg' %}">
+                                        <img src="{{entry.foto_pemilik.url}}">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -109,21 +109,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-
-                                        <!-- PDF -->
-                                        <embed src="{% static 'files/testing.pdf' %}" type="application/pdf" width="100%" height="400px" />
-
-                                        <!-- PNG -->
-                                        <!-- <img src="{% static 'images/testing.jpg' %}"> -->
-
-                                        <!--
-                                        {% if typecheck == 1 %}
-                                            <embed src="files/Brochure.pdf" type="application/pdf" width="100%" height="400px" />
-                                        {% else %}
-                                             <img src="{% static 'images/testing.jpg' %}">
-                                        {% endif %}
-                                        -->
-                                       
+                                        <img src="{{entry.ktp_pemilik.url}}">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -152,7 +138,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{% static 'images/testing.jpg' %}">
+                                       <!-- PDF -->
+                                       <embed src="{{entry.akta_pendirian_badan_usaha.url}}" type="application/pdf" width="100%" height="400px" />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
