@@ -12,7 +12,4 @@ urlpatterns=[
     path('read_proyek/<int:id>/', views.read_proyek, name="read_proyek"),
     path('read_perusahaan/<int:id>/', views.read_perusahaan, name="read_perusahaan"),
     path('read_perizinan/<int:id>/', views.read_perizinan, name="read_perizinan"),
-
-    # testing
-    path('read_proyek/', views.read_proyek, name="read_proyek"),
 ]
