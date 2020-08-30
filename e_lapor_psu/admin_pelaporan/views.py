@@ -32,7 +32,21 @@ def listing_rumah_susun(request):
 
 def read_proyek(request, id):
     entry = DataProyek.objects.get(id_data_proyek = id)
-    return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry})
+
+    if entry.jenis_produk == "Rumah Tapak":
+        query = RumahTapak.objects.filter(id_data_proyek_id=id)
+        rumahTapaks = []
+        for temp in query.all():
+            rumahTapaks.append(temp)
+        return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry, 'rumahTapaks': rumahTapaks})
+
+    elif entry.jenis_produk == "Rumah Susun":
+        query = RumahSusun.objects.filter(id_data_proyek_id=id)
+        rumahSusuns = []
+        for temp in query.all():
+            rumahSusuns.append(temp)
+
+    return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
 
 def read_perusahaan(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
@@ -60,8 +74,3 @@ def generate_username(request):
         
     else:
         return render(request, 'admin_pelaporan/generate_username.html')
-
-# Testing
-def read_proyek(request):
-    jumlah_tipe = 3
-    return render(request, 'admin_pelaporan/read_proyek.html', {'jumlah_tipe' : jumlah_tipe})
