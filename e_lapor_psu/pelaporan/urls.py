@@ -23,6 +23,6 @@ urlpatterns = [
     path('update_data_perizinan/<int:id>/', views.update_data_perizinan, name='update_data_perizinan'),
     path('update_jenis_psu/<int:id>/', views.update_jenis_psu, name='update_jenis_psu'),
 
-    # path('update_tipe_rumah_tapak/<int:id>/', views.update_tipe_rumah_tapak, name='update_tipe_rumah_tapak'),
-    # path('update_tipe_rumah_susun/<int:id>/', views.update_tipe_rumah_susun, name='update_tipe_rumah_susun'),
+    path('update_tipe_rumah_tapak/<int:id>/', views.update_tipe_rumah_tapak, name='update_tipe_rumah_tapak'),
+    path('update_tipe_rumah_susun/<int:id>/', views.update_tipe_rumah_susun, name='update_tipe_rumah_susun'),
 ]

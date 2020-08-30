@@ -1,0 +1,62 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+            <form action="" method="POST" enctype="multipart/form-data" class="register-form" id="register-form">
+
+                {% csrf_token %}
+
+                <h1 id="judul-tipe"> Tipe Rumah Tapak </h1>
+                
+                {% for RumahTapak in daftarRumahTapak %}
+                <div class="form-row">
+                    <div class="form-group" id="number-susun">
+
+                        <h1> {{iterasi}} </h1>
+
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <div class="form-input">
+                            <input type="text" name="tipe_rumah_tapak{{iterasi}}" id="tipe_rumah_tapak" value="{{iterasi}}" hidden/>
+                        </div>
+
+                        <div class="form-input">
+                            <input type="text" name="tipe_rumah_tapak_id{{iterasi}}" id="tipe_rumah_tapak" value="{{RumahTapak.id}}" hidden/>
+                        </div>
+                        
+                        <div class="form-input">
+                            <label for="lb_rumah_tapak">Luas Bangunan</label>
+                            <input type="text" name="lb_rumah_tapak{{iterasi}}" id="lb_rumah_tapak" value="{{RumahTapak.lb_rumah_tapak}}"/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="lt_rumah_tapak">Luas Tanah</label>
+                            <input type="text" name="lt_rumah_tapak{{iterasi}}" id="lt_rumah_tapak" value="{{RumahTapak.lt_rumah_tapak}}"/>
+                        </div>
+
+                        <div class="form-input">
+                            <label for="jumlah_unit_rumah_tapak">Jumlah Unit</label>
+                            <input type="text" name="jumlah_unit_rumah_tapak{{iterasi}}" id="jumlah_unit_rumah_tapak" value="{{RumahTapak.jumlah_unit_rumah_tapak}}"/>
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+
+                {% endfor %}
+
+                <div class="form-submit">
+                    <input type="text" name="jumlah_tipe" id="jumlah_tipe" value="{{jumlah_tipe}}" hidden/>
+                    <input type="submit" value="Next" class="submit" id="submit-tipe" name="submit" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
