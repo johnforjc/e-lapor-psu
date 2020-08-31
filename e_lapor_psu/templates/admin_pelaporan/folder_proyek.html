@@ -1,0 +1,90 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-folder-proyek">
+
+                        <h1 class="main-header-folder-proyek"> Folder Proyek </h1>
+
+                        <div class="row">
+
+                            <div class="col">
+                                <a class ="item" href="{% url 'read_proyek' entry.id_data_proyek %}">
+                                    <div class="listing-proyek-folder">
+                                        <div class="listing-content-details">
+                                            <div class="row" id="proyek-folder-row">
+                                                <h3 class="proyek-folder-header">Detail Proyek</h3>
+                                            </div>
+                                            <div class="row" id="proyek-folder-row">
+                                                <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <a class ="item" href="{% url 'read_tipe_rumah' entry.id_data_proyek %}">
+                                    <div class="listing-proyek-folder">
+                                        <div class="listing-content-details">
+                                            <div class="row" id="proyek-folder-row">
+                                                <h3 class="proyek-folder-header">Rincian {{entry.jenis_produk}}</h3>
+                                            </div>
+                                            <div class="row" id="proyek-folder-row">
+                                                <button class="btn btn-danger" id="verified-tag"> Belum Diverifikasi </button>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col">
+                                <a class ="item" href="{% url 'read_jenis_psu' entry.id_data_proyek %}">
+                                    <div class="listing-proyek-folder">
+                                        <div class="listing-content-details">
+                                            <div class="row" id="proyek-folder-row">
+                                                <h3 class="proyek-folder-header">Detail Jenis PSU</h3>
+                                            </div>
+                                            <div class="row" id="proyek-folder-row">
+                                                <button class="btn btn-danger" id="verified-tag"> Belum Diverifikasi </button>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <a class ="item" href="{% url 'read_perizinan' entry.id_data_proyek %}">
+                                    <div class="listing-proyek-folder">
+                                        <div class="listing-content-details">
+                                            <div class="row" id="proyek-folder-row">
+                                                <h3 class="proyek-folder-header">Detail Perizinan</h3>
+                                            </div>
+                                            <div class="row" id="proyek-folder-row">
+                                                <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

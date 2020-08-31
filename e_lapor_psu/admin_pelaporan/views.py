@@ -10,10 +10,6 @@ import os
 def index(request):
     return render(request, 'admin_pelaporan/index_admin_pelaporan.html')
 
-def listing_proyek(request):
-    all_entries = DataProyek.objects.all()
-    return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries})
-
 def listing_perusahaan(request):
     all_entries = DataPerusahaan.objects.all()
     return render(request, 'admin_pelaporan/list_perusahaan.html', {'all_entries' : all_entries})
@@ -21,32 +17,6 @@ def listing_perusahaan(request):
 def listing_perizinan(request):
     all_entries = DataPerizinan.objects.all()
     return render(request, 'admin_pelaporan/list_perizinan.html', {'all_entries' : all_entries})
-
-def listing_rumah_tapak(request):
-    all_entries = RumahTapak.objects.all()
-    return render(request, 'admin_pelaporan/listing_rumah_tapak.html', {'all_entries' : all_entries})
-
-def listing_rumah_susun(request):
-    all_entries = RumahSusun.objects.all()
-    return render(request, 'admin_pelaporan/listing_rumah_susun.html', {'all_entries' : all_entries})
-
-def read_proyek(request, id):
-    entry = DataProyek.objects.get(id_data_proyek = id)
-
-    if entry.jenis_produk == "Rumah Tapak":
-        query = RumahTapak.objects.filter(id_data_proyek_id=id)
-        rumahTapaks = []
-        for temp in query.all():
-            rumahTapaks.append(temp)
-        return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry, 'rumahTapaks': rumahTapaks})
-
-    elif entry.jenis_produk == "Rumah Susun":
-        query = RumahSusun.objects.filter(id_data_proyek_id=id)
-        rumahSusuns = []
-        for temp in query.all():
-            rumahSusuns.append(temp)
-
-    return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
 
 def read_perusahaan(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
@@ -61,9 +31,48 @@ def read_perusahaan(request, id):
 
     return render(request, 'admin_pelaporan/read_perusahaan.html', {'entry' : entry, 'ktpPDF' : ktpPDF, 'aktaPDF' : aktaPDF})
 
+def listing_proyek(request, id):
+    query = DataProyek.objects.filter(id_data_perusahaan_id = id)
+    all_entries = []
+    for temp in query.all():
+        all_entries.append(temp)
+    return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries})
+
+def read_proyek(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+
+    return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry})
+
+def read_tipe_rumah(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+
+    if entry.jenis_produk == "Rumah Tapak":
+        query = RumahTapak.objects.filter(id_data_proyek_id=id)
+        rumahTapaks = []
+        for temp in query.all():
+            rumahTapaks.append(temp)
+        return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahTapaks': rumahTapaks})
+
+    elif entry.jenis_produk == "Rumah Susun":
+        query = RumahSusun.objects.filter(id_data_proyek_id=id)
+        rumahSusuns = []
+        for temp in query.all():
+            rumahSusuns.append(temp)
+
+    return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
+
+def read_jenis_psu(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+
+    return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
+
 def read_perizinan(request, id):
     entry = DataPerizinan.objects.get(id_data_proyek = id)
     return render(request, 'admin_pelaporan/read_perizinan.html', {'entry' : entry})
+
+def folder_proyek(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+    return render(request, 'admin_pelaporan/folder_proyek.html', {'entry' : entry})
 
 def generate_username(request):
     if request.method == 'POST':

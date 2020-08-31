@@ -62,7 +62,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" id="read-row">
                             
                             {# col 1 #}
                             <div class="col">
@@ -123,7 +123,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" id="read-row">
 
                             <div class="col">
                                 <label for="akta_pendirian_badan_usaha_atau_badan_hukum" class="detail-title">Akta pendirian Badan Usaha / Badan Hukum</label>
@@ -156,6 +156,14 @@
                             </div>
 
                         </div>
+
+                        <div class="row" id="read-row">
+                            <h2 class="sub-header"> Daftar Proyek </h2>
+                        </div>
+
+                        <a href="{% url 'listing_proyek' entry.id_data_perusahaan %}" class="btn btn-primary" id="lihat-daftar-proyek"> Lihat Daftar Proyek </a>
+
+
                         
                     </div>
                 </div>

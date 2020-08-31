@@ -9,7 +9,7 @@
                 <h1>Daftar Proyek</h1>
 
                 {% for entry in all_entries%}
-                    <a class="item" href="#">
+                    <a class="item" href="{% url 'folder_proyek' entry.id_data_proyek %}">
                         <div class="col-md-12">
                             <div class="listing listing-radius">
                                 <div class="listing-content-proyek">

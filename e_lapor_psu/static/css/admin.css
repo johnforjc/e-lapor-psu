@@ -3,6 +3,14 @@
     background-color: #03a678 !important;
     box-shadow: none !important;
     border: 1px solid #ccc !important;
+    font-weight: 500;
+}
+
+.btn-danger, .btn-danger:hover, .btn-dangery:active, .btn-danger:focus, .btn-danger:focus:active,.btn-danger:visited {
+    background-color: #ccc !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    font-weight: 500;
 }
 
 /* listing perusahaan */
@@ -138,18 +146,70 @@
     align-items: center;
 }
 
+#read-row{
+    padding-left: 10px
+}
+
 .col {
     padding-bottom: 25px;
 }
 
-/* read proyek */
 .sub-header{
     font-size: 20px;
-    padding: 30px 0 30px;
+    margin: 30px 0 30px 15px;
     text-decoration: underline;
     text-decoration-color: #03a678;
     text-underline-position: under;
 }
+
+#lihat-daftar-proyek{
+    margin-left: 10px;
+}
+
+/* folder proyek */
+.listing-content-folder-proyek {
+    padding: 20px 20px 20px;
+}
+
+.main-header-folder-proyek{
+    margin-bottom: 40px;
+}
+
+.listing-proyek-folder{
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px -5px 30px;
+    border-radius: 10px;
+}
+
+.listing-proyek-folder:hover {
+    border: 1px solid #03a678;
+}
+
+#proyek-folder-row{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.proyek-folder-header{
+    font-size: 20px;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
+}
+
+#verified-status-label{
+    margin-top: 50px;
+    margin-bottom: -30px;
+}
+
+#verified-tag{
+    margin: 50px 0 -30px 10px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
 
 
     
