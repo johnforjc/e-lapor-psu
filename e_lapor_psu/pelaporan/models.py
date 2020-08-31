@@ -66,6 +66,7 @@ class JenisPsu(models.Model):
     sarana_penerangan_jalan_umum = models.IntegerField(default=0)
 
 class RumahTapak(models.Model):
+    id_rumah_tapak = models.AutoField(primary_key=True)
     id_data_proyek = models.ForeignKey(DataProyek, on_delete=models.CASCADE)
     tipe_rumah_tapak = models.IntegerField()
     lb_rumah_tapak = models.FloatField()
@@ -73,6 +74,7 @@ class RumahTapak(models.Model):
     jumlah_unit_rumah_tapak = models.IntegerField()
 
 class RumahSusun(models.Model):
+    id_rumah_susun = models.AutoField(primary_key=True)
     id_data_proyek = models.ForeignKey(DataProyek, on_delete=models.CASCADE)
     tipe_rumah_susun = models.IntegerField()
     lb_rumah_susun = models.FloatField()

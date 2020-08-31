@@ -285,7 +285,7 @@ def detail_proyek(request, id):
 #### Update on database code
 
 def update_data_perusahaan(request, id):
-    dataPerusahaan = DataPerusahaan.objects.get(id_data_proyek=id)
+    dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     if request.method == 'POST':
         nama_perusahaan = request.POST['nama_perusahaan']
         nama_pemilik = request.POST['nama_pemilik']
@@ -351,7 +351,7 @@ def update_data_proyek(request, id):
         return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})
 
 def update_data_perizinan(request, id):
-    dataPerizinan = DataPerizinan.objects.get(id_data_proyek=id)
+    dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
     if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
         site_plan = request.FILES['site_plan']
         ukl_upl = request.FILES['ukl_upl']
@@ -372,7 +372,7 @@ def update_data_perizinan(request, id):
         return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan})
 
 def update_jenis_psu(request, id):
-    daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
+    daftarJenisPsu = JenisPsu.objects.get(id_data_proyek_id=id)
     if request.method == 'POST':
         jaringan_jalan = request.POST['jaringan_jalan']
         jaringan_saluran_pembuangan_air_hujan = request.POST['jaringan_saluran_pembuangan_air_hujan']
@@ -426,12 +426,8 @@ def update_jenis_psu(request, id):
     else:
         return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
 
-def rumah_susun(request, id):
-    dataRumahSusun = RumahSusun.objects.get(id = id)
-    return HttpResponse(dataRumahSusun.jumlah_unit_rumah_susun)
-
 def update_tipe_rumah_susun(request, id):
-    daftarRumahSusun = RumahSusun.objects.filter(id_data_proyek=id)
+    daftarRumahSusun = RumahSusun.objects.filter(id_data_proyek_id=id)
     if request.method == 'POST':
         jumlah_tipe = int(request.POST['jumlah_tipe'])
         rumahSusun = []
@@ -458,7 +454,7 @@ def update_tipe_rumah_susun(request, id):
         return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'daftarRumahSusun' : daftarRumahSusun, 'iterasi': 0})
 
 def update_tipe_rumah_tapak(request, id):
-    daftarRumahTapak = RumahTapak.objects.filter(id_data_proyek=id)
+    daftarRumahTapak = RumahTapak.objects.filter(id_data_proyek_id=id)
     if request.method == 'POST':    
         jumlah_tipe = int(request.POST['jumlah_tipe'])
         rumahTapak = []
