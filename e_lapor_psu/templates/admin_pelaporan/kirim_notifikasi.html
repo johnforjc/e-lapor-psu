@@ -11,7 +11,9 @@
                     <div class="listing-content-details">
 
                         <form action="" method="POST" enctype="multipart/form-data">
-                
+                            
+                            {% csrf_token %}
+
                             <h1 header="header"> Kirim Notifikasi </h1>
 
                             <div class="form-row-single">
@@ -24,7 +26,7 @@
 
                                     <div class="form-input">
                                         <label for="pesan_notifikasi" class="detail-title">Pesan</label>
-                                        <textarea class="form-control" id="textarea-kirim-notifikasi"></textarea>
+                                        <textarea class="form-control" id="textarea-kirim-notifikasi" name="notifikasi"></textarea>
                                     </div>
 
                                 </div>
