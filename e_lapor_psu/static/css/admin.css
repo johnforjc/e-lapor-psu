@@ -10,8 +10,13 @@
     background-color: #025b42 !important;
 }
 
-.btn-danger, .btn-danger:hover, .btn-dangery:active, .btn-danger:focus, .btn-danger:focus:active,.btn-danger:visited {
-    background-color: #ccc !important;
+.btn-secondary, .btn-secondary:active, .btn-secondary:focus, .btn-secondary:focus:active,.btn-secondary:visited {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    font-weight: 500;
+}
+
+.btn-danger, .btn-danger:active, .btn-danger:focus, .btn-danger:focus:active,.btn-danger:visited {
     box-shadow: none !important;
     border: 1px solid #ccc !important;
     font-weight: 500;
@@ -30,10 +35,15 @@
     margin-right: 30px;
 }
 
-/* listing perusahaan */
+#kirim-notifikasi{
+    margin-right: 30px;
+}
+
 .content {
     padding: 75px 100px 75px 100px; 
 }
+
+/* listing perusahaan */
 
 .item {
     color: #000;
@@ -228,7 +238,28 @@
     cursor: not-allowed;
 }
 
+/* kirim notifikasi */
 
+.form-control:active, .form-control:focus, .form-control:focus:active{
+    border: 1px solid #03a678 !important;
+}
+
+#textarea-kirim-notifikasi{
+    height: 300px;
+}
+
+#button-kirim-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#button-kirim{
+    text-transform: uppercase;
+    margin-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
 
 
 

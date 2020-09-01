@@ -1,0 +1,46 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-details">
+
+                        <form action="" method="POST" enctype="multipart/form-data">
+                
+                            <h1 header="header"> Kirim Notifikasi </h1>
+
+                            <div class="form-row-single">
+                                <div class="form-group-single">
+
+                                    <div class="detail-text">
+                                        <label for="nama_perusahaan_notifikasi" class="detail-title">Nama Perusahaan</label>
+                                        <p class="read-details">{{entry.nama_perusahaan}}</p>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <label for="pesan_notifikasi" class="detail-title">Pesan</label>
+                                        <textarea class="form-control" id="textarea-kirim-notifikasi"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row" id="button-kirim-row">
+                                <div class="form-submit">
+                                    <input type="submit" value="kirim" class="btn btn-primary" id="button-kirim"/>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

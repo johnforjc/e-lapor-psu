@@ -16,5 +16,6 @@ urlpatterns=[
     path('read_perizinan/<int:id>/', views.read_perizinan, name="read_perizinan"),
     
     path('listing_perizinan/', views.listing_perizinan, name='listing_perizinan'),
+    path('kirim_notifikasi/<int:id>/', views.kirim_notifikasi, name='kirim_notifikasi'),
     
 ]

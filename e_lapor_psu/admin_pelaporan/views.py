@@ -39,7 +39,7 @@ def read_perusahaan(request, id):
 
 def listing_proyek(request, id):
     query = DataProyek.objects.filter(id_data_perusahaan_id = id)
-    all_entries = []
+    all_entries = [] 
     for temp in query.all():
         all_entries.append(temp)
     return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries})
@@ -83,3 +83,7 @@ def read_perizinan(request, id):
 def listing_perizinan(request):
     all_entries = DataPerizinan.objects.all()
     return render(request, 'admin_pelaporan/list_perizinan.html', {'all_entries' : all_entries})
+
+def kirim_notifikasi(request, id):
+    entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
+    return render(request, 'admin_pelaporan/kirim_notifikasi.html', {'entry': entry})
