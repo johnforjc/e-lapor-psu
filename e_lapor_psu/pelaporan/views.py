@@ -106,7 +106,7 @@ def form_data_perizinan(request, id):
         )
 
         if dataPerizinan:
-            data_proyek.update(verified_data_perizinan = True)
+            DataProyek.objects.filter(id_data_proyek=id).update(verified_data_perizinan = True)
         
         return redirect('/')
 
@@ -139,7 +139,7 @@ def tipe_rumah_tapak(request, id):
             )
         
         if rumahTapak:
-            data_proyek.update(verified_tipe_rumah = True)
+            DataProyek.objects.filter(id_data_proyek=id).update(verified_tipe_rumah = True)
 
         return redirect('jenis_psu', id=id)
 
@@ -172,7 +172,7 @@ def tipe_rumah_susun(request, id):
             )
 
         if rumahSusun:
-            data_proyek.update(verified_tipe_rumah = True)
+            DataProyek.objects.filter(id_data_proyek=id).update(verified_tipe_rumah = True)
 
         return redirect('jenis_psu', id=id)
 
@@ -183,58 +183,44 @@ def tipe_rumah_susun(request, id):
         else:
             return redirect('detail_proyek/'+ id +'/')
 
+# Jenis PSU FIX
 def jenis_psu(request, id):
     data_proyek = DataProyek.objects.get(id_data_proyek=id)
     if request.method == 'POST':
-        jaringan_jalan = request.POST['jaringan_jalan']
-        jaringan_saluran_pembuangan_air_hujan = request.POST['jaringan_saluran_pembuangan_air_hujan']
-        sanitasi = request.POST['sanitasi']
-        jaringan_saluran_pembuangan_air_limbah = request.POST['jaringan_saluran_pembuangan_air_limbah']
-        tempat_pembuangan_sampah = request.POST['tempat_pembuangan_sampah']
-        sarana_perniagaan = request.POST['sarana_perniagaan']
-        sarana_pelayanan_umum_dan_pemerintahan = request.POST['sarana_pelayanan_umum_dan_pemerintahan']
-        sarana_pendidikan = request.POST['sarana_pendidikan']
-        sarana_kesehatan = request.POST['sarana_kesehatan']
-        sarana_peribadatan = request.POST['sarana_peribadatan']
-        sarana_rekreasi_dan_olahraga = request.POST['sarana_rekreasi_dan_olahraga']
-        sarana_pemakaman = request.POST['sarana_pemakaman']
-        sarana_pertanaman_dan_ruang_terbuka_hijau = request.POST['sarana_pertanaman_dan_ruang_terbuka_hijau']
-        sarana_parkir = request.POST['sarana_parkir']
-        jaringan_air_bersih = request.POST['jaringan_air_bersih']
-        jaringan_listrik = request.POST['jaringan_listrik']
-        jaringan_telepon = request.POST['jaringan_telepon']
-        jaringan_gas = request.POST['jaringan_gas']
-        jaringan_transportasi = request.POST['jaringan_transportasi']
-        pemadam_kebakaran = request.POST['pemadam_kebakaran']
-        sarana_penerangan_jalan_umum = request.POST['sarana_penerangan_jalan_umum']
+        my_input = []
+        for i in range(1, 22):
+            if request.POST.get('inputPSU_'+str(i), False):
+                my_input.append(request.POST.get('inputPSU_'+str(i)))
+            else:
+                my_input.append(0)
 
         jenisPsu = JenisPsu.objects.create(
-            jaringan_jalan = jaringan_jalan,
-            jaringan_saluran_pembuangan_air_hujan = jaringan_saluran_pembuangan_air_hujan,
-            sanitasi = sanitasi,
-            jaringan_saluran_pembuangan_air_limbah = jaringan_saluran_pembuangan_air_limbah,
-            tempat_pembuangan_sampah = tempat_pembuangan_sampah,
-            sarana_perniagaan = sarana_perniagaan,
-            sarana_pelayanan_umum_dan_pemerintahan = sarana_pelayanan_umum_dan_pemerintahan,
-            sarana_pendidikan = sarana_pendidikan,
-            sarana_kesehatan = sarana_kesehatan,
-            sarana_peribadatan = sarana_peribadatan,
-            sarana_rekreasi_dan_olahraga = sarana_rekreasi_dan_olahraga,
-            sarana_pemakaman = sarana_pemakaman,
-            sarana_pertanaman_dan_ruang_terbuka_hijau = sarana_pertanaman_dan_ruang_terbuka_hijau,
-            sarana_parkir = sarana_parkir,
-            jaringan_air_bersih = jaringan_air_bersih,
-            jaringan_listrik = jaringan_listrik,
-            jaringan_telepon = jaringan_telepon,
-            jaringan_gas = jaringan_gas,
-            jaringan_transportasi = jaringan_transportasi,
-            pemadam_kebakaran = pemadam_kebakaran,
-            sarana_penerangan_jalan_umum = sarana_penerangan_jalan_umum,
+            jaringan_jalan = my_input[0],
+            jaringan_saluran_pembuangan_air_hujan = my_input[1],
+            sanitasi = my_input[2],
+            jaringan_saluran_pembuangan_air_limbah = my_input[3],
+            tempat_pembuangan_sampah = my_input[4],
+            sarana_perniagaan = my_input[5],
+            sarana_pelayanan_umum_dan_pemerintahan = my_input[6],
+            sarana_pendidikan = my_input[7],
+            sarana_kesehatan = my_input[8],
+            sarana_peribadatan = my_input[9],
+            sarana_rekreasi_dan_olahraga = my_input[10],
+            sarana_pemakaman = my_input[11],
+            sarana_pertanaman_dan_ruang_terbuka_hijau = my_input[12],
+            sarana_parkir = my_input[13],
+            jaringan_air_bersih = my_input[14],
+            jaringan_listrik = my_input[15],
+            jaringan_telepon = my_input[16],
+            jaringan_gas = my_input[17],
+            jaringan_transportasi = my_input[18],
+            pemadam_kebakaran = my_input[19],
+            sarana_penerangan_jalan_umum = my_input[20],
             id_data_proyek_id = id,
         )
 
         if JenisPsu:
-            data_proyek.update(verified_jenis_psu = True)
+           DataProyek.objects.filter(id_data_proyek=id).update(verified_jenis_psu = True)
 
         return redirect('form_data_perizinan', id=id)
 
@@ -242,7 +228,7 @@ def jenis_psu(request, id):
         if data_proyek.verified_jenis_psu == False:
             return render(request, 'pengembang_pelaporan/jenis_psu.html')
         else:
-            return redirect('detail_proyek/'+ id +'/')
+            return redirect('detail_proyek/'+ str(id) +'/')
 
 
 #### Read on database code
@@ -290,16 +276,9 @@ def update_data_perusahaan(request, id):
         website = request.POST['website']
         nomor_telp = request.POST['no_telp']
 
-        foto_pemilik = request.FILES['foto_pemilik']
-        ktp_pemilik = request.FILES['ktp_pemilik']
-        akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
-
         dataPerusahaan = DataPerusahaan.objects.filter(id_data_perusahaan=id).update(
             nama_perusahaan= nama_perusahaan,
-            akta_pendirian_badan_usaha = akta,
             nama_pemilik   = nama_pemilik,
-            foto_pemilik   = foto_pemilik,
-            ktp_pemilik= ktp_pemilik,
             bentuk_perusahaan  = bentuk_perusahaan,
             alamat_perusahaan  = alamat_perusahaan,
             tahun_berdiri  = tahun_berdiri,
@@ -307,6 +286,17 @@ def update_data_perusahaan(request, id):
             email  = email,
             website= website,
         )
+
+        ## Check apakah ada file yang diupdate
+        if request.FILES.get('foto_pemilik', False):
+            foto_pemilik = request.FILES['foto_pemilik']
+            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(foto_pemilik = foto_pemilik)
+        if request.FILES.get('ktp_pemilik', False):
+            ktp_pemilik = request.FILES['ktp_pemilik']
+            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(ktp_pemilik = ktp_pemilik)
+        if request.FILES.get('akta_pendirian_badan_usaha_atau_badan_hukum', False):
+            akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
+            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(akta_pendirian_badan_usaha = akta)
 
         return redirect('/')
 
@@ -336,33 +326,31 @@ def update_data_proyek(request, id):
             jumlah_tipe_rumah = jumlah_tipe_rumah,
             target_pembangunan = target_pembangunan,
         )
-        
-        # if jenis_produk == "Rumah Tapak":
-        #     return redirect('tipe_rumah_tapak', id_rumah_susun=dataProyek.id_data_proyek)
-        # elif jenis_produk == "Rumah Susun":
-        #     return redirect('tipe_rumah_susun', id_rumah_tapak=dataProyek.id_data_proyek)
         redirect_link = "/detail_proyek/" + str(id)
         return redirect(redirect_link)
 
     else:
         return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})
 
+# update data perizinan FIX
 def update_data_perizinan(request, id):
     dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
-    if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
-        site_plan = request.FILES['site_plan']
-        ukl_upl = request.FILES['ukl_upl']
-        izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
-        izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
+    if request.method == 'POST':
 
-        dataPerizinan = DataPerizinan.objects.filter(id_data_proyek_id=id).update(
-            site_plan = site_plan,
-            ukl_upl = ukl_upl,
-            izin_mendirikan_bangunan = izin_mendirikan_bangunan,
-            izin_penggunaan_bangunan = izin_penggunaan_bangunan,
-            id_data_proyek_id = id,
-        )
-        
+        ## Check file ada yang diupload atau tidak
+        if request.FILES.get('site_plan', False):
+            site_plan = request.FILES['site_plan']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(site_plan = site_plan)
+        if request.FILES.get('ukl_upl', False):
+            ukl_upl = request.FILES['ukl_upl']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(ukl_upl = ukl_upl)
+        if request.FILES.get('izin_mendirikan_bangunan', False):
+            izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(izin_mendirikan_bangunan = izin_mendirikan_bangunan)
+        if request.FILES.get('izin_penggunaan_bangunan', False):
+            izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(izin_penggunaan_bangunan = izin_penggunaan_bangunan)
+      
         return redirect('/')
 
     else:
@@ -371,7 +359,12 @@ def update_data_perizinan(request, id):
 def update_jenis_psu(request, id):
     daftarJenisPsu = JenisPsu.objects.get(id_data_proyek_id=id)
     if request.method == 'POST':
-        jaringan_jalan = request.POST['jaringan_jalan']
+        if request.POST.get('jaringan_jalan', False):
+            return HttpResponse("MASUK")
+            jaringan_jalan = request.POST['jaringan_jalan']
+        else:
+            return HttpResponse("MASUK AAAAAAAAAAAAAAAAAa")
+            jaringan_jalan = 0
         jaringan_saluran_pembuangan_air_hujan = request.POST['jaringan_saluran_pembuangan_air_hujan']
         sanitasi = request.POST['sanitasi']
         jaringan_saluran_pembuangan_air_limbah = request.POST['jaringan_saluran_pembuangan_air_limbah']
