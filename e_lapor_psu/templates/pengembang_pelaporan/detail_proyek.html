@@ -51,11 +51,11 @@
 
                         <h1 class="sub-header"> Rincian Rumah Tapak </h1>
 
-                            {% for rumahTapak in rumahTapaks %}
+                            {% for query in queries %}
                             <div class="form-row">
                                 <div class="form-group" id="number-susun">
 
-                                    <h1> {{rumahTapak.tipe_rumah_tapak}} </h1>
+                                    <h1> {{query.tipe_rumah_tapak}} </h1>
 
                                 </div>
 
@@ -63,19 +63,22 @@
                                     
                                     <div class="detail-text">
                                         <label for="lb_rumah_tapak" class="detail-title">Luas Bangunan</label>
-                                        <p class="read-details">{{rumahTapak.lb_rumah_tapak}} Hektar(Ha)</p>
+                                        <p class="read-details">{{query.lb_rumah_tapak}} Hektar(Ha)</p>
                                     </div>
 
                                     <div class="detail-text">
                                         <label for="lt_rumah_tapak" class="detail-title">Luas Tanah</label>
-                                        <p class="read-details">{{rumahTapak.lt_rumah_tapak}} Hektar(Ha)</p>
+                                        <p class="read-details">{{query.lt_rumah_tapak}} Hektar(Ha)</p>
                                     </div>
 
                                     <div class="detail-text">
                                         <label for="jumlah_unit_rumah_tapak" class="detail-title">Jumlah Unit</label>
-                                        <p class="read-details">{{rumahTapak.jumlah_unit_rumah_tapak}} Unit</p>
+                                        <p class="read-details">{{query.jumlah_unit_rumah_tapak}} Unit</p>
                                     </div>
 
+                                    <a href="/update_tipe_rumah_tapak/{{query.id_rumah_tapak}}">
+                                        <div class="submit">Update Tipe Rumah</div>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
@@ -86,25 +89,29 @@
 
                         <h1 class="sub-header"> Rincian Rumah Susun </h1>
 
-                            {% for rumahSusun in rumahSusuns %}
+                            {% for query in queries %}
                             <div class="form-row">
                                 <div class="form-group" id="number-susun">
 
-                                    <h1> {{rumahSusun.tipe_rumah_susun}} </h1>
+                                    <h1> {{query.tipe_rumah_susun}} </h1>
 
                                 </div>
 
                                 <div class="form-group">
                                     
                                     <div class="detail-text">
-                                        <label for="lb_rumah_tapak" class="detail-title">Luas Bangunan</label>
-                                        <p class="read-details">{{rumahSusun.lb_rumah_susun}} Hektar(Ha)</p>
+                                        <label for="lb_rumah_susun" class="detail-title">Luas Bangunan</label>
+                                        <p class="read-details">{{query.lb_rumah_susun}} Hektar(Ha)</p>
                                     </div>
 
                                     <div class="detail-text">
-                                        <label for="jumlah_unit_rumah_tapak" class="detail-title">Jumlah Unit</label>
-                                        <p class="read-details">{{rumahSusun.jumlah_unit_rumah_susun}} Unit</p>
+                                        <label for="jumlah_unit_rumah_susun" class="detail-title">Jumlah Unit</label>
+                                        <p class="read-details">{{query.jumlah_unit_rumah_susun}} Unit</p>
                                     </div>
+
+                                    <a href="/update_tipe_rumah_susun/{{query.id_rumah_susun}}">
+                                        <div class="submit">Update Tipe Rumah</div>
+                                    </a>
 
                                 </div>
                             </div>

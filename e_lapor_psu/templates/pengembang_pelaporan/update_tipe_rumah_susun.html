@@ -4,17 +4,17 @@
 
     <div class="main">
         <div class="container">
-            <form action="" method="PUT" enctype="multipart/form-data" class="register-form" id="register-form">
+            <form action="" method="POST" enctype="multipart/form-data" class="register-form" id="register-form">
 
                 {% csrf_token %}
 
                 <h1 id="judul-tipe"> Tipe Rumah Susun </h1>
                 
-                {% for RumahSusun in daftarRumahSusun %}
                 <div class="form-row">
                     <div class="form-group" id="number-susun">
 
-                        <h1> {{iterasi|increment}} </h1>
+                        <h1> {{RumahSusun.tipe_rumah_susun}} </h1>
+
 
                     </div>
 
@@ -23,32 +23,25 @@
                     <div class="form-group">
                         
                         <div class="form-input">
-                            <input type="text" name="tipe_rumah_susun{{iterasi}}" id="tipe_rumah_susun" value="{{iterasi}}" hidden/>
-                        </div>
-                        
-                        <div class="form-input">
-                            <input type="text" name="tipe_rumah_susun_id_{{iterasi}}" id="tipe_rumah_susun" value="{{RumahSusun.id}}" hidden/>
+                            <input type="text" name="tipe_rumah_susun_id" id="tipe_rumah_susun" value="{{RumahSusun.id_rumah_susun}}" hidden/>
                         </div>
 
                         <div class="form-input">
                             <label for="lb_rumah_susun">Luas Bangunan</label>
-                            <input type="text" name="lb_rumah_susun{{iterasi}}" id="lb_rumah_susun" value="{{RumahSusun.lb_rumah_susun}}"/>
+                            <input type="text" name="lb_rumah_susun" id="lb_rumah_susun" value="{{RumahSusun.lb_rumah_susun}}"/>
                         </div>
 
                         <div class="form-input">
                             <label for="jumlah_unit_rumah_susun">Jumlah Unit</label>
-                            <input type="text" name="jumlah_unit_rumah_susun{{iterasi}}" id="jumlah_unit_rumah_susun"  value="{{RumahSusun.jumlah_unit_rumah_susun}}"/>
+                            <input type="text" name="jumlah_unit_rumah_susun" id="jumlah_unit_rumah_susun"  value="{{RumahSusun.jumlah_unit_rumah_susun}}"/>
                         </div>
 
                     </div>
                 </div>
                 <hr>
 
-                {% endfor %}
-
                 <div class="form-submit">
-                    <input type="text" name="jumlah_tipe" id="jumlah_tipe" value="{{jumlah_tipe}}" hidden/>
-                    <input type="submit" value="Next" class="submit" id="submit-tipe" name="submit" />
+                    <input type="submit" value="Update" class="submit" id="submit-tipe" name="submit" />
                 </div>
 
             </form>

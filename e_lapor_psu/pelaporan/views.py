@@ -270,16 +270,10 @@ def detail_proyek(request, id):
     dataProyek = DataProyek.objects.get(id_data_proyek=id)
     if dataProyek.jenis_produk == "Rumah Tapak":
         query = RumahTapak.objects.filter(id_data_proyek_id=id)
-        rumahTapaks = []
-        for temp in query.all():
-            rumahTapaks.append(temp)
-        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'rumahTapaks': rumahTapaks})
+        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'queries': query})
     elif dataProyek.jenis_produk == "Rumah Susun":
         query = RumahSusun.objects.filter(id_data_proyek_id=id)
-        rumahSusuns = []
-        for temp in query.all():
-            rumahSusuns.append(temp)
-        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'rumahSusuns': rumahSusuns})
+        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'queries': query})
 
 
 #### Update on database code
@@ -427,56 +421,25 @@ def update_jenis_psu(request, id):
         return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
 
 def update_tipe_rumah_susun(request, id):
-    daftarRumahSusun = RumahSusun.objects.filter(id_data_proyek_id=id)
-    if request.method == 'POST':
-        jumlah_tipe = int(request.POST['jumlah_tipe'])
-        rumahSusun = []
-
-        for iterasi in range(1,jumlah_tipe+1):
-                
-            tipe_rumah_susun = request.POST['tipe_rumah_susun'+str(iterasi)]
-            lb_rumah_susun = request.POST['lb_rumah_susun'+str(iterasi)]
-            jumlah_unit_rumah_susun = request.POST['jumlah_unit_rumah_susun'+str(iterasi)]
-            id_rumah_susun = request.POST['tipe_rumah_susun_id_'+str(iterasi)]
-
-            rumahSusun.append(
-                RumahSusun.objects.get(id=id_rumah_susun).create(
-                    tipe_rumah_susun = tipe_rumah_susun,
-                    lb_rumah_susun = lb_rumah_susun,
-                    jumlah_unit_rumah_susun = jumlah_unit_rumah_susun,
-                    id_data_proyek_id = id,
-                )
-            )
-
-        return redirect('jenis_psu', id=id)
-
+    rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
+    if request=='POST':
+        tipe_rumah_susun = request.POST['tipe_rumah_susun']
+        lb_rumah_susun = request.POST['lb_rumah_susun']
+        jumlah_unit_rumah_susun = request.POST['jumlah_unit_rumah_susun']
+        RumahSusun.objects.get(id_rumah_susun=id).update(
+            tipe_rumah_susun = tipe_rumah_susun,
+            lb_rumah_susun = lb_rumah_susun,
+            jumlah_unit_rumah_susun = jumlah_unit_rumah_susun,
+            id_data_proyek_id = id,
+        )
     else:
-        return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'daftarRumahSusun' : daftarRumahSusun, 'iterasi': 0})
+        return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
 
 def update_tipe_rumah_tapak(request, id):
-    daftarRumahTapak = RumahTapak.objects.filter(id_data_proyek_id=id)
-    if request.method == 'POST':    
-        jumlah_tipe = int(request.POST['jumlah_tipe'])
-        rumahTapak = []
-
-        for iterasi in range(1,jumlah_tipe+1):
-            tipe_rumah_tapak = request.POST['tipe_rumah_tapak'+str(iterasi)]
-            lb_rumah_tapak = request.POST['lb_rumah_tapak'+str(iterasi)]
-            lt_rumah_tapak = request.POST['lt_rumah_tapak'+str(iterasi)]
-            jumlah_unit_rumah_tapak = request.POST['jumlah_unit_rumah_tapak'+str(iterasi)]
-            id_rumah_tapak = request.POST['tipe_rumah_tapak_id_'+str(iterasi)]
-
-            rumahTapak.append(
-                RumahTapak.objects.get(id=id_rumah_tapak).update(
-                    tipe_rumah_tapak = tipe_rumah_tapak,
-                    lb_rumah_tapak = lb_rumah_tapak,
-                    lt_rumah_tapak = lt_rumah_tapak,
-                    jumlah_unit_rumah_tapak = jumlah_unit_rumah_tapak,
-                    id_data_proyek_id = id,
-                )
-            )
-
-        return redirect('jenis_psu', id=id)
-
-    else:
-        return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'daftarRumahTapak' : daftarRumahTapak})
+    rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
+    if request.method == 'POST':
+        tipe_rumah_tapak = request.POST['tipe_rumah_tapak']
+        lb_rumah_tapak = request.POST['lb_rumah_tapak']
+        lt_rumah_tapak = request.POST['lt_rumah_tapak']
+        jumlah_unit_rumah_tapak = request.POST['jumlah_unit_rumah_tapak']
+    return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahTapak' : rumahTapak})
