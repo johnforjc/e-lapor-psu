@@ -235,7 +235,8 @@ def jenis_psu(request, id):
 
 #### Read on database code
 
-def detail_perusahaan(request, id):
+def detail_perusahaan(request):
+    id = 1
     dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     ktpCheck = 0
     aktaCheck = 0
@@ -251,16 +252,32 @@ def list_proyek(request):
     dataProyeks = []
     for temp in query.all():
         dataProyeks.append(temp)
-    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : dataProyeks})
+    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : dataProyeks, 'id_data_perusahaan' : id})
+
+def folder_proyek(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+    return render(request, 'pengembang_pelaporan/folder_proyek.html', {'entry' : entry})
 
 def detail_proyek(request, id):
     dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek})
+
+def detail_tipe_rumah(request, id):
+    dataProyek = DataProyek.objects.get(id_data_proyek=id)
     if dataProyek.jenis_produk == "Rumah Tapak":
         query = RumahTapak.objects.filter(id_data_proyek_id=id)
-        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'queries': query})
+        return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
     elif dataProyek.jenis_produk == "Rumah Susun":
         query = RumahSusun.objects.filter(id_data_proyek_id=id)
-        return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek, 'queries': query})
+        return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
+
+def detail_jenis_psu(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+    return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry})
+
+def detail_perizinan(request, id):
+    entry = DataPerizinan.objects.get(id_data_proyek = id)
+    return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry' : entry})
 
 
 #### Update on database code

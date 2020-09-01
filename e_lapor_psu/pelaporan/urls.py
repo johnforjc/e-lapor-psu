@@ -14,9 +14,12 @@ urlpatterns = [
 
     ## Read on database
     path('detail_perusahaan', views.detail_perusahaan, name='detail_perusahaan'),
-    path('detail_perusahaan/<int:id>/', views.detail_perusahaan, name='detail_perusahaan'),
     path('list_proyek/', views.list_proyek, name='list_proyek'),
+    path('folder_proyek/<int:id>/', views.folder_proyek, name="folder_proyek_pengembang"),
     path('detail_proyek/<int:id>/', views.detail_proyek, name='detail_proyek'),
+    path('detail_tipe_rumah/<int:id>/', views.detail_tipe_rumah, name="detail_tipe_rumah"),
+    path('detail_jenis_psu/<int:id>/', views.detail_jenis_psu, name="detail_jenis_psu"),
+    path('detail_perizinan/<int:id>/', views.detail_perizinan, name="detail_perizinan"),
 
     ## Update database
     path('update_data_perusahaan/<int:id>/', views.update_data_perusahaan, name='update_data_perusahaan'),

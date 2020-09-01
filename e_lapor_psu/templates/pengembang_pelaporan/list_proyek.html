@@ -9,7 +9,7 @@
                 <h1>Daftar Proyek</h1>
                 {% for dataProyek in dataProyeks %}
 
-                <a class="item" href="{% url 'detail_proyek' dataProyek.id_data_proyek %}">
+                <a class="item" href="{% url 'folder_proyek_pengembang' dataProyek.id_data_proyek %}">
                     <div class="col-md-12">
                         <div class="listing listing-radius">
                             <div class="listing-content-proyek">
@@ -33,6 +33,10 @@
                 </a>
 
                 {% endfor %}
+
+                <div class="row" id="admin-verify-back">
+                    <a href="{% url 'detail_perusahaan' %}" class="btn btn-secondary"> Kembali ke Detail Perusahaan </a>
+                </div>
 
             </div>
         </div>
