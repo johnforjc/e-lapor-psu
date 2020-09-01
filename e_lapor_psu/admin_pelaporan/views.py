@@ -87,3 +87,7 @@ def listing_perizinan(request):
 def kirim_notifikasi(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
     return render(request, 'admin_pelaporan/kirim_notifikasi.html', {'entry': entry})
+
+def verifikasi_perusahaan_berhasil(request, id):
+    entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
+    return render(request, 'admin_pelaporan/verifikasi_perusahaan_berhasil.html', {'entry': entry})

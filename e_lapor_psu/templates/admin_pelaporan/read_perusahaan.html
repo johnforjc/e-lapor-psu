@@ -168,7 +168,7 @@
                         <a href="{% url 'listing_proyek' entry.id_data_perusahaan %}" class="btn btn-primary" id="lihat-daftar-proyek"> Lihat Daftar Proyek </a>
 
                         <div class="row" id="admin-verify-back">
-                            <a href="" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
+                            <a href="{% url 'verifikasi_perusahaan_berhasil' entry.id_data_perusahaan %}" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
                             <a href="{% url 'kirim_notifikasi' entry.id_data_perusahaan %}" class="btn btn-danger" id="kirim-notifikasi"> Kirim Notifikasi </a>
                             <a href="{% url 'listing_perusahaan' %}" class="btn btn-secondary"> Kembali ke Daftar Perusahaan </a>
                         </div>
