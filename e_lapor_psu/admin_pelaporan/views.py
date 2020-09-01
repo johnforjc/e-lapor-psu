@@ -10,13 +10,19 @@ import os
 def index(request):
     return render(request, 'admin_pelaporan/index_admin_pelaporan.html')
 
+def generate_username(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username+' '+password)
+        return render(request, 'admin_pelaporan/generate_username.html')
+        
+    else:
+        return render(request, 'admin_pelaporan/generate_username.html')
+
 def listing_perusahaan(request):
     all_entries = DataPerusahaan.objects.all()
     return render(request, 'admin_pelaporan/list_perusahaan.html', {'all_entries' : all_entries})
-
-def listing_perizinan(request):
-    all_entries = DataPerizinan.objects.all()
-    return render(request, 'admin_pelaporan/list_perizinan.html', {'all_entries' : all_entries})
 
 def read_perusahaan(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
@@ -37,6 +43,10 @@ def listing_proyek(request, id):
     for temp in query.all():
         all_entries.append(temp)
     return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries})
+
+def folder_proyek(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+    return render(request, 'admin_pelaporan/folder_proyek.html', {'entry' : entry})
 
 def read_proyek(request, id):
     entry = DataProyek.objects.get(id_data_proyek = id)
@@ -70,16 +80,6 @@ def read_perizinan(request, id):
     entry = DataPerizinan.objects.get(id_data_proyek = id)
     return render(request, 'admin_pelaporan/read_perizinan.html', {'entry' : entry})
 
-def folder_proyek(request, id):
-    entry = DataProyek.objects.get(id_data_proyek = id)
-    return render(request, 'admin_pelaporan/folder_proyek.html', {'entry' : entry})
-
-def generate_username(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        print(username+' '+password)
-        return render(request, 'admin_pelaporan/generate_username.html')
-        
-    else:
-        return render(request, 'admin_pelaporan/generate_username.html')
+def listing_perizinan(request):
+    all_entries = DataPerizinan.objects.all()
+    return render(request, 'admin_pelaporan/list_perizinan.html', {'all_entries' : all_entries})

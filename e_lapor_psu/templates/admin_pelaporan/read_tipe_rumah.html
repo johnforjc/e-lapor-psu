@@ -76,6 +76,11 @@
                             {% endfor %}
 
                         {% endif %}
+
+                        <div class="row" id="admin-verify-back">
+                            <a href="" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
+                            <a href="{% url 'folder_proyek' entry.id_data_proyek %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
+                        </div>
                         
                     </div>
                 </div>
