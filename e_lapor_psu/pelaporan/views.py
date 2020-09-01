@@ -82,9 +82,11 @@ def form_data_proyek(request):
         )
         
         if jenis_produk == "Rumah Tapak":
-            return redirect('tipe_rumah_tapak', id=dataProyek.id_data_proyek)
+            link = '/tipe_rumah_tapak/'+ str(dataProyek.id_data_proyek)
+            return redirect(link)
         elif jenis_produk == "Rumah Susun":
-            return redirect('tipe_rumah_susun', id=dataProyek.id_data_proyek)
+            link = '/tipe_rumah_susun/'+ str(dataProyek.id_data_proyek)
+            return redirect(link)
 
     else:
         return render(request, 'pengembang_pelaporan/form_data_proyek.html')
@@ -314,6 +316,7 @@ def update_data_proyek(request, id):
         jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
         target_pembangunan = request.POST['target_pembangunan']
         
+        # kalau sudah ada perusahaan idnya
         id_data_perusahaan = request.POST['id_data_perusahaan']
         
         # POST data upload here
