@@ -18,5 +18,6 @@ urlpatterns=[
     path('listing_perizinan/', views.listing_perizinan, name='listing_perizinan'),
     path('kirim_notifikasi/<int:id>/', views.kirim_notifikasi, name='kirim_notifikasi'),
     path('verifikasi_perusahaan_berhasil/<int:id>/', views.verifikasi_perusahaan_berhasil, name='verifikasi_perusahaan_berhasil'),
+    path('verifikasi_proyek_berhasil/<int:id>/', views.verifikasi_proyek_berhasil, name='verifikasi_proyek_berhasil'),
     
 ]

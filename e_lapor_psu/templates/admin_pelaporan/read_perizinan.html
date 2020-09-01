@@ -1,10 +1,26 @@
 {% extends '../layout.html' %}
 
 {% block content %}
-    <h1>Detail Data Perizinan Proyek A</h1>
-    
-    {% if entry%}
-        <p>{{entry.id_data_proyek}}</p>
-    {% endif %}
-    
+
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-details">
+
+                        <h1 class="header"> Detail Perizinan </h1>
+
+                        <div class="row" id="admin-verify-back">
+                            <a href="{% url 'verifikasi_proyek_berhasil' entry.id_data_proyek %}" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
+                            <a href="{% url 'folder_proyek' entry.id_data_proyek %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

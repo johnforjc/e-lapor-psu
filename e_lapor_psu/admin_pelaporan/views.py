@@ -101,3 +101,7 @@ def kirim_notifikasi(request, id):
 def verifikasi_perusahaan_berhasil(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
     return render(request, 'admin_pelaporan/verifikasi_perusahaan_berhasil.html', {'entry': entry})
+
+def verifikasi_proyek_berhasil(request, id):
+    entry = DataProyek.objects.get(id_data_proyek = id)
+    return render(request, 'admin_pelaporan/verifikasi_proyek_berhasil.html', {'entry': entry})

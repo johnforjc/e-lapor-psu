@@ -259,7 +259,6 @@
 }
 
 #button-kirim{
-    text-transform: uppercase;
     margin-top: 10px;
     padding-left: 50px;
     padding-right: 50px;
@@ -300,7 +299,10 @@
 
 .verifikasi-berhasil-text{
     margin-top: 20px;
-    text-transform: initial;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
 }
 
 .verifikasi-info{

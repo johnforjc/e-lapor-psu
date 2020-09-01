@@ -9,7 +9,6 @@
             <div class="content">
                 <div class="listing-details">
                 
-
                     <div class="listing-content-details" id="verifikasi-berhasil-content-logo">
                         <img src="{% static 'images/success.png' %}" class="berhasil-logo">
                     </div>
@@ -19,11 +18,11 @@
                     </div>
 
                     <div class="verifikasi-info">
-                        <p class="verifikasi-info-text"> Perusahaan telah berhasil diverifikasi </p>
+                        <p class="verifikasi-info-text"> Data Proyek telah berhasil diverifikasi </p>
                     </div>
 
                     <div class="listing-content-details" id="verifikasi-berhasil-content">
-                        <a href="{% url 'read_perusahaan' entry.id_data_perusahaan %}" class="btn btn-secondary"> Kembali ke Detail Perusahaan </a>
+                        <a href="{% url 'folder_proyek' entry.id_data_proyek %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
                     </div>
 
                 </div>     
