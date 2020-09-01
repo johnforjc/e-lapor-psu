@@ -290,16 +290,9 @@ def update_data_perusahaan(request, id):
         website = request.POST['website']
         nomor_telp = request.POST['no_telp']
 
-        foto_pemilik = request.FILES['foto_pemilik']
-        ktp_pemilik = request.FILES['ktp_pemilik']
-        akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
-
         dataPerusahaan = DataPerusahaan.objects.filter(id_data_perusahaan=id).update(
             nama_perusahaan= nama_perusahaan,
-            akta_pendirian_badan_usaha = akta,
             nama_pemilik   = nama_pemilik,
-            foto_pemilik   = foto_pemilik,
-            ktp_pemilik= ktp_pemilik,
             bentuk_perusahaan  = bentuk_perusahaan,
             alamat_perusahaan  = alamat_perusahaan,
             tahun_berdiri  = tahun_berdiri,
@@ -307,6 +300,17 @@ def update_data_perusahaan(request, id):
             email  = email,
             website= website,
         )
+
+        ## Check apakah ada file yang diupdate
+        if request.FILES.get('foto_pemilik', False):
+            foto_pemilik = request.FILES['foto_pemilik']
+            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(foto_pemilik = foto_pemilik)
+        if request.FILES.get('ktp_pemilik', False):
+            ktp_pemilik = request.FILES['ktp_pemilik']
+            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(ktp_pemilik = ktp_pemilik)
+        if request.FILES.get('akta_pendirian_badan_usaha_atau_badan_hukum', False):
+            akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
+            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(akta_pendirian_badan_usaha = akta)
 
         return redirect('/')
 
@@ -336,33 +340,31 @@ def update_data_proyek(request, id):
             jumlah_tipe_rumah = jumlah_tipe_rumah,
             target_pembangunan = target_pembangunan,
         )
-        
-        # if jenis_produk == "Rumah Tapak":
-        #     return redirect('tipe_rumah_tapak', id_rumah_susun=dataProyek.id_data_proyek)
-        # elif jenis_produk == "Rumah Susun":
-        #     return redirect('tipe_rumah_susun', id_rumah_tapak=dataProyek.id_data_proyek)
         redirect_link = "/detail_proyek/" + str(id)
         return redirect(redirect_link)
 
     else:
         return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})
 
+# update data perizinan FIX
 def update_data_perizinan(request, id):
     dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
-    if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
-        site_plan = request.FILES['site_plan']
-        ukl_upl = request.FILES['ukl_upl']
-        izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
-        izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
+    if request.method == 'POST':
 
-        dataPerizinan = DataPerizinan.objects.filter(id_data_proyek_id=id).update(
-            site_plan = site_plan,
-            ukl_upl = ukl_upl,
-            izin_mendirikan_bangunan = izin_mendirikan_bangunan,
-            izin_penggunaan_bangunan = izin_penggunaan_bangunan,
-            id_data_proyek_id = id,
-        )
-        
+        ## Check file ada yang diupload atau tidak
+        if request.FILES.get('site_plan', False):
+            site_plan = request.FILES['site_plan']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(site_plan = site_plan)
+        if request.FILES.get('ukl_upl', False):
+            ukl_upl = request.FILES['ukl_upl']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(ukl_upl = ukl_upl)
+        if request.FILES.get('izin_mendirikan_bangunan', False):
+            izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(izin_mendirikan_bangunan = izin_mendirikan_bangunan)
+        if request.FILES.get('izin_penggunaan_bangunan', False):
+            izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
+            DataPerizinan.objects.filter(id_data_proyek_id=id).update(izin_penggunaan_bangunan = izin_penggunaan_bangunan)
+      
         return redirect('/')
 
     else:
