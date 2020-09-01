@@ -277,6 +277,7 @@ def detail_proyek(request, id):
 
 #### Update on database code
 
+## update data perusahaan FIX
 def update_data_perusahaan(request, id):
     dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     if request.method == 'POST':
@@ -293,7 +294,7 @@ def update_data_perusahaan(request, id):
         ktp_pemilik = request.FILES['ktp_pemilik']
         akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
 
-        dataPerusahaan = DataPerusahaan.objects.update(
+        dataPerusahaan = DataPerusahaan.objects.filter(id_data_perusahaan=id).update(
             nama_perusahaan= nama_perusahaan,
             akta_pendirian_badan_usaha = akta,
             nama_pemilik   = nama_pemilik,
@@ -312,6 +313,7 @@ def update_data_perusahaan(request, id):
     else:
         return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan})
 
+## update data proyek FIX
 def update_data_proyek(request, id):
     dataProyek = DataProyek.objects.get(id_data_proyek=id)
     if request.method == 'POST':
@@ -325,7 +327,7 @@ def update_data_proyek(request, id):
         id_data_perusahaan = request.POST['id_data_perusahaan']
         
         # POST data upload here
-        dataProyek = DataProyek.objects.update(
+        dataProyek = DataProyek.objects.filter(id_data_proyek=id).update(
             id_data_perusahaan_id = id_data_perusahaan,
             lokasi_proyek = lokasi_proyek,
             luas_total_area_proyek = luas_total_area_proyek,
@@ -353,7 +355,7 @@ def update_data_perizinan(request, id):
         izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
         izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
 
-        dataPerizinan = DataPerizinan.objects.update(
+        dataPerizinan = DataPerizinan.objects.filter(id_data_proyek_id=id).update(
             site_plan = site_plan,
             ukl_upl = ukl_upl,
             izin_mendirikan_bangunan = izin_mendirikan_bangunan,
@@ -391,7 +393,7 @@ def update_jenis_psu(request, id):
         pemadam_kebakaran = request.POST['pemadam_kebakaran']
         sarana_penerangan_jalan_umum = request.POST['sarana_penerangan_jalan_umum']
 
-        jenisPsu = JenisPsu.objects.update(
+        jenisPsu = JenisPsu.objects.filter(id_data_proyek_id=id).update(
             jaringan_jalan = jaringan_jalan,
             jaringan_saluran_pembuangan_air_hujan = jaringan_saluran_pembuangan_air_hujan,
             sanitasi = sanitasi,
@@ -421,26 +423,44 @@ def update_jenis_psu(request, id):
     else:
         return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
 
+
+## update data rumah susun FIX
 def update_tipe_rumah_susun(request, id):
     rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
-    if request=='POST':
+    if request.method=='POST':
         tipe_rumah_susun = request.POST['tipe_rumah_susun']
-        lb_rumah_susun = request.POST['lb_rumah_susun']
-        jumlah_unit_rumah_susun = request.POST['jumlah_unit_rumah_susun']
-        RumahSusun.objects.get(id_rumah_susun=id).update(
+        lb_rumah_susun = request.POST['luas_bangunan']
+        jumlah_unit_rumah_susun = request.POST['jumlah_unit']
+        id_data_proyek = request.POST["id_proyek"]
+        
+        rumahSusun = RumahSusun.objects.filter(id_rumah_susun=id).update(
             tipe_rumah_susun = tipe_rumah_susun,
             lb_rumah_susun = lb_rumah_susun,
             jumlah_unit_rumah_susun = jumlah_unit_rumah_susun,
-            id_data_proyek_id = id,
+            id_data_proyek_id = id_data_proyek,
         )
+
+        return redirect("/")
     else:
         return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
 
+
+## update data rumah tapak FIX
+
 def update_tipe_rumah_tapak(request, id):
     rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
-    if request.method == 'POST':
+    if request.method=='POST':
         tipe_rumah_tapak = request.POST['tipe_rumah_tapak']
         lb_rumah_tapak = request.POST['lb_rumah_tapak']
         lt_rumah_tapak = request.POST['lt_rumah_tapak']
         jumlah_unit_rumah_tapak = request.POST['jumlah_unit_rumah_tapak']
+        id_data_proyek = request.POST["id_proyek"]
+
+        rumahTapak = RumahTapak.objects.filter(id_rumah_tapak=id).update(
+            tipe_rumah_tapak = tipe_rumah_tapak,
+            lb_rumah_tapak = lb_rumah_tapak,
+            lt_rumah_tapak = lt_rumah_tapak,
+            jumlah_unit_rumah_tapak = jumlah_unit_rumah_tapak,
+            id_data_proyek_id = id_data_proyek,
+        )
     return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahTapak' : rumahTapak})
