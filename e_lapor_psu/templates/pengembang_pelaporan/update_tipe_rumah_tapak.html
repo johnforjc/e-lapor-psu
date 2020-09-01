@@ -13,14 +13,15 @@
                 <div class="form-row">
                     <div class="form-group" id="number-susun">
 
-                        <h1> {{RumahSusun.tipe_rumah_susun}} </h1>
+                        <h1> {{RumahTapak.tipe_rumah_tapak}} </h1>
 
                     </div>
 
                     <div class="form-group">
 
                         <div class="form-input">
-                            <input type="text" name="tipe_rumah_tapak_id" id="tipe_rumah_tapak" value="{{RumahTapak.id_rumah_tapak}}" hidden/>
+                            <input type="text" name="id_proyek" id="tipe_rumah_tapak" value="{{RumahTapak.id_data_proyek_id}}" hidden/>
+                            <input type="text" name="tipe_rumah_tapak" id="tipe_rumah_tapak" value="{{RumahTapak.tipe_rumah_tapak}}" hidden/>
                         </div>
                         
                         <div class="form-input">
@@ -41,8 +42,6 @@
                     </div>
                 </div>
                 <hr>
-
-                {% endfor %}
 
                 <div class="form-submit">
                     <input type="text" name="jumlah_tipe" id="jumlah_tipe" value="{{jumlah_tipe}}" hidden/>

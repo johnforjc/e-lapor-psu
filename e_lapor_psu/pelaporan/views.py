@@ -360,61 +360,41 @@ def update_data_perizinan(request, id):
         return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan})
 
 def update_jenis_psu(request, id):
-    daftarJenisPsu = JenisPsu.objects.get(id_data_proyek_id=id)
+    daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
     if request.method == 'POST':
-        if request.POST.get('jaringan_jalan', False):
-            return HttpResponse("MASUK")
-            jaringan_jalan = request.POST['jaringan_jalan']
-        else:
-            return HttpResponse("MASUK AAAAAAAAAAAAAAAAAa")
-            jaringan_jalan = 0
-        jaringan_saluran_pembuangan_air_hujan = request.POST['jaringan_saluran_pembuangan_air_hujan']
-        sanitasi = request.POST['sanitasi']
-        jaringan_saluran_pembuangan_air_limbah = request.POST['jaringan_saluran_pembuangan_air_limbah']
-        tempat_pembuangan_sampah = request.POST['tempat_pembuangan_sampah']
-        sarana_perniagaan = request.POST['sarana_perniagaan']
-        sarana_pelayanan_umum_dan_pemerintahan = request.POST['sarana_pelayanan_umum_dan_pemerintahan']
-        sarana_pendidikan = request.POST['sarana_pendidikan']
-        sarana_kesehatan = request.POST['sarana_kesehatan']
-        sarana_peribadatan = request.POST['sarana_peribadatan']
-        sarana_rekreasi_dan_olahraga = request.POST['sarana_rekreasi_dan_olahraga']
-        sarana_pemakaman = request.POST['sarana_pemakaman']
-        sarana_pertanaman_dan_ruang_terbuka_hijau = request.POST['sarana_pertanaman_dan_ruang_terbuka_hijau']
-        sarana_parkir = request.POST['sarana_parkir']
-        jaringan_air_bersih = request.POST['jaringan_air_bersih']
-        jaringan_listrik = request.POST['jaringan_listrik']
-        jaringan_telepon = request.POST['jaringan_telepon']
-        jaringan_gas = request.POST['jaringan_gas']
-        jaringan_transportasi = request.POST['jaringan_transportasi']
-        pemadam_kebakaran = request.POST['pemadam_kebakaran']
-        sarana_penerangan_jalan_umum = request.POST['sarana_penerangan_jalan_umum']
+        my_input = []
+        for i in range(1, 22):
+            if request.POST.get('inputPSU_'+str(i), False):
+                my_input.append(request.POST.get('inputPSU_'+str(i)))
+            else:
+                my_input.append(0)
 
-        jenisPsu = JenisPsu.objects.filter(id_data_proyek_id=id).update(
-            jaringan_jalan = jaringan_jalan,
-            jaringan_saluran_pembuangan_air_hujan = jaringan_saluran_pembuangan_air_hujan,
-            sanitasi = sanitasi,
-            jaringan_saluran_pembuangan_air_limbah = jaringan_saluran_pembuangan_air_limbah,
-            tempat_pembuangan_sampah = tempat_pembuangan_sampah,
-            sarana_perniagaan = sarana_perniagaan,
-            sarana_pelayanan_umum_dan_pemerintahan = sarana_pelayanan_umum_dan_pemerintahan,
-            sarana_pendidikan = sarana_pendidikan,
-            sarana_kesehatan = sarana_kesehatan,
-            sarana_peribadatan = sarana_peribadatan,
-            sarana_rekreasi_dan_olahraga = sarana_rekreasi_dan_olahraga,
-            sarana_pemakaman = sarana_pemakaman,
-            sarana_pertanaman_dan_ruang_terbuka_hijau = sarana_pertanaman_dan_ruang_terbuka_hijau,
-            sarana_parkir = sarana_parkir,
-            jaringan_air_bersih = jaringan_air_bersih,
-            jaringan_listrik = jaringan_listrik,
-            jaringan_telepon = jaringan_telepon,
-            jaringan_gas = jaringan_gas,
-            jaringan_transportasi = jaringan_transportasi,
-            pemadam_kebakaran = pemadam_kebakaran,
-            sarana_penerangan_jalan_umum = sarana_penerangan_jalan_umum,
+        jenisPsu = JenisPsu.objects.filter(id_data_proyek=id).update(
+            jaringan_jalan = my_input[0],
+            jaringan_saluran_pembuangan_air_hujan = my_input[1],
+            sanitasi = my_input[2],
+            jaringan_saluran_pembuangan_air_limbah = my_input[3],
+            tempat_pembuangan_sampah = my_input[4],
+            sarana_perniagaan = my_input[5],
+            sarana_pelayanan_umum_dan_pemerintahan = my_input[6],
+            sarana_pendidikan = my_input[7],
+            sarana_kesehatan = my_input[8],
+            sarana_peribadatan = my_input[9],
+            sarana_rekreasi_dan_olahraga = my_input[10],
+            sarana_pemakaman = my_input[11],
+            sarana_pertanaman_dan_ruang_terbuka_hijau = my_input[12],
+            sarana_parkir = my_input[13],
+            jaringan_air_bersih = my_input[14],
+            jaringan_listrik = my_input[15],
+            jaringan_telepon = my_input[16],
+            jaringan_gas = my_input[17],
+            jaringan_transportasi = my_input[18],
+            pemadam_kebakaran = my_input[19],
+            sarana_penerangan_jalan_umum = my_input[20],
             id_data_proyek_id = id,
         )
 
-        return redirect('form_data_perizinan', id=id)
+        return redirect('/detail_proyek/'+ str(id))
 
     else:
         return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
@@ -436,13 +416,12 @@ def update_tipe_rumah_susun(request, id):
             id_data_proyek_id = id_data_proyek,
         )
 
-        return redirect("/")
+        return redirect('/detail_proyek/' + id_data_proyek)
     else:
         return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
 
 
 ## update data rumah tapak FIX
-
 def update_tipe_rumah_tapak(request, id):
     rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
     if request.method=='POST':
@@ -459,4 +438,7 @@ def update_tipe_rumah_tapak(request, id):
             jumlah_unit_rumah_tapak = jumlah_unit_rumah_tapak,
             id_data_proyek_id = id_data_proyek,
         )
-    return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahTapak' : rumahTapak})
+        return redirect('/detail_proyek/' + id_data_proyek)
+    
+    else:
+        return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})
