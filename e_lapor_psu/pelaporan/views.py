@@ -106,7 +106,7 @@ def form_data_perizinan(request, id):
         )
 
         if dataPerizinan:
-            data_proyek.update(verified_data_perizinan = True)
+            DataProyek.objects.filter(id_data_proyek=id).update(verified_data_perizinan = True)
         
         return redirect('/')
 
@@ -139,7 +139,7 @@ def tipe_rumah_tapak(request, id):
             )
         
         if rumahTapak:
-            data_proyek.update(verified_tipe_rumah = True)
+            DataProyek.objects.filter(id_data_proyek=id).update(verified_tipe_rumah = True)
 
         return redirect('jenis_psu', id=id)
 
@@ -172,7 +172,7 @@ def tipe_rumah_susun(request, id):
             )
 
         if rumahSusun:
-            data_proyek.update(verified_tipe_rumah = True)
+            DataProyek.objects.filter(id_data_proyek=id).update(verified_tipe_rumah = True)
 
         return redirect('jenis_psu', id=id)
 
@@ -234,7 +234,7 @@ def jenis_psu(request, id):
         )
 
         if JenisPsu:
-            data_proyek.update(verified_jenis_psu = True)
+           DataProyek.objects.filter(id_data_proyek=id).update(verified_jenis_psu = True)
 
         return redirect('form_data_perizinan', id=id)
 
