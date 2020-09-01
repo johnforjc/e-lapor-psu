@@ -5,7 +5,7 @@
     <div class="main">
         <div class="container">
                 
-            <form action="" method="PUT" enctype="multipart/form-data" class="register-form" id="register-form">
+            <form action="" method="POST" enctype="multipart/form-data" class="register-form" id="register-form">
 
                 {% csrf_token %}
 
@@ -16,7 +16,7 @@
                         
                         <div class="form-input">
                             <label for="lokasi">Lokasi</label>
-                            <input type="text" name="lokasi" id="lokasi" value="{{dataProyek.lokasi_proyek"}}/>
+                            <input type="text" name="lokasi" id="lokasi" value="{{dataProyek.lokasi_proyek}}"/>
                         </div>
 
                         <input
@@ -29,12 +29,12 @@
 
                         <div class="form-input">
                             <label for="luas_total_area_proyek">Luas Total Area Proyek</label>
-                            <input type="text" name="luas_total_area_proyek" id="luas_total_area_proyek" value="{{dataProyek.luas_total_area_proyek"}}/>
+                            <input type="text" name="luas_total_area_proyek" id="luas_total_area_proyek" value="{{dataProyek.luas_total_area_proyek}}"/>
                         </div>
                         
                         <div class="form-input">
                             <label for="jumlah_total_unit_yang_akan_dibangun">Jumlah Total Unit yang akan dibangun</label>
-                            <input type="text" name="jumlah_total_unit_yang_akan_dibangun" id="jumlah_total_unit_yang_akan_dibangun" value="{{dataProyek.jumlah_total_unit"}}/>
+                            <input type="text" name="jumlah_total_unit_yang_akan_dibangun" id="jumlah_total_unit_yang_akan_dibangun" value="{{dataProyek.jumlah_total_unit}}"/>
                         </div>
 
                         <div class="form-select">
@@ -51,14 +51,15 @@
 
                         <div class="form-input">
                             <label for="jumlah_tipe_rumah">Jumlah Tipe Rumah</label>
-                            <input type="text" name="jumlah_tipe_rumah" id="jumlah_tipe_rumah" value="{{dataProyek.jumlah_tipe_rumah"}}/>
+                            <input type="text" name="jumlah_tipe_rumah" id="jumlah_tipe_rumah" value="{{dataProyek.jumlah_tipe_rumah}}"/>
                         </div>
 
                         <div class="form-input">
                             <label for="target_pembangunan">Target Pembangunan</label>
-                            <input type="text" name="target_pembangunan" id="target_pembangunan" value="{{dataProyek.target_pembangunan"}}/>
+                            <input type="text" name="target_pembangunan" id="target_pembangunan" value="{{dataProyek.target_pembangunan}}"/>
                         </div>
                         <div class="form-submit">
+                            <input type="text" name="id_data_perusahaan" id="id_data_perusahaan" value="{{dataProyek.id_data_perusahaan}}" hidden/>
                             <input type="submit" value="Next" class="submit" id="submit-single" name="submit" />
                         </div>
                     </div>

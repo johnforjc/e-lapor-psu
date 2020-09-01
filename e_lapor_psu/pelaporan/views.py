@@ -247,8 +247,7 @@ def jenis_psu(request, id):
 
 #### Read on database code
 
-def detail_perusahaan(request):
-    id = 7
+def detail_perusahaan(request, id):
     dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     ktpCheck = 0
     aktaCheck = 0
@@ -323,7 +322,7 @@ def update_data_proyek(request, id):
         jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
         target_pembangunan = request.POST['target_pembangunan']
         
-        id_data_perusahaan = 1
+        id_data_perusahaan = request.POST['id_data_perusahaan']
         
         # POST data upload here
         dataProyek = DataProyek.objects.update(
@@ -336,10 +335,12 @@ def update_data_proyek(request, id):
             target_pembangunan = target_pembangunan,
         )
         
-        if jenis_produk == "Rumah Tapak":
-            return redirect('tipe_rumah_tapak', id=dataProyek.id_data_proyek)
-        elif jenis_produk == "Rumah Susun":
-            return redirect('tipe_rumah_susun', id=dataProyek.id_data_proyek)
+        # if jenis_produk == "Rumah Tapak":
+        #     return redirect('tipe_rumah_tapak', id_rumah_susun=dataProyek.id_data_proyek)
+        # elif jenis_produk == "Rumah Susun":
+        #     return redirect('tipe_rumah_susun', id_rumah_tapak=dataProyek.id_data_proyek)
+        redirect_link = "/detail_proyek/" + str(id)
+        return redirect(redirect_link)
 
     else:
         return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})

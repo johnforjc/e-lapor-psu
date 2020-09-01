@@ -13,7 +13,8 @@ urlpatterns = [
     path('jenis_psu/<int:id>/', views.jenis_psu, name='jenis_psu'),
 
     ## Read on database
-    path('detail_perusahaan/', views.detail_perusahaan, name='detail_perusahaan'),
+    path('detail_perusahaan', views.detail_perusahaan, name='detail_perusahaan'),
+    path('detail_perusahaan/<int:id>/', views.detail_perusahaan, name='detail_perusahaan'),
     path('list_proyek/', views.list_proyek, name='list_proyek'),
     path('detail_proyek/<int:id>/', views.detail_proyek, name='detail_proyek'),
 
