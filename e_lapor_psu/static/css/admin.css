@@ -240,6 +240,10 @@
 
 /* kirim notifikasi */
 
+.form-row-notifikasi .form-notifikasi {
+    width: 100%;
+    padding: 0 40px; }
+
 .form-control:active, .form-control:focus, .form-control:focus:active{
     border: 1px solid #03a678 !important;
 }
@@ -260,6 +264,34 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+/* verifikasi berhasil */
+#verifikasi-berhasil{
+    background: #d2d2d2;
+}
+
+#box-verifikasi{
+    border-radius: 10px;
+}
+
+.container-verifikasi-berhasil{
+    padding: 70px 250px 70px 250px;
+}
+
+#verifikasi-berhasil-content-logo{
+    display: flex;
+    justify-content: center;
+    background: #03a678;
+}
+
+#verifikasi-berhasil-content{
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+
+
 
 
 

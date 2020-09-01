@@ -1,0 +1,30 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main" id="verifikasi-berhasil">
+        <div class="container-verifikasi-berhasil">
+            <div class="content">
+                <div class="listing-details">
+                
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content-logo">
+                        {# <img src="{% static 'images/success.png' %}"> #}
+                    </div>
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content">
+                        <h1>Verifikasi Berhasil</h1>
+                    </div>
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content">
+                        <a href="{% url 'read_perusahaan' entry.id_data_perusahaan %}" class="btn btn-secondary"> Kembali ke Detail Perusahaan </a>
+                    </div>
+
+                </div>     
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
