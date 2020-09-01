@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from pelaporan.models import DataProyek
 from pelaporan.models import DataPerusahaan
 from pelaporan.models import DataPerizinan
 from pelaporan.models import RumahTapak
 from pelaporan.models import RumahSusun
+from pelaporan.models import Notifikasi
 import os
 
 # Create your views here.
@@ -86,7 +88,15 @@ def listing_perizinan(request):
 
 def kirim_notifikasi(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
-    return render(request, 'admin_pelaporan/kirim_notifikasi.html', {'entry': entry})
+    if request.method == 'POST':
+        isi_notifikasi = request.POST['notifikasi']
+        notifikasi = Notifikasi.objects.create(
+            isi_notifikasi = isi_notifikasi,
+            id_data_perusahaan_id = id,
+        )
+        return redirect('read_perusahaan', id)
+    else:
+        return render(request, 'admin_pelaporan/kirim_notifikasi.html', {'entry': entry})
 
 def verifikasi_perusahaan_berhasil(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
