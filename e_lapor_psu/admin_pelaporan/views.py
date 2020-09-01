@@ -42,7 +42,7 @@ def listing_proyek(request, id):
     all_entries = [] 
     for temp in query.all():
         all_entries.append(temp)
-    return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries})
+    return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries, 'id_data_perusahaan' : id})
 
 def folder_proyek(request, id):
     entry = DataProyek.objects.get(id_data_proyek = id)
