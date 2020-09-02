@@ -317,6 +317,13 @@
     font-weight: 500;
 }
 
+/* Read Perizinan */
+#perizinan-col-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 

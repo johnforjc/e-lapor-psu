@@ -6,6 +6,7 @@ from pelaporan.models import DataPerizinan
 from pelaporan.models import RumahTapak
 from pelaporan.models import RumahSusun
 from pelaporan.models import Notifikasi
+from pelaporan.models import JenisPsu
 import os
 
 # Create your views here.
