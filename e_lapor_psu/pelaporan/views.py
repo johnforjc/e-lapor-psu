@@ -433,7 +433,7 @@ def update_tipe_rumah_susun(request, id):
             id_data_proyek_id = id_data_proyek,
         )
 
-        return redirect('/detail_proyek/' + id_data_proyek)
+        return redirect('/detail_tipe_rumah/' + id_data_proyek)
     else:
         return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
 
@@ -455,7 +455,7 @@ def update_tipe_rumah_tapak(request, id):
             jumlah_unit_rumah_tapak = jumlah_unit_rumah_tapak,
             id_data_proyek_id = id_data_proyek,
         )
-        return redirect('/detail_proyek/' + id_data_proyek)
+        return redirect('/detail_tipe_rumah/' + id_data_proyek)
     
     else:
         return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})

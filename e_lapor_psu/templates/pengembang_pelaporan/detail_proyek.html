@@ -46,6 +46,14 @@
 
                             </div>
                         </div>
+                        
+                        <div class="row" id="admin-verify-back">
+                            {% if dataProyek.verified_admin_data_proyek %}
+                                <div class="btn btn-primary">Data anda telah diverifikasi</div>
+                            {% else %}
+                                <a href="{% url 'update_data_proyek' dataProyek.id_data_proyek %}" class="btn btn-primary"> Update Data Proyek </a>
+                            {% endif%}
+                        </div>
 
                         <div class="row" id="admin-verify-back">
                             <a href="{% url 'folder_proyek_pengembang' dataProyek.id_data_proyek %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
