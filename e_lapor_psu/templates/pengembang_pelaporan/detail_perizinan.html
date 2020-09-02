@@ -1,0 +1,163 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-details">
+
+                        <h1 class="header"> Detail Perizinan </h1>
+
+                        <div class="row" id="read-row">
+                            
+                            {# col 1 #}
+                            <div class="col">
+                                <label for="site_plan" class="detail-title">Site Plan</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#site_plan">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="site_plan" tabindex="-1" role="dialog" aria-labelledby="site_plan_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="site_plan_label">Site Plan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% if sitePlanPDF == 1 %}
+                                            <embed src="{{entry.site_plan.url}}" type="application/pdf" width="100%" height="600px" />
+                                        {% else %}
+                                            <img src="{{entry.site_plan.url}}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {# col 2 #}
+                            <div class="col">
+                                <label for="ukl_upl" class="detail-title">UKL / UPL</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ukl_upl">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="ukl_upl" tabindex="-1" role="dialog" aria-labelledby="ukl_upl_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="ukl_upl_label">UKL / UPL</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% if uklUplPDF == 1 %}
+                                            <embed src="{{entry.ukl_upl.url}}" type="application/pdf" width="100%" height="600px" />
+                                        {% else %}
+                                            <img src="{{entry.ukl_upl.url}}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="read-row">
+
+                            <div class="col">
+                                <label for="izin_mendirikan_bangunan" class="detail-title">Izin Mendirikan Bangunan</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#izin_mendirikan_bangunan">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="izin_mendirikan_bangunan" tabindex="-1" role="dialog" aria-labelledby="izin_mendirikan_bangunan_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="izin_mendirikan_bangunan_label">Izin Mendirikan Bangunan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% if izinMendirikanPDF == 1 %}
+                                            <embed src="{{entry.izin_mendirikan_bangunan.url}}" type="application/pdf" width="100%" height="600px" />
+                                        {% else %}
+                                            <img src="{{entry.izin_mendirikan_bangunan.url}}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <label for="izin_penggunaan_bangunan" class="detail-title">Izin Penggunaan Bangunan</label>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#izin_penggunaan_bangunan">
+                                    Lihat Gambar
+                                  </button>
+                            </div>
+    
+                            <div class="modal fade" id="izin_penggunaan_bangunan" tabindex="-1" role="dialog" aria-labelledby="izin_penggunaan_bangunan_label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="izin_penggunaan_bangunan_label">Izin Penggunaan Bangunan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% if izinPenggunaanPDF == 1 %}
+                                            <embed src="{{entry.izin_penggunaan_bangunan.url}}" type="application/pdf" width="100%" height="600px" />
+                                        {% else %}
+                                            <img src="{{entry.izin_penggunaan_bangunan.url}}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row" id="admin-verify-back">
+                            {% if isVerified %}
+                                <div class="btn btn-primary">Data anda telah diverifikasi</div>
+                            {% else %}
+                                <a href="{% url 'update_data_perizinan' entry.id_data_proyek_id %}" class="btn btn-primary"> Update Data Proyek </a>
+                            {% endif%}
+                        </div>
+
+                        <div class="row" id="admin-verify-back">
+                            <a href="{% url 'folder_proyek_pengembang' entry.id_data_proyek_id %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

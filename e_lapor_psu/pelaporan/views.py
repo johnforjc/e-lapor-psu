@@ -243,19 +243,16 @@ def detail_perusahaan(request):
     dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     ktpCheck = 0
     aktaCheck = 0
-    if dataPerusahaan.ktp_pemilik.url[-4:] == ".pdf":
+    if dataPerusahaan.ktp_pemilik.url[-4:].lower() == ".pdf":
         ktpCheck = 1
-    if dataPerusahaan.akta_pendirian_badan_usaha.url[-4:] == ".pdf":
+    if dataPerusahaan.akta_pendirian_badan_usaha.url[-4:].lower() == ".pdf":
         aktaCheck = 1
     return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan, 'ktpCheck' : ktpCheck, 'aktaCheck' : aktaCheck})
 
 def list_proyek(request):
     id = 1
     query = DataProyek.objects.filter(id_data_perusahaan_id=id)
-    dataProyeks = []
-    for temp in query.all():
-        dataProyeks.append(temp)
-    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : dataProyeks, 'id_data_perusahaan' : id})
+    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : id})
 
 def folder_proyek(request, id):
     entry = DataProyek.objects.get(id_data_proyek = id)
@@ -279,8 +276,25 @@ def detail_jenis_psu(request, id):
     return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry})
 
 def detail_perizinan(request, id):
-    entry = DataPerizinan.objects.get(id_data_proyek = id)
-    return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry' : entry})
+    entry = DataPerizinan.objects.get(id_data_proyek_id = id)
+    
+    sitePlanPDF = 0
+    uklUplPDF = 0
+    izinMendirikanPDF = 0
+    izinPenggunaanPDF = 0
+
+    if entry.site_plan.url[-4:].lower() == ".pdf":
+        sitePlanPDF = 1
+    if entry.ukl_upl.url[-4:].lower() == ".pdf":
+        uklUplPDF = 1   
+    if entry.izin_mendirikan_bangunan.url[-4:].lower() == ".pdf":
+        izinMendirikanPDF = 1
+    if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
+        izinPenggunaanPDF = 1
+
+    dataProyek = DataProyek.objects.get(id_data_proyek = id)
+
+    return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'isVerified' : dataProyek.verified_admin_data_perizinan, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
 
 
 #### Update on database code

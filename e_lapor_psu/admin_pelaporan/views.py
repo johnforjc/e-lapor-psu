@@ -33,9 +33,9 @@ def read_perusahaan(request, id):
     ktpPDF = 0
     aktaPDF = 0   
 
-    if entry.ktp_pemilik.url[-4:] == ".pdf":
+    if entry.ktp_pemilik.url[-4:].lower() == ".pdf":
         ktpPDF = 1
-    if entry.akta_pendirian_badan_usaha.url[-4:] == ".pdf":
+    if entry.akta_pendirian_badan_usaha.url[-4:].lower() == ".pdf":
         aktaPDF = 1
 
     return render(request, 'admin_pelaporan/read_perusahaan.html', {'entry' : entry, 'ktpPDF' : ktpPDF, 'aktaPDF' : aktaPDF})
@@ -87,13 +87,13 @@ def read_perizinan(request, id):
     izinMendirikanPDF = 0
     izinPenggunaanPDF = 0
 
-    if entry.site_plan.url[-4:] == ".pdf":
+    if entry.site_plan.url[-4:].lower() == ".pdf":
         sitePlanPDF = 1
-    if entry.ukl_upl.url[-4:] == ".pdf":
+    if entry.ukl_upl.url[-4:].lower() == ".pdf":
         uklUplPDF = 1   
-    if entry.izin_mendirikan_bangunan.url[-4:] == ".pdf":
+    if entry.izin_mendirikan_bangunan.url[-4:].lower() == ".pdf":
         izinMendirikanPDF = 1
-    if entry.izin_penggunaan_bangunan.url[-4:] == ".pdf":
+    if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
         izinPenggunaanPDF = 1
 
     return render(request, 'admin_pelaporan/read_perizinan.html', {'entry': entry, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})

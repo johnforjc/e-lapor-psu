@@ -38,10 +38,14 @@
                                         <label for="jumlah_unit_rumah_tapak" class="detail-title">Jumlah Unit</label>
                                         <p class="read-details">{{query.jumlah_unit_rumah_tapak}} Unit</p>
                                     </div>
-
-                                    <a href="/update_tipe_rumah_tapak/{{query.id_rumah_tapak}}">
-                                        <div class="submit" id="submit">Update Tipe Rumah</div>
-                                    </a>
+                                    {% if dataProyek.verified_admin_tipe_rumah %}
+                                        <div class="btn btn-primary">Data anda telah diverifikasi</div>
+                                    {% else %}
+                                        <a href="/update_tipe_rumah_tapak/{{query.id_rumah_tapak}}">
+                                            <div class="submit" id="submit">Update Tipe Rumah</div>
+                                        </a>
+                                    {% endif%}
+                                    
                                 </div>
                             </div>
                             <hr>
@@ -72,9 +76,13 @@
                                         <p class="read-details">{{query.jumlah_unit_rumah_susun}} Unit</p>
                                     </div>
 
-                                    <a href="/update_tipe_rumah_susun/{{query.id_rumah_susun}}">
-                                        <div class="submit" id="submit">Update Tipe Rumah</div>
-                                    </a>
+                                    {% if dataProyek.verified_admin_tipe_rumah %}
+                                        <div class="btn btn-primary">Data anda telah diverifikasi</div>
+                                    {% else %}
+                                        <a href="/update_tipe_rumah_susun/{{query.id_rumah_susun}}">
+                                            <div class="submit" id="submit">Update Tipe Rumah</div>
+                                        </a>
+                                    {% endif%}
 
                                 </div>
                             </div>
