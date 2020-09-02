@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+from django.template.defaulttags import register
+from django.conf import settings
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from .models import DataPerusahaan
 from .models import DataPerizinan
 from .models import DataProyek
 from .models import RumahTapak
 from .models import RumahSusun
 from .models import JenisPsu
-from django.core.files.storage import FileSystemStorage
-from django.template.defaulttags import register
 
 @register.filter
 def get_range(value):
@@ -307,15 +310,26 @@ def update_data_perusahaan(request, id):
         )
 
         ## Check apakah ada file yang diupdate
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
         if request.FILES.get('foto_pemilik', False):
             foto_pemilik = request.FILES['foto_pemilik']
-            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(foto_pemilik = foto_pemilik)
+            default_storage.delete(dataPerusahaan.foto_pemilik.path)
+            dataPerusahaan.foto_pemilik.name = "foto_pemilik/" + foto_pemilik.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerusahaan.foto_pemilik.name
+            path = default_storage.save(new_path, foto_pemilik)
         if request.FILES.get('ktp_pemilik', False):
             ktp_pemilik = request.FILES['ktp_pemilik']
-            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(ktp_pemilik = ktp_pemilik)
+            default_storage.delete(dataPerusahaan.ktp_pemilik.path)
+            dataPerusahaan.ktp_pemilik.name = "ktp_pemilik/" + ktp_pemilik.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerusahaan.ktp_pemilik.name
+            path = default_storage.save(new_path, ktp_pemilik)
         if request.FILES.get('akta_pendirian_badan_usaha_atau_badan_hukum', False):
             akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
-            DataPerusahaan.objects.filter(id_data_perusahaan=id).update(akta_pendirian_badan_usaha = akta)
+            default_storage.delete(dataPerusahaan.akta_pendirian_badan_usaha.path)
+            dataPerusahaan.akta_pendirian_badan_usaha.name = "akta_pendirian_badan_usaha/" + akta.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerusahaan.akta_pendirian_badan_usaha.name
+            path = default_storage.save(new_path, akta)
+        dataPerusahaan.save()
 
         return redirect('/')
 
@@ -360,16 +374,29 @@ def update_data_perizinan(request, id):
         ## Check file ada yang diupload atau tidak
         if request.FILES.get('site_plan', False):
             site_plan = request.FILES['site_plan']
-            DataPerizinan.objects.filter(id_data_proyek_id=id).update(site_plan = site_plan)
+            default_storage.delete(dataPerizinan.site_plan.path)
+            dataPerizinan.site_plan.name = "site_plan/" + site_plan.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerizinan.site_plan.name
+            path = default_storage.save(new_path, site_plan)
         if request.FILES.get('ukl_upl', False):
             ukl_upl = request.FILES['ukl_upl']
-            DataPerizinan.objects.filter(id_data_proyek_id=id).update(ukl_upl = ukl_upl)
+            default_storage.delete(dataPerizinan.ukl_upl.path)
+            dataPerizinan.ukl_upl.name = "ukl_upl/" + ukl_upl.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerizinan.ukl_upl.name
+            path = default_storage.save(new_path, ukl_upl)
         if request.FILES.get('izin_mendirikan_bangunan', False):
             izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
-            DataPerizinan.objects.filter(id_data_proyek_id=id).update(izin_mendirikan_bangunan = izin_mendirikan_bangunan)
+            default_storage.delete(dataPerizinan.izin_mendirikan_bangunan.path)
+            dataPerizinan.izin_mendirikan_bangunan.name = "izin_mendirikan_bangunan/" + izin_mendirikan_bangunan.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerizinan.izin_mendirikan_bangunan.name
+            path = default_storage.save(new_path, izin_mendirikan_bangunan)
         if request.FILES.get('izin_penggunaan_bangunan', False):
             izin_penggunaan_bangunan = request.FILES['izin_penggunaan_bangunan']
-            DataPerizinan.objects.filter(id_data_proyek_id=id).update(izin_penggunaan_bangunan = izin_penggunaan_bangunan)
+            default_storage.delete(dataPerizinan.izin_penggunaan_bangunan.path)
+            dataPerizinan.izin_penggunaan_bangunan.name = "izin_penggunaan_bangunan/" + izin_penggunaan_bangunan.name
+            new_path = settings.MEDIA_ROOT + "/" + dataPerizinan.izin_penggunaan_bangunan.name
+            path = default_storage.save(new_path, izin_penggunaan_bangunan)
+        dataPerizinan.save()
       
         return redirect('/')
 
