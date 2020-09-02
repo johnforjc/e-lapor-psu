@@ -143,6 +143,14 @@
                         </div>
 
                         <div class="row" id="admin-verify-back">
+                            {% if isVerified %}
+                                <div class="btn btn-primary">Data anda telah diverifikasi</div>
+                            {% else %}
+                                <a href="{% url 'update_data_perizinan' entry.id_data_proyek_id %}" class="btn btn-primary"> Update Data Proyek </a>
+                            {% endif%}
+                        </div>
+
+                        <div class="row" id="admin-verify-back">
                             <a href="{% url 'folder_proyek_pengembang' entry.id_data_proyek_id %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
                         </div>
                         

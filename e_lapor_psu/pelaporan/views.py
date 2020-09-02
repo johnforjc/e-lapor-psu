@@ -292,7 +292,9 @@ def detail_perizinan(request, id):
     if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
         izinPenggunaanPDF = 1
 
-    return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
+    dataProyek = DataProyek.objects.get(id_data_proyek = id)
+
+    return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'isVerified' : dataProyek.verified_admin_data_perizinan, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
 
 
 #### Update on database code
