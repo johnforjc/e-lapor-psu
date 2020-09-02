@@ -79,8 +79,23 @@ def read_jenis_psu(request, id):
     return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
 
 def read_perizinan(request, id):
-    entry = DataPerizinan.objects.get(id_data_proyek = id)
-    return render(request, 'admin_pelaporan/read_perizinan.html', {'entry' : entry})
+    entry = DataPerizinan.objects.get(id_data_proyek_id = id)
+    
+    sitePlanPDF = 0
+    uklUplPDF = 0
+    izinMendirikanPDF = 0
+    izinPenggunaanPDF = 0
+
+    if entry.site_plan.url[-4:] == ".pdf":
+        sitePlanPDF = 1
+    if entry.ukl_upl.url[-4:] == ".pdf":
+        uklUplPDF = 1   
+    if entry.izin_mendirikan_bangunan.url[-4:] == ".pdf":
+        izinMendirikanPDF = 1
+    if entry.izin_penggunaan_bangunan.url[-4:] == ".pdf":
+        izinPenggunaanPDF = 1
+
+    return render(request, 'admin_pelaporan/read_perizinan.html', {'entry': entry, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
 
 def listing_perizinan(request):
     all_entries = DataPerizinan.objects.all()
