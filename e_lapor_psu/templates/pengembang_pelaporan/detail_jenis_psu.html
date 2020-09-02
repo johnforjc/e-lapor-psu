@@ -1,0 +1,180 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main">
+        <div class="container">
+            <div class="content">
+                <div class="listing-details">
+                    <div class="listing-content-details">
+
+                        <h1> Detail Jenis PSU </h1>
+
+                        <div class="row" id="read-row">
+                            <h2 class="sub-header"> Prasarana Perumahan </h2>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+
+                                <div class="detail-text">
+                                    <label for="jaringan_jalan" class="detail-title">Jaringan Jalan</label>
+                                    <p class="read-details">{{entry.jaringan_jalan}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="jaringan_saluran_pembuangan_air_hujan" class="detail-title">Jaringan Saluran Pembuangan Air Hujan (Drainase)</label>
+                                    <p class="read-details">{{entry.jaringan_saluran_pembuangan_air_hujan}}</p>
+                                </div>
+                                
+                                <div class="detail-text">
+                                    <label for="sanitasi" class="detail-title">Sanitasi</label>
+                                    <p class="read-details">{{entry.sanitasi}}</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group vert">
+
+                                <div class="detail-text">
+                                    <label for="jaringan_saluran_pembuangan_air_limbah" class="detail-title">Jaringan Saluran Pembuangan Air Limbah</label>
+                                    <p class="read-details">{{entry.jaringan_saluran_pembuangan_air_limbah}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="tempat_pembuangan_sampah" class="detail-title">Tempat Pembuangan Sampah</label>
+                                    <p class="read-details">{{entry.tempat_pembuangan_sampah}}</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row" id="read-row">
+                            <h2 class="sub-header"> Sarana Perumahan </h2>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+
+                                <div class="detail-text">
+                                    <label for="sarana_perniagaan" class="detail-title">Sarana Perniagaan / Perbelanjaan</label>
+                                    <p class="read-details">{{entry.sarana_perniagaan}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_pelayanan_umum_dan_pemerintahan" class="detail-title">Sarana Pelayanan Umum dan Pemerintahan</label>
+                                    <p class="read-details">{{entry.sarana_pelayanan_umum_dan_pemerintahan}}</p>
+                                </div>
+                                
+                                <div class="detail-text">
+                                    <label for="sarana_pendidikan" class="detail-title">Sarana Pendidikan</label>
+                                    <p class="read-details">{{entry.sarana_pendidikan}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_kesehatan" class="detail-title">Sarana Kesehatan</label>
+                                    <p class="read-details">{{entry.sarana_kesehatan}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_peribadatan" class="detail-title">Sarana Peribadatan</label>
+                                    <p class="read-details">{{entry.sarana_peribadatan}}</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group vert">
+
+                                <div class="detail-text">
+                                    <label for="sarana_rekreasi_dan_olahraga" class="detail-title">Sarana Rekreasi dan Olahraga</label>
+                                    <p class="read-details">{{entry.sarana_rekreasi_dan_olahraga}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_pemakaman" class="detail-title">Sarana Pemakaman</label>
+                                    <p class="read-details">{{entry.sarana_pemakaman}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_pertanaman_dan_ruang_terbuka_hijau" class="detail-title">Sarana Pertanaman dan Ruang Terbuka Hijau</label>
+                                    <p class="read-details">{{entry.sarana_pertanaman_dan_ruang_terbuka_hijau}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_parkir" class="detail-title">Sarana Parkir</label>
+                                    <p class="read-details">{{entry.sarana_parkir}}</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row" id="read-row">
+                            <h2 class="sub-header"> Utilitas Umum Perumahan </h2>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+
+                                <div class="detail-text">
+                                    <label for="jaringan_air_bersih" class="detail-title">Jaringan Air Bersih</label>
+                                    <p class="read-details">{{entry.jaringan_air_bersih}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="jaringan_listrik" class="detail-title">Jaringan Listrik</label>
+                                    <p class="read-details">{{entry.jaringan_listrik}}</p>
+                                </div>
+                                
+                                <div class="detail-text">
+                                    <label for="jaringan_telepon" class="detail-title">Jaringan Telepon</label>
+                                    <p class="read-details">{{entry.jaringan_telepon}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="jaringan_gas" class="detail-title">Jaringan Gas</label>
+                                    <p class="read-details">{{entry.jaringan_gas}}</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="form-group vert">
+
+                                <div class="detail-text">
+                                    <label for="jaringan_transportasi" class="detail-title">Jaringan Transportasi</label>
+                                    <p class="read-details">{{entry.jaringan_transportasi}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="pemadam_kebakaran" class="detail-title">Pemadam Kebakaran</label>
+                                    <p class="read-details">{{entry.pemadam_kebakaran}}</p>
+                                </div>
+
+                                <div class="detail-text">
+                                    <label for="sarana_penerangan_jalan_umum" class="detail-title">Sarana Penerangan Jalan Umum</label>
+                                    <p class="read-details">{{entry.sarana_penerangan_jalan_umum}}</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row" id="admin-verify-back">
+                            {% if isVerified %}
+                                <div class="btn btn-primary">Data anda telah diverifikasi</div>
+                            {% else %}
+                                <a href="{% url 'update_jenis_psu' entry.id_data_proyek_id %}" class="btn btn-primary"> Update Jenis PSU </a>
+                            {% endif%}
+                        </div>
+
+                        <div class="row" id="admin-verify-back">
+                            <a href="{% url 'folder_proyek_pengembang' entry.id_data_proyek_id %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

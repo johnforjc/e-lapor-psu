@@ -14,8 +14,7 @@
 
                         <div class="row" id="read-row">
                             
-                            {# col 1 #}
-                            <div class="col">
+                            <div class="col" id="perizinan-col-center">
                                 <label for="site_plan" class="detail-title">Site Plan</label>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#site_plan">
                                     Lihat Gambar
@@ -45,8 +44,7 @@
                                 </div>
                             </div>
                             
-                            {# col 2 #}
-                            <div class="col">
+                            <div class="col" id="perizinan-col-center">
                                 <label for="ukl_upl" class="detail-title">UKL / UPL</label>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ukl_upl">
                                     Lihat Gambar
@@ -75,11 +73,16 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+                            
                         </div>
 
                         <div class="row" id="read-row">
 
-                            <div class="col">
+                            <div class="col" id="perizinan-col-center">
                                 <label for="izin_mendirikan_bangunan" class="detail-title">Izin Mendirikan Bangunan</label>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#izin_mendirikan_bangunan">
                                     Lihat Gambar
@@ -109,7 +112,7 @@
                                 </div>
                             </div>
 
-                            <div class="col">
+                            <div class="col" id="perizinan-col-center">
                                 <label for="izin_penggunaan_bangunan" class="detail-title">Izin Penggunaan Bangunan</label>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#izin_penggunaan_bangunan">
                                     Lihat Gambar
@@ -146,10 +149,10 @@
                             {% if isVerified %}
                                 <div class="btn btn-primary">Data anda telah diverifikasi</div>
                             {% else %}
-                                <a href="{% url 'update_data_perizinan' entry.id_data_proyek_id %}" class="btn btn-primary"> Update Data Proyek </a>
+                                <a href="{% url 'update_data_perizinan' entry.id_data_proyek_id %}" class="btn btn-primary"> Update Data Perizinan </a>
                             {% endif%}
                         </div>
-
+                        
                         <div class="row" id="admin-verify-back">
                             <a href="{% url 'folder_proyek_pengembang' entry.id_data_proyek_id %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
                         </div>

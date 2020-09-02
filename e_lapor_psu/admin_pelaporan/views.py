@@ -76,7 +76,6 @@ def read_tipe_rumah(request, id):
 
 def read_jenis_psu(request, id):
     entry = JenisPsu.objects.get(id_data_proyek_id = id)
-
     return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
 
 def read_perizinan(request, id):

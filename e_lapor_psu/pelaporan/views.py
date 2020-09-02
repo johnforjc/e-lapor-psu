@@ -272,8 +272,9 @@ def detail_tipe_rumah(request, id):
         return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
 
 def detail_jenis_psu(request, id):
-    entry = DataProyek.objects.get(id_data_proyek = id)
-    return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry})
+    entry = JenisPsu.objects.get(id_data_proyek_id = id)
+    dataProyek = DataProyek.objects.get(id_data_proyek = id)
+    return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry, 'isVerified' : dataProyek.verified_admin_jenis_psu})
 
 def detail_perizinan(request, id):
     entry = DataPerizinan.objects.get(id_data_proyek_id = id)
