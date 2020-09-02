@@ -74,7 +74,7 @@ def read_tipe_rumah(request, id):
     return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
 
 def read_jenis_psu(request, id):
-    entry = DataProyek.objects.get(id_data_proyek = id)
+    entry = JenisPsu.objects.get(id_data_proyek_id = id)
 
     return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
 
@@ -99,9 +99,24 @@ def kirim_notifikasi(request, id):
         return render(request, 'admin_pelaporan/kirim_notifikasi.html', {'entry': entry})
 
 def verifikasi_perusahaan_berhasil(request, id):
-    entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
-    return render(request, 'admin_pelaporan/verifikasi_perusahaan_berhasil.html', {'entry': entry})
+    DataPerusahaan.objects.filter(id_data_perusahaan=id).update(verified_admin=True)
+    return render(request, 'admin_pelaporan/verifikasi_perusahaan_berhasil.html', {'entry': id})
+
+def verifikasi_data_proyek(request, id):
+    DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_data_proyek=True)
+    return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
+
+def verifikasi_data_tipe_rumah(request, id):
+    DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_tipe_rumah=True)
+    return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
+
+def verifikasi_data_perizinan(request, id):
+    DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_data_perizinan=True)
+    return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
+
+def verifikasi_data_psu(request, id):
+    DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_jenis_psu=True)
+    return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
 
 def verifikasi_proyek_berhasil(request, id):
-    entry = DataProyek.objects.get(id_data_proyek = id)
-    return render(request, 'admin_pelaporan/verifikasi_proyek_berhasil.html', {'entry': entry})
+    return render(request, 'admin_pelaporan/verifikasi_proyek_berhasil.html', {'entry': id})

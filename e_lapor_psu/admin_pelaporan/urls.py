@@ -19,5 +19,9 @@ urlpatterns=[
     path('kirim_notifikasi/<int:id>/', views.kirim_notifikasi, name='kirim_notifikasi'),
     path('verifikasi_perusahaan_berhasil/<int:id>/', views.verifikasi_perusahaan_berhasil, name='verifikasi_perusahaan_berhasil'),
     path('verifikasi_proyek_berhasil/<int:id>/', views.verifikasi_proyek_berhasil, name='verifikasi_proyek_berhasil'),
-    
+    path('verifikasi_data_proyek/<int:id>', views.verifikasi_data_proyek, name="verifikasi_data_proyek"),
+    path('verifikasi_data_tipe_rumah/<int:id>', views.verifikasi_data_tipe_rumah, name="verifikasi_data_tipe_rumah"),
+    path('verifikasi_data_perizinan/<int:id>', views.verifikasi_data_perizinan, name="verifikasi_data_perizinan"),
+    path('verifikasi_data_psu/<int:id>', views.verifikasi_data_psu, name="verifikasi_data_psu"),
+
 ]
