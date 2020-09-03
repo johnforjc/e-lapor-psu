@@ -254,3 +254,16 @@ hr {
 #generate_input_password{
     width: 70%;
 }
+
+/* index pengembang */
+header{
+    padding: 300px 0 300px;
+}
+  
+section{
+    padding: 150px 0;
+}
+
+#index-header{
+    background: #ccc;
+}
