@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
 
     <!-- Icon -->
     <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
@@ -38,7 +39,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="#">Beranda <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="/">Beranda <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,7 +90,15 @@
 
                 <!-- Sudah Login -->
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <i class="fa fa-bell nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="1" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre></i>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Test Notifikasi</a>
+                        <a class="dropdown-item" href="#">Test Notifikasi</a>
+                        <a class="dropdown-item" href="#">Test Notifikasi</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         Username <span class="caret"></span>
                     </a>
 
@@ -100,7 +109,7 @@
                         <a class="dropdown-item" href="#">Logout</a>
 
                         <form id="logout-form" action="#" method="POST" style="display: none;">
-                            <!-- Insert csrf token here -->
+                           
                         </form>
                     </div>
                 </li>

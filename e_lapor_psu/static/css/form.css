@@ -319,3 +319,26 @@ section{
     margin-left: 40px;
     margin-bottom: 20px;
 }
+
+.mybell
+{
+    color: white;
+    font-size: 21px;
+    position: relative;
+}
+
+.countBell::after
+{
+    content: attr(data-count);
+    font-size: 0.5em;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgb(51, 243, 51);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+}

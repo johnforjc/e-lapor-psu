@@ -67,3 +67,11 @@ function initAutocomplete() {
     });
   }
 
+function remover()
+{
+  if(document.getElementById('idBell'))
+  {
+    var notification = document.getElementById('idBell');
+    notification.classList.remove('countBell');
+  }
+}
