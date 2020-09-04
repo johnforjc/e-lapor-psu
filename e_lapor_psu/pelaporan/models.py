@@ -86,3 +86,4 @@ class Notifikasi(models.Model):
     id_data_perusahaan = models.ForeignKey(DataPerusahaan, on_delete=models.CASCADE)
     isi_notifikasi = models.TextField()
     created_at = models.DateTimeField(default=datetime.datetime.now())
+    is_read = models.BooleanField(default=False)
