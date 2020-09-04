@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from pelaporan.models import DataProyek
 from pelaporan.models import DataPerusahaan
@@ -8,6 +9,8 @@ from pelaporan.models import RumahSusun
 from pelaporan.models import Notifikasi
 from pelaporan.models import JenisPsu
 import os
+
+EMAIL_HOST_ADMIN = os.environ.get('EMAIL_HOST_USER')
 
 # Create your views here.
 def index(request):
@@ -105,6 +108,13 @@ def kirim_notifikasi(request, id):
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
     if request.method == 'POST':
         isi_notifikasi = request.POST['notifikasi']
+        subject_notifikasi = request.POST['subject']
+        send_mail(
+            subject = subject_notifikasi,
+            message = isi_notifikasi,
+            from_email = EMAIL_HOST_ADMIN,
+            recipient_list = [entry.email],
+        )
         notifikasi = Notifikasi.objects.create(
             isi_notifikasi = isi_notifikasi,
             id_data_perusahaan_id = id,
