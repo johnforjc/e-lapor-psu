@@ -265,7 +265,19 @@ section{
 }
 
 #index-header{
-    background: #ccc;
+    background: url('../images/index-header-picture.jpg');
+    background-size: cover;
+}
+
+#header-text{
+    color : #fff;
+    font-size: 40px;
+}
+
+#header-info{
+    color : #fff;
+    font-size: 30px;
+    font-weight: 500;
 }
 
 #steps-number{
@@ -305,6 +317,5 @@ section{
     list-style-type: circle;
     font-size: 16px;
     margin-left: 40px;
-    margin-bottom: 10px;
-
+    margin-bottom: 20px;
 }
