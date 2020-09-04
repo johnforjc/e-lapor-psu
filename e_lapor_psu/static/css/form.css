@@ -265,7 +265,7 @@ section{
 }
 
 #index-header{
-    background: url('../images/index-header-picture.jpg');
+    background: url('../images/index-header-picture.jpg') no-repeat;
     background-size: cover;
 }
 
