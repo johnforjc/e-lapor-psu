@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 
@@ -84,3 +85,4 @@ class Notifikasi(models.Model):
     id_notifikasi = models.AutoField(primary_key=True)
     id_data_perusahaan = models.ForeignKey(DataPerusahaan, on_delete=models.CASCADE)
     isi_notifikasi = models.TextField()
+    created_at = models.DateTimeField(default=datetime.datetime.now())
