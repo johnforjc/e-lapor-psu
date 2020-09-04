@@ -261,9 +261,50 @@ header{
 }
   
 section{
-    padding: 150px 0;
+    padding: 75px 0 85px;
 }
 
 #index-header{
     background: #ccc;
+}
+
+#steps-number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #03a678;
+}
+
+.index-h2{
+    text-decoration: none;
+}
+
+.number-alignment{
+    margin-top: -40px;
+}
+
+.steps{
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+}
+
+.listing-index {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 25px;
+}
+
+.steps-info{
+    text-align: left;
+    margin-left: -15px;
+    margin-top: 40px;
+}
+
+.index-list{
+    list-style-type: circle;
+    font-size: 16px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+
 }
