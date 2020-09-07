@@ -92,7 +92,13 @@ def form_data_proyek(request):
             return redirect(link)
 
     else:
-        return render(request, 'pengembang_pelaporan/form_data_proyek.html')
+        id = 1
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+        is_verified = dataPerusahaan.verified_admin
+        if is_verified:
+            return render(request, 'pengembang_pelaporan/form_data_proyek.html')
+        else:
+            return redirect('/')
 
 def form_data_perizinan(request, id):
     data_proyek = DataProyek.objects.get(id_data_proyek=id)
