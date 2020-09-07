@@ -29,4 +29,6 @@ urlpatterns = [
 
     path('update_tipe_rumah_tapak/<int:id>/', views.update_tipe_rumah_tapak, name='update_tipe_rumah_tapak'),
     path('update_tipe_rumah_susun/<int:id>/', views.update_tipe_rumah_susun, name='update_tipe_rumah_susun'),
+
+    path('update_notification', views.update_notification, name='update_notification')
 ]

@@ -323,8 +323,17 @@ section{
 .mybell
 {
     color: white;
-    font-size: 21px;
     position: relative;
+    box-sizing: content-box;
+    width: 21px;
+    height: 21px;
+    background-size: contain;
+}
+
+.bell-img
+{
+    width: 21px;
+    height: 21px;
 }
 
 .countBell::after

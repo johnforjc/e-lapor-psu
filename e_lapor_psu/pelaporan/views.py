@@ -11,6 +11,7 @@ from .models import DataProyek
 from .models import RumahTapak
 from .models import RumahSusun
 from .models import JenisPsu
+from .models import Notifikasi
 
 @register.filter
 def get_range(value):
@@ -21,10 +22,20 @@ def increment(value):
     value += 1
     return value
 
+def bring_some_notification(id):
+    notification = Notifikasi.objects.filter(id_data_perusahaan = id, is_read=False)
+    return notification
+
+def update_notification(request):
+    id_list = request.POST('idList')
+
+    print("==============================================================================================")
+    print(id_list)
 # Create your views here.
 
 def index_lapor_pengembang(request):
-    return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html')
+    notification = bring_some_notification(1)
+    return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html', {'notification': notification})
 
 #### Create on database code
 

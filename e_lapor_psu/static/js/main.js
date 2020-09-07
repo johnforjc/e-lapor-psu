@@ -71,6 +71,24 @@ function remover()
 {
   if(document.getElementById('idBell'))
   {
+    // // AJAX MULAI DARI SINI
+    // var idList = document.querySelectorAll('.list_id');
+    // var idArray = []
+
+    // for(let i = 0; i<idList.length; i++)
+    // {
+    //     idArray.push(idList[i].value);
+    // }
+
+    // const xhr = new XMLHttpRequest();
+
+    // xhr.open("POST", '/update_notification');
+
+    // xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+
+    // xhr.send("idList="+idArray);
+    // // AJAX SELESAI DISINI
+
     var notification = document.getElementById('idBell');
     notification.classList.remove('countBell');
   }
