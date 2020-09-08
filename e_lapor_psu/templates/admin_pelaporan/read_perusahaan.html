@@ -170,9 +170,12 @@
                         <div class="row" id="admin-verify-back">
                             <a href="{% url 'verifikasi_perusahaan_berhasil' entry.id_data_perusahaan %}" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
                             <a href="{% url 'kirim_notifikasi' entry.id_data_perusahaan %}" class="btn btn-danger" id="kirim-notifikasi"> Kirim Notifikasi </a>
+                            <form action="{% url 'delete_data_perusahaan' entry.id_data_perusahaan %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
+                            </form>
                             <a href="{% url 'listing_perusahaan' %}" class="btn btn-secondary"> Kembali ke Daftar Perusahaan </a>
                         </div>
-
                         
                     </div>
                 </div>

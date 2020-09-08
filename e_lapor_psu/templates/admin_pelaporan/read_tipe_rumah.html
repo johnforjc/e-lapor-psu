@@ -39,6 +39,11 @@
                                             <p class="read-details">{{rumahTapak.jumlah_unit_rumah_tapak}} Unit</p>
                                         </div>
 
+                                        <form action="{% url 'delete_tipe_rumah_tapak' rumahTapak.id_rumah_tapak %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
+                                        </form>
+
                                     </div>
                                 </div>
                                 <hr>
@@ -68,6 +73,11 @@
                                             <label for="jumlah_unit_rumah_tapak" class="detail-title">Jumlah Unit</label>
                                             <p class="read-details">{{rumahSusun.jumlah_unit_rumah_susun}} Unit</p>
                                         </div>
+
+                                        <form action="{% url 'delete_tipe_rumah_susun' rumahSusun.id_rumah_susun %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
+                                        </form>
 
                                     </div>
                                 </div>

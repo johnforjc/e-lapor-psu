@@ -39,6 +39,11 @@
     margin-right: 30px;
 }
 
+#delete-data{
+    margin-right: 30px;
+    width: auto;
+}
+
 .content {
     padding: 75px 100px 75px 100px; 
 }

@@ -24,4 +24,11 @@ urlpatterns=[
     path('verifikasi_data_perizinan/<int:id>', views.verifikasi_data_perizinan, name="verifikasi_data_perizinan"),
     path('verifikasi_data_psu/<int:id>', views.verifikasi_data_psu, name="verifikasi_data_psu"),
 
+    ## Delete database
+    path('delete_data_perusahaan/<int:id>/', views.delete_data_perusahaan, name='delete_data_perusahaan'),
+    path('delete_data_proyek/<int:id>/', views.delete_data_proyek, name='delete_data_proyek'),
+    path('delete_data_perizinan/<int:id>/', views.delete_data_perizinan, name='delete_data_perizinan'),
+    path('delete_jenis_psu/<int:id>/', views.delete_jenis_psu, name='delete_jenis_psu'),
+    path('delete_tipe_rumah_tapak/<int:id>/', views.delete_tipe_rumah_tapak, name='delete_tipe_rumah_tapak'),
+    path('delete_tipe_rumah_susun/<int:id>/', views.delete_tipe_rumah_susun, name='delete_tipe_rumah_susun'),
 ]

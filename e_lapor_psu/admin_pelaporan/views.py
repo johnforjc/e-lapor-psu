@@ -145,3 +145,44 @@ def verifikasi_data_psu(request, id):
 
 def verifikasi_proyek_berhasil(request, id):
     return render(request, 'admin_pelaporan/verifikasi_proyek_berhasil.html', {'entry': id})
+
+## Delete on database
+def delete_data_perusahaan(request, id):
+    if request.method == 'POST':
+        DataPerusahaan.objects.filter(id_data_perusahaan=id).delete()
+        return redirect('listing_perusahaan')
+
+def delete_data_proyek(request, id):
+    if request.method == 'POST':
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        id_data_perusahaan = dataProyek.id_data_perusahaan_id
+        dataProyek.delete()
+        return redirect('listing_proyek', id_data_perusahaan)
+
+def delete_data_perizinan(request, id):
+    if request.method == 'POST':
+        dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
+        id_data_proyek = dataPerizinan.id_data_proyek_id
+        dataPerizinan.delete()
+        return redirect('folder_proyek', id_data_proyek)
+
+def delete_jenis_psu(request, id):
+    if request.method == 'POST':
+        jenisPsu = JenisPsu.objects.get(id_data_proyek_id=id)
+        id_data_proyek = jenisPsu.id_data_proyek_id
+        jenisPsu.delete()
+        return redirect('folder_proyek', id_data_proyek)
+
+def delete_tipe_rumah_tapak(request, id):
+    if request.method == 'POST':
+        rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
+        id_data_proyek = rumahTapak.id_data_proyek_id
+        rumahTapak.delete()
+        return redirect('read_tipe_rumah', id_data_proyek)
+
+def delete_tipe_rumah_susun(request, id):
+    if request.method == 'POST':
+        rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
+        id_data_proyek = rumahSusun.id_data_proyek_id
+        rumahSusun.delete()
+        return redirect('read_tipe_rumah', id_data_proyek)
