@@ -67,7 +67,13 @@ def read_tipe_rumah(request, id):
         rumahTapaks = []
         for temp in query.all():
             rumahTapaks.append(temp)
-        return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahTapaks': rumahTapaks})
+        
+        if not query:
+            entry = DataProyek.objects.get(id_data_proyek = id)
+            message = "Rincian rumah tapak yang anda cari kosong atau telah dihapus"
+            return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
+        else:
+            return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahTapaks': rumahTapaks})
 
     elif entry.jenis_produk == "Rumah Susun":
         query = RumahSusun.objects.filter(id_data_proyek_id=id)
@@ -75,30 +81,45 @@ def read_tipe_rumah(request, id):
         for temp in query.all():
             rumahSusuns.append(temp)
 
-    return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
+        if not query:
+            entry = DataProyek.objects.get(id_data_proyek = id)
+            message = "Rincian rumah susun yang anda cari kosong atau telah dihapus"
+            return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
+        else:
+            return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
 
 def read_jenis_psu(request, id):
-    entry = JenisPsu.objects.get(id_data_proyek_id = id)
-    return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
-
-def read_perizinan(request, id):
-    entry = DataPerizinan.objects.get(id_data_proyek_id = id)
+    try:
+        entry = JenisPsu.objects.get(id_data_proyek_id = id)
+        return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
+    except JenisPsu.DoesNotExist:
+        entry = DataProyek.objects.get(id_data_proyek = id)
+        message = "Jenis PSU yang anda cari kosong atau telah dihapus"
+        return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
     
-    sitePlanPDF = 0
-    uklUplPDF = 0
-    izinMendirikanPDF = 0
-    izinPenggunaanPDF = 0
+def read_perizinan(request, id):
+    try:
+        entry = DataPerizinan.objects.get(id_data_proyek_id = id)
+        
+        sitePlanPDF = 0
+        uklUplPDF = 0
+        izinMendirikanPDF = 0
+        izinPenggunaanPDF = 0
 
-    if entry.site_plan.url[-4:].lower() == ".pdf":
-        sitePlanPDF = 1
-    if entry.ukl_upl.url[-4:].lower() == ".pdf":
-        uklUplPDF = 1   
-    if entry.izin_mendirikan_bangunan.url[-4:].lower() == ".pdf":
-        izinMendirikanPDF = 1
-    if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
-        izinPenggunaanPDF = 1
+        if entry.site_plan.url[-4:].lower() == ".pdf":
+            sitePlanPDF = 1
+        if entry.ukl_upl.url[-4:].lower() == ".pdf":
+            uklUplPDF = 1   
+        if entry.izin_mendirikan_bangunan.url[-4:].lower() == ".pdf":
+            izinMendirikanPDF = 1
+        if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
+            izinPenggunaanPDF = 1
 
-    return render(request, 'admin_pelaporan/read_perizinan.html', {'entry': entry, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
+        return render(request, 'admin_pelaporan/read_perizinan.html', {'entry': entry, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
+    except DataPerizinan.DoesNotExist:
+        entry = DataProyek.objects.get(id_data_proyek = id)
+        message = "Data perizinan yang anda cari kosong atau telah dihapus"
+        return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
 
 def listing_perizinan(request):
     all_entries = DataPerizinan.objects.all()
