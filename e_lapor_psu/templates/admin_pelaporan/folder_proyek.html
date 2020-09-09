@@ -21,9 +21,17 @@
                                             <div class="row" id="proyek-folder-row">
                                                 <h3 class="proyek-folder-header">Detail Proyek</h3>
                                             </div>
-                                            <div class="row" id="proyek-folder-row">
-                                                <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
-                                            </div>
+
+                                            {% if entry.verified_admin_data_proyek == 1 %}
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                                </div>
+                                            {% else %}
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
+                                                </div>
+                                            {% endif %}
+                                            
                                         </div>
                                     </div>    
                                 </a>
@@ -36,9 +44,17 @@
                                             <div class="row" id="proyek-folder-row">
                                                 <h3 class="proyek-folder-header">Rincian {{entry.jenis_produk}}</h3>
                                             </div>
-                                            <div class="row" id="proyek-folder-row">
-                                                <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
-                                            </div>
+
+                                            {% if entry.verified_admin_tipe_rumah == 1 %} 
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                                </div>
+                                            {% else %}
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
+                                                </div>
+                                            {% endif %}
+
                                         </div>
                                     </div>    
                                 </a>
@@ -55,9 +71,17 @@
                                             <div class="row" id="proyek-folder-row">
                                                 <h3 class="proyek-folder-header">Detail Jenis PSU</h3>
                                             </div>
-                                            <div class="row" id="proyek-folder-row">
-                                                <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
-                                            </div>
+
+                                            {% if entry.verified_admin_jenis_psu == 1 %}                
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                                </div>
+                                            {% else %}
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
+                                                </div>
+                                            {% endif %}
+
                                         </div>
                                     </div>  
                                 </a>
@@ -70,9 +94,17 @@
                                             <div class="row" id="proyek-folder-row">
                                                 <h3 class="proyek-folder-header">Detail Perizinan</h3>
                                             </div>
-                                            <div class="row" id="proyek-folder-row">
-                                                <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
-                                            </div>
+
+                                            {% if entry.verified_admin_data_perizinan == 1 %}
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                                </div>
+                                            {% else %}
+                                                <div class="row" id="proyek-folder-row">
+                                                    <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
+                                                </div>
+                                            {% endif %}
+
                                         </div>
                                     </div>
                                 </a>
