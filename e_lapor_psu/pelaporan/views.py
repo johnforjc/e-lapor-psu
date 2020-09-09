@@ -12,6 +12,7 @@ from .models import RumahTapak
 from .models import RumahSusun
 from .models import JenisPsu
 from .models import Notifikasi
+import os
 
 @register.filter
 def get_range(value):
@@ -33,6 +34,10 @@ def update_notification(request, id):
 # Create your views here.
 
 def index_lapor_pengembang(request):
+    print('------------------------------------------')
+    path = os.getcwd()
+    print(path)
+    print('------------------------------------------')
     notification = bring_some_notification(1)
     return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html', {'notification': notification})
 

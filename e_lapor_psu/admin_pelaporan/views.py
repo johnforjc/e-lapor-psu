@@ -11,6 +11,7 @@ from pelaporan.models import JenisPsu
 import os
 
 EMAIL_HOST_ADMIN = os.environ.get('EMAIL_HOST_USER')
+DEFAULT_MEDIA_PATH = os.getcwd() + '/media'
 
 # Create your views here.
 def index(request):
@@ -170,6 +171,20 @@ def verifikasi_proyek_berhasil(request, id):
 ## Delete on database
 def delete_data_perusahaan(request, id):
     if request.method == 'POST':
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+
+        ## Delete file
+        if(dataPerusahaan.akta_pendirian_badan_usaha):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/akta_pendirian_badan_usaha/' + dataPerusahaan.akta_pendirian_badan_usaha
+            os.remove(path_to_delete)
+        if(dataPerusahaan.foto_pemilik):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/foto_pemilik/' + dataPerusahaan.foto_pemilik
+            os.remove(path_to_delete)
+        if(dataPerusahaan.ktp_pemilik):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/ktp_pemilik/' + dataPerusahaan.ktp_pemilik
+            os.remove(path_to_delete)
+        ## End of delete file
+
         DataPerusahaan.objects.filter(id_data_perusahaan=id).delete()
         return redirect('listing_perusahaan')
 
@@ -183,6 +198,22 @@ def delete_data_proyek(request, id):
 def delete_data_perizinan(request, id):
     if request.method == 'POST':
         dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
+
+        ## Delete file yang ada START
+        if(dataPerizinan.site_plan):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/site_plan/' + dataPerizinan.site_plan
+            os.remove(path_to_delete)
+        if(dataPerizinan.ukl_upl):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/ukl_upl/' + dataPerizinan.ukl_upl
+            os.remove(path_to_delete)
+        if(dataPerizinan.izin_mendirikan_bangunan):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/izin_mendirikan_bangunan/' + dataPerizinan.izin_mendirikan_bangunan
+            os.remove(path_to_delete)
+        if(dataPerizinan.izin_penggunaan_bangunan):
+            path_to_delete = DEFAULT_MEDIA_PATH + '/izin_penggunaan_bangunan/' + dataPerizinan.izin_penggunaan_bangunan
+            os.remove(path_to_delete)
+
+        ## Delete file yang ada END
         id_data_proyek = dataPerizinan.id_data_proyek_id
         dataPerizinan.delete()
         return redirect('folder_proyek', id_data_proyek)
