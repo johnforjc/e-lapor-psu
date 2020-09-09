@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main" id="verifikasi-berhasil">
+        <div class="container-verifikasi-berhasil">
+            <div class="content">
+                <div class="listing-details">
+                
+
+                    <div class="listing-content-details" id="error-message-content-logo">
+                        <img src="{% static 'images/error.png' %}" class="berhasil-logo">
+                    </div>
+
+                    <div class="listing-content-details" id="error-message-content">
+                        <h1 class="error-message-text">Error</h1>
+                    </div>
+
+                    <div class="verifikasi-info">
+                        <p class="verifikasi-info-text">{{message}}</p>
+                    </div>
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content">
+                        <a href="{% url 'folder_proyek' entry.id_data_proyek %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
+                    </div>
+
+                </div>     
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
