@@ -351,3 +351,27 @@ section{
     top: 0;
     right: 0;
 }
+
+/* Error Message */
+#error-message-content-logo{
+    display: flex;
+    justify-content: center;
+    background: #dd3447;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+}
+
+#error-message-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.error-message-text{
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: #dd3447;
+    text-underline-position: under;
+}

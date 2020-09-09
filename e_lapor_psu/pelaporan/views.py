@@ -109,7 +109,7 @@ def form_data_proyek(request):
         if is_verified:
             return render(request, 'pengembang_pelaporan/form_data_proyek.html')
         else:
-            return redirect('/')
+            return redirect('/tunggu_verifikasi_perusahaan')
 
 def form_data_perizinan(request, id):
     data_proyek = DataProyek.objects.get(id_data_proyek=id)
@@ -518,3 +518,6 @@ def update_tipe_rumah_tapak(request, id):
     
     else:
         return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})
+
+def tunggu_verifikasi_perusahaan(request):
+    return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html')
