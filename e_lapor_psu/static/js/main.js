@@ -67,26 +67,54 @@ function initAutocomplete() {
     });
   }
 
+  
+var inputList = document.querySelectorAll('input');
+for(let i=0; i<inputList.length; i++)
+{
+  if(inputList[i].name='csrfmiddlewaretoken')
+  {
+    var csrfmiddlewaretoken=inputList[i].value;
+    console.log(csrfmiddlewaretoken)
+    break;
+  }
+}
+
 function remover()
 {
   if(document.getElementById('idBell'))
   {
     // // AJAX MULAI DARI SINI
-    // var idList = document.querySelectorAll('.list_id');
+    var idList = document.querySelectorAll('.list_id');
     // var idArray = []
+    var form = document.getElementById('list_id_form');
+    var inputList = document.querySelectorAll('input');
 
-    // for(let i = 0; i<idList.length; i++)
-    // {
-    //     idArray.push(idList[i].value);
-    // }
+    var csrfmiddlewaretoken='';
 
-    // const xhr = new XMLHttpRequest();
+    for(let i=0; i<inputList.length; i++)
+    {
+      if(inputList[i].name='csrfmiddlewaretoken')
+      {
+        csrfmiddlewaretoken=inputList[i].value;
+        break;
+      }
+    }
 
-    // xhr.open("POST", '/update_notification');
+    for(let i = 0; i<idList.length; i++)
+    {
+      const xhr = new XMLHttpRequest();
+      var url = form.action + '/' +idList[i].value + '/';
 
-    // xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+      xhr.open(form.method, url);
 
-    // xhr.send("idList="+idArray);
+      xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
+
+      var data = "idList="+idList[i].value;
+
+      xhr.send(data);
+    }
+
+    // 
     // // AJAX SELESAI DISINI
 
     var notification = document.getElementById('idBell');

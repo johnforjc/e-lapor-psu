@@ -26,11 +26,10 @@ def bring_some_notification(id):
     notification = Notifikasi.objects.filter(id_data_perusahaan = id, is_read=False)
     return notification
 
-def update_notification(request):
-    id_list = request.POST('idList')
+def update_notification(request, id):
+    notification = Notifikasi.objects.filter(id_data_perusahaan = id).update(is_read=True)
+    return HttpResponse(200)
 
-    print("==============================================================================================")
-    print(id_list)
 # Create your views here.
 
 def index_lapor_pengembang(request):

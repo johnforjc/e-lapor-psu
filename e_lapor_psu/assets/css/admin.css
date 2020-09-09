@@ -1,7 +1,54 @@
-/* Daftar Perusahaan */
+/* Bootstrap Button Color Change */
+.btn-primary, .btn-primary:active, .btn-primary:focus, .btn-primary:focus:active,.btn-primary:visited {
+    background-color: #03a678 !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    font-weight: 500;
+}
+
+.btn-primary:hover{
+    background-color: #025b42 !important;
+}
+
+.btn-secondary, .btn-secondary:active, .btn-secondary:focus, .btn-secondary:focus:active,.btn-secondary:visited {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    font-weight: 500;
+}
+
+.btn-danger, .btn-danger:active, .btn-danger:focus, .btn-danger:focus:active,.btn-danger:visited {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    font-weight: 500;
+}
+
+/* general */
+#admin-verify-back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+#verify-admin{
+    margin-right: 30px;
+}
+
+#kirim-notifikasi{
+    margin-right: 30px;
+}
+
+#delete-data{
+    margin-right: 30px;
+    width: auto;
+}
+
 .content {
     padding: 75px 100px 75px 100px; 
 }
+
+/* listing perusahaan */
 
 .item {
     color: #000;
@@ -39,7 +86,7 @@
     width: 50%; 
     float: left; }
 
-.nama_perusahaan {
+.list-title {
     font-size: 22px;
     font-weight: 700;
     text-transform: uppercase;
@@ -50,6 +97,21 @@
     font-size: 13px;
     font-weight: 400;
     margin-left: 3px;
+}
+
+/* listing proyek*/
+.listing-content-proyek {
+    padding: 20px 20px 50px 20px;
+}
+
+#group-proyek {
+    width: 33%; 
+    float: left; }
+
+#details-proyek {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 8px 0 0 3px;
 }
 
 /* Read Perusahaan */
@@ -64,6 +126,7 @@
 .detail-title {
     font-size: 18px;
     text-transform: initial;
+    padding-bottom: 5px;
 }
 
 .detail-text{
@@ -73,9 +136,25 @@
     font-size: 18px;
     font-weight: 400; }
 
+.form-group.vert
+{
+    position: relative;
+}
+
+.form-group.vert::after
+{
+    height: 97%;
+    width: 2px;
+    background-color:#03a678;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    content: "";
+    z-index: 1;
+}
 .vertical-detail { 
-    border-left: 2px solid #03a678; ; 
-    height: 35vh;
+    border-left: 2px solid #03a678; 
+    height: 100%;
     position: absolute; 
     left: 50%; } 
 
@@ -87,11 +166,175 @@
 }
 
 .listing-content-details {
-    padding: 20px 20px 75px;
+    padding: 20px 20px 30px;
 }
 
 .detail-text-bottom{
     margin: 10px 0 30px 10px; }
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#read-row{
+    padding-left: 10px
+}
+
+.col {
+    padding-bottom: 25px;
+}
+
+.sub-header{
+    font-size: 20px;
+    margin: 30px 0 30px 15px;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
+}
+
+#lihat-daftar-proyek{
+    margin-left: 10px;
+    margin-bottom: 70px;
+}
+
+/* folder proyek */
+.listing-content-folder-proyek {
+    padding: 20px 20px 20px;
+}
+
+.main-header-folder-proyek{
+    margin-bottom: 40px;
+}
+
+.listing-proyek-folder{
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px -5px 30px;
+    border-radius: 10px;
+}
+
+.listing-proyek-folder:hover {
+    border: 1px solid #03a678;
+}
+
+#proyek-folder-row{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.proyek-folder-header{
+    font-size: 20px;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
+}
+
+#verified-status-label{
+    margin-top: 50px;
+    margin-bottom: -30px;
+}
+
+#verified-tag{
+    margin: 50px 0 -10px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* kirim notifikasi */
+
+.form-row-notifikasi .form-notifikasi {
+    width: 100%;
+    padding: 0 40px; }
+
+.form-control:active, .form-control:focus, .form-control:focus:active{
+    border: 1px solid #03a678 !important;
+}
+
+#textarea-kirim-notifikasi{
+    height: 300px;
+}
+
+#button-kirim-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#button-kirim{
+    margin-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+/* verifikasi berhasil */
+#verifikasi-berhasil{
+    background: #d2d2d2;
+}
+
+#box-verifikasi{
+    border-radius: 10px;
+}
+
+.container-verifikasi-berhasil{
+    padding: 70px 250px 70px 250px;
+}
+
+#verifikasi-berhasil-content-logo{
+    display: flex;
+    justify-content: center;
+    background: #03a678;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+}
+
+#verifikasi-berhasil-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.berhasil-logo{
+    height: 170px;
+    width: 170px;
+}
+
+.verifikasi-berhasil-text{
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
+}
+
+.verifikasi-info{
+    margin-top: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verifikasi-info-text{
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* Read Perizinan */
+#perizinan-col-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+    
 
 
 
