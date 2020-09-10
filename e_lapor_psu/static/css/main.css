@@ -386,3 +386,34 @@ section{
     color: #fff;
     width: 100%;
     margin-top: 15px; }
+
+.notification-div
+{
+    min-width: 400px;
+}
+
+h4.notification-title
+{
+    box-sizing: content-box;
+    padding: 10px 0px;
+    margin: 0;
+}
+
+.notification-div p
+{
+    margin: 0px;
+    padding: 0px 0px 10px;
+    box-sizing: content-box;
+}
+
+.date
+{
+    position: relative;
+    height: 20px;
+}
+
+.date small
+{
+    position: absolute;
+    right: 0;
+}
