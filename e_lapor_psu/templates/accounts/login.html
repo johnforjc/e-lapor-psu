@@ -5,12 +5,12 @@
     <div class="main">
         <div class="container">
 
-            <form action="register" method="POST" enctype="multipart/form-data" class="register-form">
+            <form action="login" method="POST" enctype="multipart/form-data" class="register-form">
 
                 {% csrf_token %}
 
                 <div class="header-border-register">
-                    <h1 class="register-header-text"> Register </h1>
+                    <h1 class="register-header-text"> Login </h1>
                 </div>
 
                 <div class="border-register">
@@ -26,12 +26,6 @@
                                             {{ message }}
                                         </div>
                                     {% endif %}
-
-                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                                        <div class="alert alert-success" role="alert" id="alert-box-register">
-                                            {{ message }}
-                                        </div>
-                                    {% endif %}
                                     
                                 {% endfor %}
                             {% endif %}
@@ -42,18 +36,8 @@
                             </div>
 
                             <div class="form-input">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" required/>
-                            </div>
-
-                            <div class="form-input">
-                                <label for="password1">Password</label>
-                                <input type="password" name="password1" id="password1" required/>
-                            </div>
-
-                            <div class="form-input">
-                                <label for="password2">Confirm Password</label>
-                                <input type="password" name="password2" id="password2" required/>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" required/>
                             </div>
                             
                             <div class="form-submit-register">
