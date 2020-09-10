@@ -93,6 +93,7 @@
                     {% if notification.count > 0 %}
                     <div class="nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="{{ notification.count }}" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="bell-img" src="{% static 'images/bell-custom.png' %}" alt="">
+                        <div class="notification-text">Notifikasi</div>
                         <form action="update_notification" method="post" id="list_id_form">
                             {% csrf_token %}
                             {% for notif in notification %}
@@ -115,6 +116,7 @@
                     {% else %}
                     <div class="nav-link text-white mybell nav-link" id="idBell" aria-hidden="true" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="bell-img" src="{% static 'images/bell-custom.png' %}" alt="">
+                        <div class="notification-text">Notifikasi</div>
                     </div>
                     {% endif %}
                     <!-- <i class="fa fa-bell nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="1" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre></i>  -->

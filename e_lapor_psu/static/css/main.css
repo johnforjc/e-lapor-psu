@@ -387,6 +387,14 @@ section{
     width: 100%;
     margin-top: 15px; }
 
+
+/*notifikasi*/
+
+.notification-text
+{
+    display: none;
+}
+
 .notification-div
 {
     min-width: 400px;
@@ -416,4 +424,16 @@ h4.notification-title
 {
     position: absolute;
     right: 0;
+}
+
+@media only screen and (max-width: 991px)
+{
+    .notification-text
+    {
+        display: inherit;
+    }
+    .bell-img
+    {
+        display: none;
+    }
 }
