@@ -100,11 +100,9 @@ def form_data_proyek(request):
         )
         
         if jenis_produk == "Rumah Tapak":
-            link = '/tipe_rumah_tapak/'+ str(dataProyek.id_data_proyek)
-            return redirect(link)
+            return redirect('tipe_rumah_tapak', id=dataProyek.id_data_proyek)
         elif jenis_produk == "Rumah Susun":
-            link = '/tipe_rumah_susun/'+ str(dataProyek.id_data_proyek)
-            return redirect(link)
+            return redirect('tipe_rumah_susun', id=dataProyek.id_data_proyek)
 
     else:
         id = 1
@@ -113,11 +111,11 @@ def form_data_proyek(request):
         if is_verified:
             return render(request, 'pengembang_pelaporan/form_data_proyek.html')
         else:
-            return redirect('/tunggu_verifikasi_perusahaan')
+            return redirect('tunggu_verifikasi_perusahaan')
 
 def form_data_perizinan(request, id):
     data_proyek = DataProyek.objects.get(id_data_proyek=id)
-    if request.method == 'POST' and request.FILES['site_plan'] and request.FILES['ukl_upl'] and request.FILES['izin_mendirikan_bangunan'] and request.FILES['izin_penggunaan_bangunan']:
+    if request.method == 'POST':
         site_plan = request.FILES['site_plan']
         ukl_upl = request.FILES['ukl_upl']
         izin_mendirikan_bangunan = request.FILES['izin_mendirikan_bangunan']
@@ -140,7 +138,7 @@ def form_data_perizinan(request, id):
         if data_proyek.verified_data_perizinan == False:
             return render(request, 'pengembang_pelaporan/form_data_perizinan.html')
         else:
-            return redirect('detail_proyek/'+ id +'/')
+            return redirect('detail_proyek', id=id)
 
 def tipe_rumah_tapak(request, id):
     data_proyek = DataProyek.objects.get(id_data_proyek=id)
@@ -174,7 +172,7 @@ def tipe_rumah_tapak(request, id):
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
             return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
         else:
-            return redirect('detail_proyek/'+ id +'/')
+            return redirect('detail_proyek', id=id)
 
 def tipe_rumah_susun(request, id):
     data_proyek = DataProyek.objects.get(id_data_proyek=id)
@@ -207,7 +205,7 @@ def tipe_rumah_susun(request, id):
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
             return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
         else:
-            return redirect('detail_proyek/'+ id +'/')
+            return redirect('detail_proyek', id=id)
 
 # Jenis PSU FIX
 def jenis_psu(request, id):
@@ -254,7 +252,7 @@ def jenis_psu(request, id):
         if data_proyek.verified_jenis_psu == False:
             return render(request, 'pengembang_pelaporan/jenis_psu.html')
         else:
-            return redirect('detail_proyek/'+ str(id) +'/')
+            return redirect('detail_proyek', id=id)
 
 
 #### Read on database code
@@ -286,38 +284,48 @@ def detail_proyek(request, id):
 def detail_tipe_rumah(request, id):
     dataProyek = DataProyek.objects.get(id_data_proyek=id)
     if dataProyek.jenis_produk == "Rumah Tapak":
-        query = RumahTapak.objects.filter(id_data_proyek_id=id)
-        return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
+        try:
+            query = RumahTapak.objects.filter(id_data_proyek_id=id)
+            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
+        except:
+            return redirect('tipe_rumah_tapak', id=id)
     elif dataProyek.jenis_produk == "Rumah Susun":
-        query = RumahSusun.objects.filter(id_data_proyek_id=id)
-        return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
+        try:
+            query = RumahSusun.objects.filter(id_data_proyek_id=id)
+            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
+        except:
+            return redirect('tipe_rumah_susun', id=id)
 
 def detail_jenis_psu(request, id):
-    entry = JenisPsu.objects.get(id_data_proyek_id = id)
-    dataProyek = DataProyek.objects.get(id_data_proyek = id)
-    return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry, 'isVerified' : dataProyek.verified_admin_jenis_psu})
-
+    try:
+        entry = JenisPsu.objects.get(id_data_proyek_id = id)
+        dataProyek = DataProyek.objects.get(id_data_proyek = id)
+        return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry, 'isVerified' : dataProyek.verified_admin_jenis_psu})
+    except:
+        return redirect('jenis_psu', id=id)
 def detail_perizinan(request, id):
-    entry = DataPerizinan.objects.get(id_data_proyek_id = id)
+    try:
+        entry = DataPerizinan.objects.get(id_data_proyek_id = id)
     
-    sitePlanPDF = 0
-    uklUplPDF = 0
-    izinMendirikanPDF = 0
-    izinPenggunaanPDF = 0
+        sitePlanPDF = 0
+        uklUplPDF = 0
+        izinMendirikanPDF = 0
+        izinPenggunaanPDF = 0
 
-    if entry.site_plan.url[-4:].lower() == ".pdf":
-        sitePlanPDF = 1
-    if entry.ukl_upl.url[-4:].lower() == ".pdf":
-        uklUplPDF = 1   
-    if entry.izin_mendirikan_bangunan.url[-4:].lower() == ".pdf":
-        izinMendirikanPDF = 1
-    if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
-        izinPenggunaanPDF = 1
+        if entry.site_plan.url[-4:].lower() == ".pdf":
+            sitePlanPDF = 1
+        if entry.ukl_upl.url[-4:].lower() == ".pdf":
+            uklUplPDF = 1   
+        if entry.izin_mendirikan_bangunan.url[-4:].lower() == ".pdf":
+            izinMendirikanPDF = 1
+        if entry.izin_penggunaan_bangunan.url[-4:].lower() == ".pdf":
+            izinPenggunaanPDF = 1
 
-    dataProyek = DataProyek.objects.get(id_data_proyek = id)
+        dataProyek = DataProyek.objects.get(id_data_proyek = id)
 
-    return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'isVerified' : dataProyek.verified_admin_data_perizinan, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
-
+        return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'isVerified' : dataProyek.verified_admin_data_perizinan, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
+    except:
+        return redirect('form_data_perizinan', id=id)
 
 #### Update on database code
 
@@ -399,8 +407,7 @@ def update_data_proyek(request, id):
             jumlah_tipe_rumah = jumlah_tipe_rumah,
             target_pembangunan = target_pembangunan,
         )
-        redirect_link = "/detail_proyek/" + str(id)
-        return redirect(redirect_link)
+        return redirect('detail_proyek', id=id)
 
     else:
         if dataProyek.verified_admin_data_proyek:
@@ -484,7 +491,7 @@ def update_jenis_psu(request, id):
             id_data_proyek_id = id,
         )
 
-        return redirect('/detail_proyek/'+ str(id))
+        return redirect('detail_proyek',  id=id)
 
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
@@ -510,7 +517,7 @@ def update_tipe_rumah_susun(request, id):
             id_data_proyek_id = id_data_proyek,
         )
 
-        return redirect('/detail_tipe_rumah/' + id_data_proyek)
+        return redirect('detail_tipe_rumah', id=id_data_proyek)
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
         if dataProyek.verified_admin_tipe_rumah:
@@ -536,7 +543,7 @@ def update_tipe_rumah_tapak(request, id):
             jumlah_unit_rumah_tapak = jumlah_unit_rumah_tapak,
             id_data_proyek_id = id_data_proyek,
         )
-        return redirect('/detail_tipe_rumah/' + id_data_proyek)
+        return redirect('detail_tipe_rumah', id=id_data_proyek)
     
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
