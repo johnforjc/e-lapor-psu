@@ -32,6 +32,15 @@ h1 {
     text-transform: uppercase;
     margin: 0 10px 40px; }
 
+h2 {
+    color: #222;
+    font-size: 18px;
+    text-decoration: underline;
+    text-decoration-color: #03a678;
+    text-underline-position: under;
+    text-transform: uppercase;
+    margin: 40px 0 40px; }
+
 h4 {
     color: #222;
     text-decoration: underline;
@@ -135,9 +144,8 @@ select {
 
 #submit-single {
     background: #03a678;
-    color: #fff; 
-    margin: 20px 14px;
-    width: 75%; }
+    color: #fff;
+    width: 100%; }
 
 #submit-single:hover {
     background-color: #025b42; }
@@ -148,22 +156,14 @@ select {
     margin-bottom: 70px;
 }
 
-#number h1 {
-    font-size: 80px;
-    margin-left: 150px;
-    margin-top: 150px;
-    color: #03a678;
+#number-susun {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-#number-susun h1 {
-    font-size: 80px;
-    margin-left: 150px;
-    margin-top: 100px;
+#number-susun h1{
     color: #03a678;
-}
-
-#tipe {
-    margin: 0 -110px; 
+    font-size: 80px;
 }
 
 hr {
@@ -253,4 +253,125 @@ hr {
 
 #generate_input_password{
     width: 70%;
+}
+
+/* index pengembang */
+header{
+    padding: 300px 0 300px;
+}
+  
+section{
+    padding: 75px 0 85px;
+}
+
+#index-header{
+    background: url('../images/index-header-picture.jpg') no-repeat;
+    background-size: cover;
+}
+
+#header-text{
+    color : #fff;
+    font-size: 40px;
+}
+
+#header-info{
+    color : #fff;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+#steps-number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #03a678;
+}
+
+.index-h2{
+    text-decoration: none;
+}
+
+.number-alignment{
+    margin-top: -40px;
+}
+
+.steps{
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+}
+
+.listing-index {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 25px;
+}
+
+.steps-info{
+    text-align: left;
+    margin-left: -15px;
+    margin-top: 40px;
+}
+
+.index-list{
+    list-style-type: circle;
+    font-size: 16px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.mybell
+{
+    color: white;
+    position: relative;
+    box-sizing: content-box;
+    width: 21px;
+    height: 21px;
+    background-size: contain;
+}
+
+.bell-img
+{
+    width: 21px;
+    height: 21px;
+}
+
+.countBell::after
+{
+    content: attr(data-count);
+    font-size: 0.5em;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgb(51, 243, 51);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+}
+
+/* Error Message */
+#error-message-content-logo{
+    display: flex;
+    justify-content: center;
+    background: #dd3447;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+}
+
+#error-message-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.error-message-text{
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: #dd3447;
+    text-underline-position: under;
 }

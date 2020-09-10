@@ -12,6 +12,7 @@ from .models import RumahTapak
 from .models import RumahSusun
 from .models import JenisPsu
 from .models import Notifikasi
+import os
 
 @register.filter
 def get_range(value):
@@ -26,14 +27,17 @@ def bring_some_notification(id):
     notification = Notifikasi.objects.filter(id_data_perusahaan = id, is_read=False)
     return notification
 
-def update_notification(request):
-    id_list = request.POST('idList')
+def update_notification(request, id):
+    notification = Notifikasi.objects.filter(id_data_perusahaan = id).update(is_read=True)
+    return HttpResponse(200)
 
-    print("==============================================================================================")
-    print(id_list)
 # Create your views here.
 
 def index_lapor_pengembang(request):
+    print('------------------------------------------')
+    path = os.getcwd()
+    print(path)
+    print('------------------------------------------')
     notification = bring_some_notification(1)
     return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html', {'notification': notification})
 
@@ -366,7 +370,10 @@ def update_data_perusahaan(request, id):
         return redirect('/')
 
     else:
-        return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan})
+        if dataPerusahaan.verified_admin:
+            return redirect('/')
+        else:
+            return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan})
 
 ## update data proyek FIX
 def update_data_proyek(request, id):
@@ -396,7 +403,10 @@ def update_data_proyek(request, id):
         return redirect(redirect_link)
 
     else:
-        return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})
+        if dataProyek.verified_admin_data_proyek:
+            return redirect('/')
+        else:
+            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})
 
 # update data perizinan FIX
 def update_data_perizinan(request, id):
@@ -433,7 +443,11 @@ def update_data_perizinan(request, id):
         return redirect('/')
 
     else:
-        return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan})
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        if dataProyek.verified_admin_data_perizinan:
+            return redirect('/')
+        else:
+            return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan})
 
 def update_jenis_psu(request, id):
     daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
@@ -473,7 +487,11 @@ def update_jenis_psu(request, id):
         return redirect('/detail_proyek/'+ str(id))
 
     else:
-        return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        if dataProyek.verified_admin_jenis_psu:
+            return redirect('/')
+        else:
+            return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
 
 
 ## update data rumah susun FIX
@@ -494,7 +512,11 @@ def update_tipe_rumah_susun(request, id):
 
         return redirect('/detail_tipe_rumah/' + id_data_proyek)
     else:
-        return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        if dataProyek.verified_admin_tipe_rumah:
+            return redirect('/')
+        else:
+            return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
 
 
 ## update data rumah tapak FIX
@@ -517,7 +539,11 @@ def update_tipe_rumah_tapak(request, id):
         return redirect('/detail_tipe_rumah/' + id_data_proyek)
     
     else:
-        return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        if dataProyek.verified_admin_tipe_rumah:
+            return redirect('/')
+        else:
+            return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})
 
 def tunggu_verifikasi_perusahaan(request):
     return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html')
