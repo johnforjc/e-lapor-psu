@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 </head>
 <body>
@@ -93,28 +93,34 @@
                     {% if notification.count > 0 %}
                     <div class="nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="{{ notification.count }}" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="bell-img" src="{% static 'images/bell-custom.png' %}" alt="">
+                        <div class="notification-text">Notifikasi</div>
                         <form action="update_notification" method="post" id="list_id_form">
                             {% csrf_token %}
                             {% for notif in notification %}
                                 <input type="hidden" class="list_id" value="{{notif.id_notifikasi}}">
                             {% endfor %}
+                            <div class="dropdown-menu dropdown-menu-right notification-div" aria-labelledby="navbarDropdown">
+                                {% for notif in notification %}
+                                    <div class="dropdown-item mynotification">
+                                        <h4 class="notification-title">{{notif.subject_notifikasi}}</h4>
+                                        <p>{{notif.isi_notifikasi}}</p>
+                                        <div class="date">
+                                            <small>{{notif.created_at}}</small>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </form>
                         
                     </div>
                     {% else %}
                     <div class="nav-link text-white mybell nav-link" id="idBell" aria-hidden="true" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="bell-img" src="{% static 'images/bell-custom.png' %}" alt="">
+                        <div class="notification-text">Notifikasi</div>
                     </div>
                     {% endif %}
                     <!-- <i class="fa fa-bell nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="1" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre></i>  -->
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        {% for notif in notification %}
-                            <div class="dropdown-item">
-                                {{notif.isi_notifikasi}}
-                                {{notif.created_at}}
-                            </div>
-                        {% endfor %}
-                    </div>
+                    
                 </li>
                 <li class="nav-item dropdown">
                     <a  class="nav-link text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
