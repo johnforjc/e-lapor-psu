@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.conf import settings
 from pelaporan.models import DataProyek
 from pelaporan.models import DataPerusahaan
 from pelaporan.models import DataPerizinan
@@ -175,20 +176,21 @@ def delete_data_perusahaan(request, id):
     if request.method == 'POST':
         dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
 
-        list_proyek = DataProyek.object.filter(id_data_perusahaan_id=0)
+        list_proyek = DataProyek.objects.filter(id_data_perusahaan_id=id)
 
         for proyek in list_proyek:
-            function_delete_data_proyek(proyek.id)
+            if(proyek.verified_data_perizinan):
+                function_delete_file_data_perizinan(proyek.id_data_proyek)
 
         ## Delete file
         if(dataPerusahaan.akta_pendirian_badan_usaha):
-            path_to_delete = DEFAULT_MEDIA_PATH + '/akta_pendirian_badan_usaha/' + dataPerusahaan.akta_pendirian_badan_usaha
+            path_to_delete = settings.MEDIA_ROOT + '/' + dataPerusahaan.akta_pendirian_badan_usaha.name
             os.remove(path_to_delete)
         if(dataPerusahaan.foto_pemilik):
-            path_to_delete = DEFAULT_MEDIA_PATH + '/foto_pemilik/' + dataPerusahaan.foto_pemilik
+            path_to_delete = settings.MEDIA_ROOT + '/' + dataPerusahaan.foto_pemilik.name
             os.remove(path_to_delete)
         if(dataPerusahaan.ktp_pemilik):
-            path_to_delete = DEFAULT_MEDIA_PATH + '/ktp_pemilik/' + dataPerusahaan.ktp_pemilik
+            path_to_delete = settings.MEDIA_ROOT + '/' + dataPerusahaan.ktp_pemilik.name
             os.remove(path_to_delete)
         ## End of delete file
 
@@ -197,84 +199,69 @@ def delete_data_perusahaan(request, id):
 
 def delete_data_proyek(request, id):
     if request.method == 'POST':
-        function_delete_data_proyek(id)
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        if(dataProyek.verified_data_perizinan):
+            function_delete_file_data_perizinan(id)
+        id_data_perusahaan = dataProyek.id_data_perusahaan_id
+        dataProyek.delete()
         return redirect('listing_proyek', id_data_perusahaan)
 
 def delete_data_perizinan(request, id):
     if request.method == 'POST':
-        function_delete_data_perizinan(id)
-        return redirect('folder_proyek', id_data_proyek)
+        function_delete_file_data_perizinan(id)
+        DataPerizinan.objects.filter(id_data_proyek_id=id).delete()
+        DataProyek.objects.filter(id_data_proyek=id).update(
+            verified_data_perizinan = False, 
+            verified_admin_data_perizinan = False
+        )
+        return redirect('folder_proyek', id)
 
 def delete_jenis_psu(request, id):
     if request.method == 'POST':
-        function_delete_jenis_psu(id)
-        return redirect('folder_proyek', id_data_proyek)
+        JenisPsu.objects.filter(id_data_proyek_id=id).delete()
+        DataProyek.objects.filter(id_data_proyek=id).update(
+            verified_jenis_psu = False,
+            verified_admin_jenis_psu = False
+        )
+        return redirect('folder_proyek', id)
 
 def delete_tipe_rumah_tapak(request, id):
     if request.method == 'POST':
-        function_delete_tipe_rumah_tapak(id)
+        rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
+        id_data_proyek = rumahTapak.id_data_proyek_id
+        rumahTapak.delete()
+        if not RumahTapak.objects.filter(id_data_proyek_id=id_data_proyek):
+            DataProyek.objects.filter(id_data_proyek=id).update(
+                verified_tipe_rumah = False,
+                verified_admin_tipe_rumah = False
+            )
         return redirect('read_tipe_rumah', id_data_proyek)
 
 def delete_tipe_rumah_susun(request, id):
     if request.method == 'POST':
-        function_delete_tipe_rumah_susun(id)
+        rumahSusun = RumahSusun.objects.get(id_rumah_tapak=id)
+        id_data_proyek = rumahSusun.id_data_proyek_id
+        rumahSusun.delete()
+        if not RumahSusun.objects.filter(id_data_proyek_id=id_data_proyek):
+            DataProyek.objects.filter(id_data_proyek=id).update(
+                verified_tipe_rumah = False,
+                verified_admin_tipe_rumah = False
+            )
         return redirect('read_tipe_rumah', id_data_proyek)
 
-## Callable delete function
-def function_delete_data_proyek(id):
-    dataProyek = DataProyek.objects.get(id_data_proyek=id)
-    id_data_perusahaan = dataProyek.id_data_perusahaan_id
-    if(dataProyek.verified_data_perizinan):
-        function_delete_data_proyek(id)
-    if(dataProyek.verifikasi_data_psu):
-        function_delete_jenis_psu(id)
-    if(dataProyek.verified_tipe_rumah):
-        if(dataProyek.jenis_produk=="Rumah Tapak"):
-            list_rumah_tapak = RumahTapak.filter(id_data_proyek_id=id)
-            for rumahTapak in list_rumah_tapak:
-                function_delete_tipe_rumah_tapak(rumahTapak.id)
-        elif(dataProyek.jenis_produk=="Rumah Susun"):
-            list_rumah_susun = RumahSusun.filter(id_data_proyek_id=id)
-            for rumahSusun in list_rumah_susun:
-                function_delete_tipe_rumah_susun(rumahSusun.id)
-    dataProyek.delete()
-
-def function_delete_data_perizinan(id):
+def function_delete_file_data_perizinan(id):
     dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
 
     ## Delete file yang ada START
     if(dataPerizinan.site_plan):
-        path_to_delete = DEFAULT_MEDIA_PATH + '/site_plan/' + dataPerizinan.site_plan
+        path_to_delete = settings.MEDIA_ROOT + '/' + dataPerizinan.site_plan.name
         os.remove(path_to_delete)
     if(dataPerizinan.ukl_upl):
-        path_to_delete = DEFAULT_MEDIA_PATH + '/ukl_upl/' + dataPerizinan.ukl_upl
+        path_to_delete = settings.MEDIA_ROOT + '/' + dataPerizinan.ukl_upl.name
         os.remove(path_to_delete)
     if(dataPerizinan.izin_mendirikan_bangunan):
-        path_to_delete = DEFAULT_MEDIA_PATH + '/izin_mendirikan_bangunan/' + dataPerizinan.izin_mendirikan_bangunan
+        path_to_delete = settings.MEDIA_ROOT + '/' + dataPerizinan.izin_mendirikan_bangunan.name
         os.remove(path_to_delete)
     if(dataPerizinan.izin_penggunaan_bangunan):
-        path_to_delete = DEFAULT_MEDIA_PATH + '/izin_penggunaan_bangunan/' + dataPerizinan.izin_penggunaan_bangunan
+        path_to_delete = settings.MEDIA_ROOT + '/' + dataPerizinan.izin_penggunaan_bangunan.name
         os.remove(path_to_delete)
-
-    ## Delete file yang ada END
-    id_data_proyek = dataPerizinan.id_data_proyek_id
-    dataPerizinan.delete()
-    return True
-
-def function_delete_jenis_psu(id):
-    jenisPsu = JenisPsu.objects.get(id_data_proyek_id=id)
-    id_data_proyek = jenisPsu.id_data_proyek_id
-    jenisPsu.delete()
-    return True
-
-def function_delete_tipe_rumah_tapak(id):
-    rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
-    id_data_proyek = rumahTapak.id_data_proyek_id
-    rumahTapak.delete()
-    return True
-
-def function_delete_tipe_rumah_susun(id):
-    rumahSusun = RumahSusun.objects.get(id_rumah_tapak=id)
-    id_data_proyek = rumahSusun.id_data_proyek_id
-    rumahSusun.delete()
-    return True
