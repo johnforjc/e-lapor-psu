@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+            <form action="" method="POST" enctype="multipart/form-data" class="register-form" id="register-form">
+
+                {% csrf_token %}
+
+                <h1 class="register-header"> Register </h1>
+
+                <div class="form-row-single">
+                    <div class="form-row-single">
+                        <div class="form-group-single">
+                            
+                            <div class="form-input">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" required/>
+                            </div>
+    
+                            <div class="form-input">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" required/>
+                            </div>
+                            
+                            <div class="form-submit">
+                                <input type="submit" value="Next" class="submit" id="register-submit" name="submit" />
+                            </div>
+                        </div>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

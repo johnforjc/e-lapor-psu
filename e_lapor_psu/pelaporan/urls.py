@@ -33,5 +33,6 @@ urlpatterns = [
     path('update_notification', views.update_notification, name='update_notification'),
 
     ## Error Message
-    path('tunggu_verifikasi_perusahaan', views.tunggu_verifikasi_perusahaan, name='tunggu_verifikasi_perusahaan')
+    path('tunggu_verifikasi_perusahaan', views.tunggu_verifikasi_perusahaan, name='tunggu_verifikasi_perusahaan'),
+
 ]

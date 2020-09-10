@@ -375,3 +375,14 @@ section{
     text-decoration-color: #dd3447;
     text-underline-position: under;
 }
+
+/* register */
+.register-header{
+    margin-left: -20px;
+}
+
+#register-submit {
+    background: #03a678;
+    color: #fff;
+    width: 100%;
+    margin-top: 15px; }

@@ -521,3 +521,5 @@ def update_tipe_rumah_tapak(request, id):
 
 def tunggu_verifikasi_perusahaan(request):
     return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html')
+
+

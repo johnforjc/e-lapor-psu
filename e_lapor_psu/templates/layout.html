@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 
@@ -85,7 +85,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Register</a>
+                    <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
                 </li>
 
                 <!-- Sudah Login -->
