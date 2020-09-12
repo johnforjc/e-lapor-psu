@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 
 # Create your models here.
 
 class DataPerusahaan(models.Model):
     id_data_perusahaan = models.AutoField(primary_key=True)
+    id_user = models.OneToOneField(User, on_delete=models.CASCADE)
     nama_perusahaan = models.CharField(max_length=255)
     akta_pendirian_badan_usaha = models.FileField(upload_to='akta_pendirian_badan_usaha')
     nama_pemilik = models.CharField(max_length=255)

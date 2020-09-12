@@ -26,8 +26,8 @@ def register(request):
                     password = password1
                 )
                 user.save()
-                messages.success(request, 'REGISTRASI SUKSES')
-                return redirect('register')
+                auth.login(request, user)
+                return redirect('/')
 
         else:
             messages.error(request, "PASSWORD TIDAK SAMA, SILAHAKAN MENGECEK ULANG PASSWORD")

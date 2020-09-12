@@ -5,6 +5,7 @@ from django.template.defaulttags import register
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from django.contrib.auth.models import User, auth
 from .models import DataPerusahaan
 from .models import DataPerizinan
 from .models import DataProyek
@@ -44,6 +45,14 @@ def index_lapor_pengembang(request):
 #### Create on database code
 
 def form_data_perusahaan(request):
+
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    if DataPerusahaan.objects.filter(id_user_id=request.user.id):
+        message = "Anda hanya bisa memiliki 1 data perusahaan"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method == 'POST':
         nama_perusahaan = request.POST['nama_perusahaan']
         nama_pemilik = request.POST['nama_pemilik']
@@ -59,7 +68,8 @@ def form_data_perusahaan(request):
         akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
 
         dataPerusahaan = DataPerusahaan.objects.create(
-            nama_perusahaan= nama_perusahaan,
+            id_user_id = request.user.id,
+            nama_perusahaan = nama_perusahaan,
             akta_pendirian_badan_usaha = akta,
             nama_pemilik   = nama_pemilik,
             foto_pemilik   = foto_pemilik,
@@ -78,6 +88,15 @@ def form_data_perusahaan(request):
         return render(request, 'pengembang_pelaporan/form_data_perusahaan.html')
 
 def form_data_proyek(request):
+
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
+    except:
+        message = "Anda belum mempunyai data perusahaan"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if request.method == 'POST':
         lokasi_proyek = request.POST['lokasi']
         luas_total_area_proyek = request.POST['luas_total_area_proyek']
@@ -86,7 +105,7 @@ def form_data_proyek(request):
         jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
         target_pembangunan = request.POST['target_pembangunan']
         
-        id_data_perusahaan = 1
+        id_data_perusahaan = dataPerusahaan.id_data_perusahaan
         
         # POST data upload here
         dataProyek = DataProyek.objects.create(
@@ -105,8 +124,6 @@ def form_data_proyek(request):
             return redirect('tipe_rumah_susun', id=dataProyek.id_data_proyek)
 
     else:
-        id = 1
-        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
         is_verified = dataPerusahaan.verified_admin
         if is_verified:
             return render(request, 'pengembang_pelaporan/form_data_proyek.html')
@@ -114,7 +131,15 @@ def form_data_proyek(request):
             return redirect('tunggu_verifikasi_perusahaan')
 
 def form_data_perizinan(request, id):
-    data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if request.method == 'POST':
         site_plan = request.FILES['site_plan']
         ukl_upl = request.FILES['ukl_upl']
@@ -141,7 +166,15 @@ def form_data_perizinan(request, id):
             return redirect('detail_proyek', id=id)
 
 def tipe_rumah_tapak(request, id):
-    data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if request.method == 'POST':
         jumlah_tipe = int(request.POST['jumlah_tipe'])
         rumahTapak = []
@@ -175,7 +208,15 @@ def tipe_rumah_tapak(request, id):
             return redirect('detail_proyek', id=id)
 
 def tipe_rumah_susun(request, id):
-    data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if request.method == 'POST':
         jumlah_tipe = int(request.POST['jumlah_tipe'])
         rumahSusun = []
@@ -209,7 +250,15 @@ def tipe_rumah_susun(request, id):
 
 # Jenis PSU FIX
 def jenis_psu(request, id):
-    data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        data_proyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if request.method == 'POST':
         my_input = []
         for i in range(1, 22):
@@ -258,8 +307,15 @@ def jenis_psu(request, id):
 #### Read on database code
 
 def detail_perusahaan(request):
-    id = 1
-    dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
+    except:
+        message = "Anda belum mempunyai data perusahaan"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     ktpCheck = 0
     aktaCheck = 0
     if dataPerusahaan.ktp_pemilik.url[-4:].lower() == ".pdf":
@@ -269,20 +325,52 @@ def detail_perusahaan(request):
     return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan, 'ktpCheck' : ktpCheck, 'aktaCheck' : aktaCheck})
 
 def list_proyek(request):
-    id = 1
-    query = DataProyek.objects.filter(id_data_perusahaan_id=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+    query = DataProyek.objects.filter(id_data_perusahaan_id=dataPerusahaan.id_data_perusahaan)
     return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : id})
 
 def folder_proyek(request, id):
-    entry = DataProyek.objects.get(id_data_proyek = id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        entry = DataProyek.objects.get(id_data_proyek = id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     return render(request, 'pengembang_pelaporan/folder_proyek.html', {'entry' : entry})
 
 def detail_proyek(request, id):
-    dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek})
 
 def detail_tipe_rumah(request, id):
-    dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if dataProyek.jenis_produk == "Rumah Tapak":
         try:
             query = RumahTapak.objects.filter(id_data_proyek_id=id)
@@ -297,6 +385,10 @@ def detail_tipe_rumah(request, id):
             return redirect('tipe_rumah_susun', id=id)
 
 def detail_jenis_psu(request, id):
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
     try:
         entry = JenisPsu.objects.get(id_data_proyek_id = id)
         dataProyek = DataProyek.objects.get(id_data_proyek = id)
@@ -304,6 +396,10 @@ def detail_jenis_psu(request, id):
     except:
         return redirect('jenis_psu', id=id)
 def detail_perizinan(request, id):
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
     try:
         entry = DataPerizinan.objects.get(id_data_proyek_id = id)
     
@@ -331,7 +427,16 @@ def detail_perizinan(request, id):
 
 ## update data perusahaan FIX
 def update_data_perusahaan(request, id):
-    dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+    except:
+        message = "Anda belum mempunyai data perusahaan"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method == 'POST':
         nama_perusahaan = request.POST['nama_perusahaan']
         nama_pemilik = request.POST['nama_pemilik']
@@ -385,7 +490,16 @@ def update_data_perusahaan(request, id):
 
 ## update data proyek FIX
 def update_data_proyek(request, id):
-    dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data proyek"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method == 'POST':
         lokasi_proyek = request.POST['lokasi']
         luas_total_area_proyek = request.POST['luas_total_area_proyek']
@@ -417,7 +531,16 @@ def update_data_proyek(request, id):
 
 # update data perizinan FIX
 def update_data_perizinan(request, id):
-    dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
+    except:
+        message = "Anda belum mempunyai data perizinan"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method == 'POST':
 
         ## Check file ada yang diupload atau tidak
@@ -457,7 +580,16 @@ def update_data_perizinan(request, id):
             return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan})
 
 def update_jenis_psu(request, id):
-    daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    try:
+        daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
+    except:
+        message = "Anda belum mempunyai data jenis psu"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method == 'POST':
         my_input = []
         for i in range(1, 22):
@@ -503,7 +635,16 @@ def update_jenis_psu(request, id):
 
 ## update data rumah susun FIX
 def update_tipe_rumah_susun(request, id):
-    rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
+    except:
+        message = "Anda belum mempunyai data tipe rumah susun"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method=='POST':
         tipe_rumah_susun = request.POST['tipe_rumah_susun']
         lb_rumah_susun = request.POST['luas_bangunan']
@@ -528,7 +669,16 @@ def update_tipe_rumah_susun(request, id):
 
 ## update data rumah tapak FIX
 def update_tipe_rumah_tapak(request, id):
-    rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    try:
+        rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
+    except:
+        message = "Anda belum mempunyai data tipe rumah tapak"
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+
     if request.method=='POST':
         tipe_rumah_tapak = request.POST['tipe_rumah_tapak']
         lb_rumah_tapak = request.POST['lb_rumah_tapak']
@@ -553,6 +703,10 @@ def update_tipe_rumah_tapak(request, id):
             return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})
 
 def tunggu_verifikasi_perusahaan(request):
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
     return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html')
 
 

@@ -16,6 +16,10 @@ DEFAULT_MEDIA_PATH = os.getcwd() + '/media'
 
 # Create your views here.
 def index(request):
+
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     return render(request, 'admin_pelaporan/index_admin_pelaporan.html')
 
 def generate_username(request):
@@ -29,10 +33,18 @@ def generate_username(request):
         return render(request, 'admin_pelaporan/generate_username.html')
 
 def listing_perusahaan(request):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+
     all_entries = DataPerusahaan.objects.all()
     return render(request, 'admin_pelaporan/list_perusahaan.html', {'all_entries' : all_entries})
 
 def read_perusahaan(request, id):
+   
+    if not request.user.is_superuser:
+        return redirect('/')
+
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
     
     ktpPDF = 0
@@ -46,6 +58,10 @@ def read_perusahaan(request, id):
     return render(request, 'admin_pelaporan/read_perusahaan.html', {'entry' : entry, 'ktpPDF' : ktpPDF, 'aktaPDF' : aktaPDF})
 
 def listing_proyek(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     query = DataProyek.objects.filter(id_data_perusahaan_id = id)
     all_entries = [] 
     for temp in query.all():
@@ -53,15 +69,27 @@ def listing_proyek(request, id):
     return render(request, 'admin_pelaporan/list_proyek.html', {'all_entries' : all_entries, 'id_data_perusahaan' : id})
 
 def folder_proyek(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     entry = DataProyek.objects.get(id_data_proyek = id)
     return render(request, 'admin_pelaporan/folder_proyek.html', {'entry' : entry})
 
 def read_proyek(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+
     entry = DataProyek.objects.get(id_data_proyek = id)
 
     return render(request, 'admin_pelaporan/read_proyek.html', {'entry' : entry})
 
 def read_tipe_rumah(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     entry = DataProyek.objects.get(id_data_proyek = id)
 
     if entry.jenis_produk == "Rumah Tapak":
@@ -91,6 +119,10 @@ def read_tipe_rumah(request, id):
             return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
 
 def read_jenis_psu(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     try:
         entry = JenisPsu.objects.get(id_data_proyek_id = id)
         return render(request, 'admin_pelaporan/read_jenis_psu.html', {'entry' : entry})
@@ -100,6 +132,10 @@ def read_jenis_psu(request, id):
         return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
     
 def read_perizinan(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     try:
         entry = DataPerizinan.objects.get(id_data_proyek_id = id)
         
@@ -124,10 +160,18 @@ def read_perizinan(request, id):
         return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
 
 def listing_perizinan(request):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     all_entries = DataPerizinan.objects.all()
     return render(request, 'admin_pelaporan/list_perizinan.html', {'all_entries' : all_entries})
 
 def kirim_notifikasi(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
     if request.method == 'POST':
         isi_notifikasi = request.POST['notifikasi']
@@ -147,32 +191,60 @@ def kirim_notifikasi(request, id):
         return render(request, 'admin_pelaporan/kirim_notifikasi.html', {'entry': entry})
 
 def verifikasi_perusahaan_berhasil(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     DataPerusahaan.objects.filter(id_data_perusahaan=id).update(verified_admin=True)
     return render(request, 'admin_pelaporan/verifikasi_perusahaan_berhasil.html', {'entry': id})
 
 def verifikasi_data_proyek(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_data_proyek=True)
     return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
 
 def verifikasi_data_tipe_rumah(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_tipe_rumah=True)
     return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
 
 def verifikasi_data_perizinan(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_data_perizinan=True)
     return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
 
 def verifikasi_data_psu(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     DataProyek.objects.filter(id_data_proyek = id).update(verified_admin_jenis_psu=True)
     return redirect('/admin_pelaporan/verifikasi_proyek_berhasil/'+str(id))
 
 def verifikasi_proyek_berhasil(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     return render(request, 'admin_pelaporan/verifikasi_proyek_berhasil.html', {'entry': id})
 
 
 ## Delete on database
 
 def delete_data_perusahaan(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
 
@@ -198,6 +270,10 @@ def delete_data_perusahaan(request, id):
         return redirect('listing_perusahaan')
 
 def delete_data_proyek(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
         if(dataProyek.verified_data_perizinan):
@@ -207,6 +283,10 @@ def delete_data_proyek(request, id):
         return redirect('listing_proyek', id_data_perusahaan)
 
 def delete_data_perizinan(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         function_delete_file_data_perizinan(id)
         DataPerizinan.objects.filter(id_data_proyek_id=id).delete()
@@ -217,6 +297,10 @@ def delete_data_perizinan(request, id):
         return redirect('folder_proyek', id)
 
 def delete_jenis_psu(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         JenisPsu.objects.filter(id_data_proyek_id=id).delete()
         DataProyek.objects.filter(id_data_proyek=id).update(
@@ -226,6 +310,10 @@ def delete_jenis_psu(request, id):
         return redirect('folder_proyek', id)
 
 def delete_tipe_rumah_tapak(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
         id_data_proyek = rumahTapak.id_data_proyek_id
@@ -238,6 +326,10 @@ def delete_tipe_rumah_tapak(request, id):
         return redirect('read_tipe_rumah', id_data_proyek)
 
 def delete_tipe_rumah_susun(request, id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         rumahSusun = RumahSusun.objects.get(id_rumah_tapak=id)
         id_data_proyek = rumahSusun.id_data_proyek_id
@@ -250,6 +342,10 @@ def delete_tipe_rumah_susun(request, id):
         return redirect('read_tipe_rumah', id_data_proyek)
 
 def function_delete_file_data_perizinan(id):
+    
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
 
     ## Delete file yang ada START
