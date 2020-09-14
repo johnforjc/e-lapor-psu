@@ -261,7 +261,7 @@ def jenis_psu(request, id):
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if request.method == 'POST':
         my_input = []
-        for i in range(1, 22):
+        for i in range(1, 23):
             if request.POST.get('inputPSU_'+str(i), False):
                 my_input.append(request.POST.get('inputPSU_'+str(i)))
             else:
@@ -289,6 +289,7 @@ def jenis_psu(request, id):
             jaringan_transportasi = my_input[18],
             pemadam_kebakaran = my_input[19],
             sarana_penerangan_jalan_umum = my_input[20],
+            detail_lainnya = my_input[21],
             id_data_proyek_id = id,
         )
 
@@ -592,7 +593,7 @@ def update_jenis_psu(request, id):
 
     if request.method == 'POST':
         my_input = []
-        for i in range(1, 22):
+        for i in range(1, 23):
             if request.POST.get('inputPSU_'+str(i), False):
                 my_input.append(request.POST.get('inputPSU_'+str(i)))
             else:
@@ -620,6 +621,7 @@ def update_jenis_psu(request, id):
             jaringan_transportasi = my_input[18],
             pemadam_kebakaran = my_input[19],
             sarana_penerangan_jalan_umum = my_input[20],
+            detail_lainnya = my_input[21],
             id_data_proyek_id = id,
         )
 

@@ -67,6 +67,7 @@ class JenisPsu(models.Model):
     jaringan_transportasi = models.FloatField(default=0)
     pemadam_kebakaran = models.FloatField(default=0)
     sarana_penerangan_jalan_umum = models.IntegerField(default=0)
+    detail_lainnya = models.TextField()
 
 class RumahTapak(models.Model):
     id_rumah_tapak = models.AutoField(primary_key=True)
