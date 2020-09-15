@@ -625,7 +625,7 @@ def update_jenis_psu(request, id):
             id_data_proyek_id = id,
         )
 
-        return redirect('detail_proyek',  id=id)
+        return redirect('detail_jenis_psu',  id=id)
 
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)

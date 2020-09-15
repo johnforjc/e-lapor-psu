@@ -158,13 +158,27 @@
                                 
                             </div>
                         </div>
+                        
+                        {% if entry.detail_lainnya != '0' %}
+                        <div class="row" id="read-row">
+                            <h2 class="sub-header"> Lainnya </h2>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="detail-text">
+                                    <p class="read-details">{{entry.detail_lainnya}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
 
                         <div class="row" id="admin-verify-back">
                             {% if isVerified %}
                                 <div class="btn btn-primary">Data anda telah diverifikasi</div>
                             {% else %}
                                 <a href="{% url 'update_jenis_psu' entry.id_data_proyek_id %}" class="btn btn-primary"> Update Jenis PSU </a>
-                            {% endif%}
+                            {% endif %}
                         </div>
 
                         <div class="row" id="admin-verify-back">

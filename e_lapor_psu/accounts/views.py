@@ -46,7 +46,10 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            if user.is_superuser == 1:
+                return redirect('index')
+            else:
+                return redirect('/')
         else:
             messages.error(request, "PASSWORD SALAH ATAU AKUN TIDAK DITEMUKAN")
             return redirect('login')
