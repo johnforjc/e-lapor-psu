@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.contrib.auth.models import User, auth
+
 from .models import DataPerusahaan
 from .models import DataPerizinan
 from .models import DataProyek
