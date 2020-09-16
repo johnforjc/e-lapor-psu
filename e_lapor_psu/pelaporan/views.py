@@ -36,6 +36,10 @@ def update_notification(request, id):
 # Create your views here.
 
 def index_lapor_pengembang(request):
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
+
     print('------------------------------------------')
     path = os.getcwd()
     print(path)
@@ -49,6 +53,9 @@ def form_data_perusahaan(request):
 
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     if DataPerusahaan.objects.filter(id_user_id=request.user.id):
         message = "Anda hanya bisa memiliki 1 data perusahaan"
@@ -92,6 +99,9 @@ def form_data_proyek(request):
 
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
@@ -136,6 +146,9 @@ def form_data_perizinan(request, id):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    if request.user.is_superuser == 1:
+        return redirect('index')
+
     try:
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
     except:
@@ -170,6 +183,9 @@ def tipe_rumah_tapak(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     try:
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
@@ -213,6 +229,9 @@ def tipe_rumah_susun(request, id):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    if request.user.is_superuser == 1:
+        return redirect('index')
+
     try:
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
     except:
@@ -254,6 +273,9 @@ def jenis_psu(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     try:
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
@@ -312,6 +334,9 @@ def detail_perusahaan(request):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
@@ -330,6 +355,9 @@ def list_proyek(request):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     try:
         dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
@@ -356,6 +384,9 @@ def detail_proyek(request, id):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    if request.user.is_superuser == 1:
+        return redirect('index')
+
     try:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
     except:
@@ -367,6 +398,9 @@ def detail_tipe_rumah(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     try:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
@@ -390,6 +424,9 @@ def detail_jenis_psu(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         entry = JenisPsu.objects.get(id_data_proyek_id = id)
@@ -401,6 +438,9 @@ def detail_perizinan(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     try:
         entry = DataPerizinan.objects.get(id_data_proyek_id = id)
@@ -432,6 +472,9 @@ def update_data_perusahaan(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
@@ -495,6 +538,9 @@ def update_data_proyek(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
@@ -536,6 +582,9 @@ def update_data_perizinan(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
@@ -585,6 +634,9 @@ def update_jenis_psu(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
     
     try:
         daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
@@ -642,6 +694,9 @@ def update_tipe_rumah_susun(request, id):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    if request.user.is_superuser == 1:
+        return redirect('index')
+
     try:
         rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
     except:
@@ -676,6 +731,9 @@ def update_tipe_rumah_tapak(request, id):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    if request.user.is_superuser == 1:
+        return redirect('index')
+
     try:
         rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
     except:
@@ -709,6 +767,9 @@ def tunggu_verifikasi_perusahaan(request):
     
     if not request.user.is_authenticated:
         return redirect('/')
+
+    if request.user.is_superuser == 1:
+        return redirect('index')
 
     return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html')
 
