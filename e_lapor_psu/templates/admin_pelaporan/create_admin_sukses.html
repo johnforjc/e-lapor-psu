@@ -1,0 +1,38 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+    {% load static %}
+
+    <div class="main" id="verifikasi-berhasil">
+        <div class="container-verifikasi-berhasil">
+            <div class="content">
+                <div class="listing-details">
+                
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content-logo">
+                        <img src="{% static 'images/success.png' %}" class="berhasil-logo">
+                    </div>
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content">
+                        <h1 class="verifikasi-berhasil-text">Admin Berhasil Dibuat</h1>
+                    </div>
+
+                    <div class="verifikasi-info">
+                        <p class="verifikasi-info-text"> Admin baru telah ditambahkan </p>
+                        <p class="verifikasi-info-text"> Username : {{username}} </p>
+                        <p class="verifikasi-info-text"> Password : {{password}} </p>
+                    </div>
+
+
+
+                    <div class="listing-content-details" id="verifikasi-berhasil-content">
+                        <a href="{% url '/' %}" class="btn btn-secondary"> Kembali ke Beranda </a>
+                    </div>
+
+                </div>     
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

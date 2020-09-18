@@ -22,12 +22,15 @@ def index(request):
     
     return render(request, 'admin_pelaporan/index_admin_pelaporan.html')
 
-def generate_username(request):
+def generate_admin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print(username+' '+password)
-        return render(request, 'admin_pelaporan/generate_username.html')
+        
+        create_superuser(username, email=None, password=password)
+
+        return render(request, 'admin_pelaporan/create_admin_sukses.html', {'username':username, 'password':password})
+        # return render(request, 'admin_pelaporan/generate_username.html')
         
     else:
         return render(request, 'admin_pelaporan/generate_username.html')
