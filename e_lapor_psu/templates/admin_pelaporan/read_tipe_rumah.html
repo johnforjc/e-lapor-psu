@@ -39,17 +39,12 @@
                                             <p class="read-details">{{rumahTapak.jumlah_unit_rumah_tapak}} Unit</p>
                                         </div>
 
-                                        <form action="{% url 'delete_tipe_rumah_tapak' rumahTapak.id_rumah_tapak %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
-                                        </form>
-
                                     </div>
                                 </div>
                                 <hr>
 
                             {% endfor %}
-
+                            
                         {% else %}
 
                             <h1 class="header"> Rincian Rumah Susun </h1>
@@ -74,11 +69,6 @@
                                             <p class="read-details">{{rumahSusun.jumlah_unit_rumah_susun}} Unit</p>
                                         </div>
 
-                                        <form action="{% url 'delete_tipe_rumah_susun' rumahSusun.id_rumah_susun %}" method="POST" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
-                                        </form>
-
                                     </div>
                                 </div>
                                 <hr>
@@ -88,6 +78,17 @@
                         {% endif %}
 
                         <div class="row" id="admin-verify-back">
+                            {% if entry.jenis_produk == "Rumah Tapak" %}
+                                <form action="{% url 'delete_tipe_rumah_tapak' id_data_proyek %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
+                                </form>
+                            {% else %}
+                                <form action="{% url 'delete_tipe_rumah_susun' id_data_proyek %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
+                                </form>
+                            {% endif %}
                             <a href="{% url 'verifikasi_data_tipe_rumah' entry.id_data_proyek %}" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
                             <a href="{% url 'folder_proyek' entry.id_data_proyek %}" class="btn btn-secondary"> Kembali ke Folder Proyek </a>
                         </div>

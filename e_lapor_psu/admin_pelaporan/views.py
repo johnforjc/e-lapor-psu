@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 from pelaporan.models import DataProyek
 from pelaporan.models import DataPerusahaan
 from pelaporan.models import DataPerizinan
@@ -23,17 +25,38 @@ def index(request):
     return render(request, 'admin_pelaporan/index_admin_pelaporan.html')
 
 def generate_admin(request):
+
+    if not request.user.is_superuser:
+        return redirect('/')
+    
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password']
-        
-        create_superuser(username, email=None, password=password)
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
 
-        return render(request, 'admin_pelaporan/create_admin_sukses.html', {'username':username, 'password':password})
-        # return render(request, 'admin_pelaporan/generate_username.html')
-        
+        if password1 == password2:
+            if User.objects.filter(username = username).exists():
+                messages.error(request, 'USERNAME TELAH TERPAKAI, MOHON MENGGUNAKAN USERNAME LAIN')
+                return redirect('generate_admin')
+            elif User.objects.filter(email = email).exists():
+                messages.error(request, 'EMAIL TELAH TERPAKAI, MOHON MENGGUNAKAN EMAIL LAIN')
+                return redirect('generate_admin')
+            else:
+                user = User.objects.create_superuser(
+                    username = username,
+                    email = email,
+                    password = password1
+                )
+                user.save()
+
+                return render(request, 'admin_pelaporan/create_admin_sukses.html', {'username':username, 'email' : email, 'password':password1})
+
+        else:
+            messages.error(request, "PASSWORD TIDAK SAMA, SILAHAKAN MENGECEK ULANG PASSWORD")
+            return redirect('generate_admin')
     else:
-        return render(request, 'admin_pelaporan/generate_username.html')
+        return render(request, 'admin_pelaporan/generate_admin.html')
 
 def listing_perusahaan(request):
     
@@ -106,7 +129,7 @@ def read_tipe_rumah(request, id):
             message = "Rincian rumah tapak yang anda cari kosong atau telah dihapus"
             return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
         else:
-            return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahTapaks': rumahTapaks})
+            return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahTapaks' : rumahTapaks, 'id_data_proyek' : id})
 
     elif entry.jenis_produk == "Rumah Susun":
         query = RumahSusun.objects.filter(id_data_proyek_id=id)
@@ -119,7 +142,7 @@ def read_tipe_rumah(request, id):
             message = "Rincian rumah susun yang anda cari kosong atau telah dihapus"
             return render(request, 'admin_pelaporan/error_kosong.html', {'entry': entry, 'message': message})
         else:
-            return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns})
+            return render(request, 'admin_pelaporan/read_tipe_rumah.html', {'entry' : entry, 'rumahSusuns': rumahSusuns, 'id_data_proyek' : id})
 
 def read_jenis_psu(request, id):
     
@@ -318,15 +341,12 @@ def delete_tipe_rumah_tapak(request, id):
         return redirect('/')
     
     if request.method == 'POST':
-        rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
-        id_data_proyek = rumahTapak.id_data_proyek_id
-        rumahTapak.delete()
-        if not RumahTapak.objects.filter(id_data_proyek_id=id_data_proyek):
-            DataProyek.objects.filter(id_data_proyek=id).update(
-                verified_tipe_rumah = False,
-                verified_admin_tipe_rumah = False
-            )
-        return redirect('read_tipe_rumah', id_data_proyek)
+        RumahTapak.objects.filter(id_data_proyek_id=id).delete()
+        DataProyek.objects.filter(id_data_proyek=id).update(
+            verified_tipe_rumah = False,
+            verified_admin_tipe_rumah = False
+        )
+        return redirect('folder_proyek', id)
 
 def delete_tipe_rumah_susun(request, id):
     
@@ -334,20 +354,14 @@ def delete_tipe_rumah_susun(request, id):
         return redirect('/')
     
     if request.method == 'POST':
-        rumahSusun = RumahSusun.objects.get(id_rumah_tapak=id)
-        id_data_proyek = rumahSusun.id_data_proyek_id
-        rumahSusun.delete()
-        if not RumahSusun.objects.filter(id_data_proyek_id=id_data_proyek):
-            DataProyek.objects.filter(id_data_proyek=id).update(
-                verified_tipe_rumah = False,
-                verified_admin_tipe_rumah = False
-            )
-        return redirect('read_tipe_rumah', id_data_proyek)
+        RumahSusun.objects.filter(id_data_proyek_id=id).delete()
+        DataProyek.objects.filter(id_data_proyek=id).update(
+            verified_tipe_rumah = False,
+            verified_admin_tipe_rumah = False
+        )
+        return redirect('folder_proyek', id)
 
 def function_delete_file_data_perizinan(id):
-    
-    if not request.user.is_superuser:
-        return redirect('/')
     
     dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
 

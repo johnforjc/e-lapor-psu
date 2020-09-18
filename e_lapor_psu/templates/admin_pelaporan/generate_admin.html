@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+
+            <form action="{% url 'generate_admin' %}" method="POST" enctype="multipart/form-data" class="register-form">
+
+                {% csrf_token %}
+
+                <div class="header-border-register">
+                    <h1 class="register-header-text"> Register Admin </h1>
+                </div>
+
+                <div class="border-register">
+
+                    <div class="form-row-register">
+                        <div class="form-group-register">
+
+                            {% if messages %}
+                                {% for message in messages %}
+
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                        <div class="alert alert-danger" role="alert" id="alert-box-register">
+                                            {{ message }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                        <div class="alert alert-success" role="alert" id="alert-box-register">
+                                            {{ message }}
+                                        </div>
+                                    {% endif %}
+                                    
+                                {% endfor %}
+                            {% endif %}
+                            
+                            <div class="form-input">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" required/>
+                            </div>
+
+                            <div class="form-input">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" required/>
+                            </div>
+
+                            <div class="form-input">
+                                <label for="password1">Password</label>
+                                <input type="password" name="password1" id="password1" required/>
+                            </div>
+
+                            <div class="form-input">
+                                <label for="password2">Confirm Password</label>
+                                <input type="password" name="password2" id="password2" required/>
+                            </div>
+                            
+                            <div class="form-submit-register">
+                                <input type="submit" value="Next" class="submit" id="register-submit" name="submit" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
