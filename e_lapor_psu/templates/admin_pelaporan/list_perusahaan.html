@@ -24,6 +24,16 @@
                                         <h6 id="details"><b>Email: </b>{{entry.email}}</h6>
                                         <h6 id="details"><b>Website: </b>{{entry.website}}</h6>
                                     </div>
+           
+                                    {% if entry.verified_admin == 1 %}
+                                        <div class="row" id="proyek-folder-row">
+                                            <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
+                                        </div>
+                                    {% else %}
+                                        <div class="row" id="proyek-folder-row">
+                                            <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
+                                        </div>
+                                    {% endif %}
                                     
                                 </div>
                             </div>

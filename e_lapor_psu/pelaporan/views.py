@@ -408,16 +408,16 @@ def detail_tipe_rumah(request, id):
         message = "Anda belum mempunyai data proyek"
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
     if dataProyek.jenis_produk == "Rumah Tapak":
-        try:
-            query = RumahTapak.objects.filter(id_data_proyek_id=id)
-            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
-        except:
+        query = RumahTapak.objects.filter(id_data_proyek_id=id)
+        if query:
+            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})        
+        else:
             return redirect('tipe_rumah_tapak', id=id)
     elif dataProyek.jenis_produk == "Rumah Susun":
-        try:
-            query = RumahSusun.objects.filter(id_data_proyek_id=id)
+        query = RumahSusun.objects.filter(id_data_proyek_id=id)
+        if query:
             return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
-        except:
+        else:    
             return redirect('tipe_rumah_susun', id=id)
 
 def detail_jenis_psu(request, id):
