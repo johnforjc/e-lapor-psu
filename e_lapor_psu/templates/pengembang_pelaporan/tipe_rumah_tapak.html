@@ -52,8 +52,12 @@
                     <input type="text" name="jumlah_tipe" id="jumlah_tipe" value="{{jumlah_tipe}}" hidden/>
                     <input type="submit" value="Next" class="submit" id="submit-tipe" name="submit" />
                 </div>
-
+                
+                <div class="row" id="admin-verify-back">
+                    <a href="{% url 'update_data_proyek' id_data_proyek 1 %}" class="btn btn-secondary">Back</a>
+                </div>
             </form>
+
         </div>
     </div>
 

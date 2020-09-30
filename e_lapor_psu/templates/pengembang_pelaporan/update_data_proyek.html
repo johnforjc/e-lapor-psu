@@ -54,7 +54,13 @@
                         </div>
                         <div class="form-submit">
                             <input type="text" name="id_data_perusahaan" id="id_data_perusahaan" value="{{dataProyek.id_data_perusahaan_id}}" hidden/>
-                            <input type="submit" value="Update" class="submit" id="submit-single" name="submit" />
+
+                            {% if is_back == 1 %}
+                                <input type="submit" value="Next" class="submit" id="submit-single" name="submit" />
+                            {% else %}
+                                <input type="submit" value="Update" class="submit" id="submit-single" name="submit" />
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>

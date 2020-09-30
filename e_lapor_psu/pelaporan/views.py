@@ -220,7 +220,7 @@ def tipe_rumah_tapak(request, id):
     else:
         if data_proyek.verified_tipe_rumah == False:
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
-            return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe})
+            return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -264,7 +264,7 @@ def tipe_rumah_susun(request, id):
     else:
         if data_proyek.verified_tipe_rumah == False:
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
-            return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe})
+            return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -323,7 +323,7 @@ def jenis_psu(request, id):
 
     else:
         if data_proyek.verified_jenis_psu == False:
-            return render(request, 'pengembang_pelaporan/jenis_psu.html')
+            return render(request, 'pengembang_pelaporan/jenis_psu.html', {'dataProyek' : data_proyek})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -434,6 +434,7 @@ def detail_jenis_psu(request, id):
         return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry, 'isVerified' : dataProyek.verified_admin_jenis_psu})
     except:
         return redirect('jenis_psu', id=id)
+        
 def detail_perizinan(request, id):
     
     if not request.user.is_authenticated:
@@ -534,7 +535,7 @@ def update_data_perusahaan(request, id):
             return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan})
 
 ## update data proyek FIX
-def update_data_proyek(request, id):
+def update_data_proyek(request, id, is_back):
     
     if not request.user.is_authenticated:
         return redirect('/')
@@ -569,13 +570,20 @@ def update_data_proyek(request, id):
             jumlah_tipe_rumah = jumlah_tipe_rumah,
             target_pembangunan = target_pembangunan,
         )
-        return redirect('detail_proyek', id=id)
+
+        if is_back == 1:
+            if jenis_produk == "Rumah Tapak":
+                return redirect('tipe_rumah_tapak', id=id)
+            elif jenis_produk == "Rumah Susun":
+                return redirect('tipe_rumah_susun', id=id)
+        else:
+            return redirect('detail_proyek', id=id)
 
     else:
         if dataProyek.verified_admin_data_proyek:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek})
+            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek, 'is_back' : is_back})
 
 # update data perizinan FIX
 def update_data_perizinan(request, id):
@@ -715,10 +723,9 @@ def update_tipe_rumah_susun(request, id):
             jumlah_unit_rumah_susun = jumlah_unit_rumah_susun,
             id_data_proyek_id = id_data_proyek,
         )
-
         return redirect('detail_tipe_rumah', id=id_data_proyek)
     else:
-        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        dataProyek = DataProyek.objects.get(id_data_proyek=rumahSusun.id_data_proyek_id)
         if dataProyek.verified_admin_tipe_rumah:
             return redirect('/')
         else:
@@ -757,7 +764,7 @@ def update_tipe_rumah_tapak(request, id):
         return redirect('detail_tipe_rumah', id=id_data_proyek)
     
     else:
-        dataProyek = DataProyek.objects.get(id_data_proyek=id)
+        dataProyek = DataProyek.objects.get(id_data_proyek=rumahTapak.id_data_proyek_id)
         if dataProyek.verified_admin_tipe_rumah:
             return redirect('/')
         else:

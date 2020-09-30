@@ -51,7 +51,7 @@
                             {% if dataProyek.verified_admin_data_proyek %}
                                 <div class="btn btn-primary">Data anda telah diverifikasi</div>
                             {% else %}
-                                <a href="{% url 'update_data_proyek' dataProyek.id_data_proyek %}" class="btn btn-primary"> Update Data Proyek </a>
+                                <a href="{% url 'update_data_proyek' dataProyek.id_data_proyek 0 %}" class="btn btn-primary"> Update Data Proyek </a>
                             {% endif%}
                         </div>
 
