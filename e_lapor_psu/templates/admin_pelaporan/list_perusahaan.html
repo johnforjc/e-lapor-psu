@@ -13,8 +13,17 @@
                         <div class="col-md-12">
                             <div class="listing listing-radius">
                                 <div class="listing-content">
-                                    <h3 class="list-title">{{entry.nama_perusahaan}}</h3>
+                                    <div> 
+                                        <h3 class="list-title">{{entry.nama_perusahaan}}</h3>
 
+                                        {% if entry.verified_admin == 1 %}
+                                            <button class="btn btn-primary" id="verified-tag-list"> Sudah Diverifikasi </button>
+                                        {% else %}
+                                            <button class="btn btn-secondary" id="verified-tag-list"> Belum Diverifikasi </button>         
+                                        {% endif %}
+                                        
+                                    </div>
+                                   
                                     <div id="group">
                                         <h6 id="details"><b>Bentuk Perusahaan: </b>{{entry.bentuk_perusahaan}}</h6>
                                         <h6 id="details"><b>Alamat Perusahaan: </b>{{entry.alamat_perusahaan}}</h6>
@@ -25,16 +34,6 @@
                                         <h6 id="details"><b>Website: </b>{{entry.website}}</h6>
                                     </div>
            
-                                    {% if entry.verified_admin == 1 %}
-                                        <div class="row" id="proyek-folder-row">
-                                            <button class="btn btn-primary" id="verified-tag"> Sudah Diverifikasi </button>
-                                        </div>
-                                    {% else %}
-                                        <div class="row" id="proyek-folder-row">
-                                            <button class="btn btn-secondary" id="verified-tag"> Belum Diverifikasi </button>
-                                        </div>
-                                    {% endif %}
-                                    
                                 </div>
                             </div>
                         </div>
