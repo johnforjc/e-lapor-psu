@@ -23,7 +23,7 @@ urlpatterns = [
 
     ## Update database
     path('update_data_perusahaan/<int:id>/', views.update_data_perusahaan, name='update_data_perusahaan'),
-    path('update_data_proyek/<int:id>/<int:is_back>/', views.update_data_proyek, name='update_data_proyek'),
+    path('update_data_proyek/<int:id>/', views.update_data_proyek, name='update_data_proyek'),
     path('update_data_perizinan/<int:id>/', views.update_data_perizinan, name='update_data_perizinan'),
     path('update_jenis_psu/<int:id>/', views.update_jenis_psu, name='update_jenis_psu'),
 
