@@ -149,7 +149,7 @@
 
                         <!-- Sudah Login -->
                         <li class="nav-item dropdown">
-                            {% if notification.count > 0 %}
+                            {% if new_notification.count > 0 %}
                             <div class="nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="{{ new_notification.count }}" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="bell-img" src="{% static 'images/bell-custom.png' %}" alt="">
                                 <div class="notification-text">Notifikasi</div>
@@ -185,6 +185,26 @@
                             <div class="nav-link text-white mybell nav-link" id="idBell" aria-hidden="true" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="bell-img" src="{% static 'images/bell-custom.png' %}" alt="">
                                 <div class="notification-text">Notifikasi</div>
+                                <div class="dropdown-menu dropdown-menu-right notification-div" aria-labelledby="navbarDropdown">
+                                    {% for notif in new_notification %}
+                                        <div class="dropdown-item mynotification">
+                                            <h4 class="notification-title">{{notif.subject_notifikasi}}</h4>
+                                            <p>{{notif.isi_notifikasi}}</p>
+                                            <div class="date">
+                                                <small>{{notif.created_at}}</small>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for notif in notification %}
+                                        <div class="dropdown-item mynotification">
+                                            <h4 class="notification-title">{{notif.subject_notifikasi}}</h4>
+                                            <p>{{notif.isi_notifikasi}}</p>
+                                            <div class="date">
+                                                <small>{{notif.created_at}}</small>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                             {% endif %}
                             <!-- <i class="fa fa-bell nav-link text-white mybell countBell nav-link" id="idBell" aria-hidden="true" data-count="1" onclick="remover()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre></i>  -->
