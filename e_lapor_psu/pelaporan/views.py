@@ -29,6 +29,10 @@ def bring_some_notification(id):
     notification = Notifikasi.objects.filter(id_data_perusahaan = id, is_read=False)
     return notification
 
+def bring_some_read_notification(id):
+    notification = Notifikasi.objects.filter(id_data_perusahaan = id, is_read=True).order_by('-created_at')[:5]
+    return notification
+
 def update_notification(request, id):
     notification = Notifikasi.objects.filter(id_data_perusahaan = id).update(is_read=True)
     return HttpResponse(200)
@@ -44,8 +48,13 @@ def index_lapor_pengembang(request):
     path = os.getcwd()
     print(path)
     print('------------------------------------------')
-    notification = bring_some_notification(1)
-    return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html', {'notification': notification})
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    # new_notification = bring_some_notification(1)
+    # notification = bring_some_read_notification(1)
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html', {'notification': notification , 'new_notification':new_notification})
 
 #### Create on database code
 
@@ -59,7 +68,9 @@ def form_data_perusahaan(request):
 
     if DataPerusahaan.objects.filter(id_user_id=request.user.id):
         message = "Anda hanya bisa memiliki 1 data perusahaan"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method == 'POST':
         nama_perusahaan = request.POST['nama_perusahaan']
@@ -93,7 +104,9 @@ def form_data_perusahaan(request):
         return redirect('/')
 
     else:
-        return render(request, 'pengembang_pelaporan/form_data_perusahaan.html')
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/form_data_perusahaan.html', {'notification': notification, 'new_notification':new_notification})
 
 def form_data_proyek(request):
 
@@ -107,7 +120,9 @@ def form_data_proyek(request):
         dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
     except:
         message = "Anda belum mempunyai data perusahaan"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     if request.method == 'POST':
         lokasi_proyek = request.POST['lokasi']
         luas_total_area_proyek = request.POST['luas_total_area_proyek']
@@ -137,7 +152,9 @@ def form_data_proyek(request):
     else:
         is_verified = dataPerusahaan.verified_admin
         if is_verified:
-            return render(request, 'pengembang_pelaporan/form_data_proyek.html')
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/form_data_proyek.html', {'notification': notification, 'new_notification':new_notification})
         else:
             return redirect('tunggu_verifikasi_perusahaan')
 
@@ -153,7 +170,9 @@ def form_data_perizinan(request, id):
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     if request.method == 'POST':
         site_plan = request.FILES['site_plan']
         ukl_upl = request.FILES['ukl_upl']
@@ -175,7 +194,9 @@ def form_data_perizinan(request, id):
 
     else:
         if data_proyek.verified_data_perizinan == False:
-            return render(request, 'pengembang_pelaporan/form_data_perizinan.html')
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/form_data_perizinan.html', {'notification': notification, 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -191,7 +212,9 @@ def tipe_rumah_tapak(request, id):
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     if request.method == 'POST':
         jumlah_tipe = int(request.POST['jumlah_tipe'])
         rumahTapak = []
@@ -220,7 +243,9 @@ def tipe_rumah_tapak(request, id):
     else:
         if data_proyek.verified_tipe_rumah == False:
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
-            return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id,'notification': notification , 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -236,7 +261,9 @@ def tipe_rumah_susun(request, id):
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     if request.method == 'POST':
         jumlah_tipe = int(request.POST['jumlah_tipe'])
         rumahSusun = []
@@ -264,7 +291,9 @@ def tipe_rumah_susun(request, id):
     else:
         if data_proyek.verified_tipe_rumah == False:
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
-            return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id,'notification': notification , 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -281,7 +310,9 @@ def jenis_psu(request, id):
         data_proyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     if request.method == 'POST':
         my_input = []
         for i in range(1, 23):
@@ -323,7 +354,9 @@ def jenis_psu(request, id):
 
     else:
         if data_proyek.verified_jenis_psu == False:
-            return render(request, 'pengembang_pelaporan/jenis_psu.html', {'dataProyek' : data_proyek})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/jenis_psu.html', {'dataProyek' : data_proyek,'notification': notification , 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -342,14 +375,18 @@ def detail_perusahaan(request):
         dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
     except:
         message = "Anda belum mempunyai data perusahaan"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     ktpCheck = 0
     aktaCheck = 0
     if dataPerusahaan.ktp_pemilik.url[-4:].lower() == ".pdf":
         ktpCheck = 1
     if dataPerusahaan.akta_pendirian_badan_usaha.url[-4:].lower() == ".pdf":
         aktaCheck = 1
-    return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan, 'ktpCheck' : ktpCheck, 'aktaCheck' : aktaCheck})
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    return render(request, 'pengembang_pelaporan/detail_perusahaan.html', {'dataPerusahaan' : dataPerusahaan, 'ktpCheck' : ktpCheck, 'aktaCheck' : aktaCheck,'notification': notification , 'new_notification':new_notification})
 
 def list_proyek(request):
     
@@ -363,9 +400,13 @@ def list_proyek(request):
         dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     query = DataProyek.objects.filter(id_data_perusahaan_id=dataPerusahaan.id_data_perusahaan)
-    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : id})
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : id,'notification': notification , 'new_notification':new_notification})
 
 def folder_proyek(request, id):
     
@@ -376,8 +417,12 @@ def folder_proyek(request, id):
         entry = DataProyek.objects.get(id_data_proyek = id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
-    return render(request, 'pengembang_pelaporan/folder_proyek.html', {'entry' : entry})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    return render(request, 'pengembang_pelaporan/folder_proyek.html', {'entry' : entry,'notification': notification , 'new_notification':new_notification})
 
 def detail_proyek(request, id):
     
@@ -391,8 +436,12 @@ def detail_proyek(request, id):
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
-    return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    return render(request, 'pengembang_pelaporan/detail_proyek.html', {'dataProyek' : dataProyek,'notification': notification , 'new_notification':new_notification})
 
 def detail_tipe_rumah(request, id):
     
@@ -406,17 +455,23 @@ def detail_tipe_rumah(request, id):
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
     if dataProyek.jenis_produk == "Rumah Tapak":
         query = RumahTapak.objects.filter(id_data_proyek_id=id)
         if query:
-            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})        
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query,'notification': notification , 'new_notification':new_notification})        
         else:
             return redirect('tipe_rumah_tapak', id=id)
     elif dataProyek.jenis_produk == "Rumah Susun":
         query = RumahSusun.objects.filter(id_data_proyek_id=id)
         if query:
-            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/detail_tipe_rumah.html', {'dataProyek' : dataProyek, 'queries': query,'notification': notification , 'new_notification':new_notification})
         else:    
             return redirect('tipe_rumah_susun', id=id)
 
@@ -431,7 +486,9 @@ def detail_jenis_psu(request, id):
     try:
         entry = JenisPsu.objects.get(id_data_proyek_id = id)
         dataProyek = DataProyek.objects.get(id_data_proyek = id)
-        return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry, 'isVerified' : dataProyek.verified_admin_jenis_psu})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/detail_jenis_psu.html', {'entry' : entry, 'isVerified' : dataProyek.verified_admin_jenis_psu,'notification': notification , 'new_notification':new_notification})
     except:
         return redirect('jenis_psu', id=id)
         
@@ -462,7 +519,9 @@ def detail_perizinan(request, id):
 
         dataProyek = DataProyek.objects.get(id_data_proyek = id)
 
-        return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'isVerified' : dataProyek.verified_admin_data_perizinan, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/detail_perizinan.html', {'entry': entry, 'isVerified' : dataProyek.verified_admin_data_perizinan, 'sitePlanPDF': sitePlanPDF, 'uklUplPDF': uklUplPDF, 'izinMendirikanPDF': izinMendirikanPDF, 'izinPenggunaanPDF': izinPenggunaanPDF,'notification': notification , 'new_notification':new_notification})
     except:
         return redirect('form_data_perizinan', id=id)
 
@@ -481,7 +540,9 @@ def update_data_perusahaan(request, id):
         dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
     except:
         message = "Anda belum mempunyai data perusahaan"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method == 'POST':
         nama_perusahaan = request.POST['nama_perusahaan']
@@ -532,7 +593,9 @@ def update_data_perusahaan(request, id):
         if dataPerusahaan.verified_admin:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan,'notification': notification , 'new_notification':new_notification})
 
 ## update data proyek FIX
 def update_data_proyek(request, id, is_back):
@@ -547,7 +610,9 @@ def update_data_proyek(request, id, is_back):
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data proyek"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method == 'POST':
         lokasi_proyek = request.POST['lokasi']
@@ -583,7 +648,9 @@ def update_data_proyek(request, id, is_back):
         if dataProyek.verified_admin_data_proyek:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek, 'is_back' : is_back})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek, 'is_back' : is_back,'notification': notification , 'new_notification':new_notification})
 
 # update data perizinan FIX
 def update_data_perizinan(request, id):
@@ -598,7 +665,9 @@ def update_data_perizinan(request, id):
         dataPerizinan = DataPerizinan.objects.get(id_data_proyek_id=id)
     except:
         message = "Anda belum mempunyai data perizinan"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method == 'POST':
 
@@ -636,7 +705,9 @@ def update_data_perizinan(request, id):
         if dataProyek.verified_admin_data_perizinan:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/update_data_perizinan.html', {'dataPerizinan' : dataPerizinan,'notification': notification , 'new_notification':new_notification})
 
 def update_jenis_psu(request, id):
     
@@ -650,7 +721,9 @@ def update_jenis_psu(request, id):
         daftarJenisPsu = JenisPsu.objects.get(id_data_proyek=id)
     except:
         message = "Anda belum mempunyai data jenis psu"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method == 'POST':
         my_input = []
@@ -693,7 +766,9 @@ def update_jenis_psu(request, id):
         if dataProyek.verified_admin_jenis_psu:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/update_jenis_psu.html', {'daftarJenisPsu': daftarJenisPsu,'notification': notification , 'new_notification':new_notification})
 
 
 ## update data rumah susun FIX
@@ -709,7 +784,9 @@ def update_tipe_rumah_susun(request, id):
         rumahSusun = RumahSusun.objects.get(id_rumah_susun=id)
     except:
         message = "Anda belum mempunyai data tipe rumah susun"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method=='POST':
         tipe_rumah_susun = request.POST['tipe_rumah_susun']
@@ -729,7 +806,9 @@ def update_tipe_rumah_susun(request, id):
         if dataProyek.verified_admin_tipe_rumah:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/update_tipe_rumah_susun.html', {'RumahSusun' : rumahSusun,'notification': notification , 'new_notification':new_notification})
 
 
 ## update data rumah tapak FIX
@@ -745,7 +824,9 @@ def update_tipe_rumah_tapak(request, id):
         rumahTapak = RumahTapak.objects.get(id_rumah_tapak=id)
     except:
         message = "Anda belum mempunyai data tipe rumah tapak"
-        return render(request, 'pengembang_pelaporan/error.html', {'message': message})
+        new_notification = bring_some_notification(request.user.id)
+        notification = bring_some_read_notification(request.user.id)
+        return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
 
     if request.method=='POST':
         tipe_rumah_tapak = request.POST['tipe_rumah_tapak']
@@ -768,7 +849,9 @@ def update_tipe_rumah_tapak(request, id):
         if dataProyek.verified_admin_tipe_rumah:
             return redirect('/')
         else:
-            return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak})
+            new_notification = bring_some_notification(request.user.id)
+            notification = bring_some_read_notification(request.user.id)
+            return render(request, 'pengembang_pelaporan/update_tipe_rumah_tapak.html', {'RumahTapak' : rumahTapak,'notification': notification , 'new_notification':new_notification})
 
 def tunggu_verifikasi_perusahaan(request):
     
@@ -778,6 +861,8 @@ def tunggu_verifikasi_perusahaan(request):
     if request.user.is_superuser == 1:
         return redirect('index')
 
-    return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html')
+    new_notification = bring_some_notification(request.user.id)
+    notification = bring_some_read_notification(request.user.id)
+    return render(request, 'pengembang_pelaporan/tunggu_verifikasi_perusahaan.html', {'notification': notification, 'new_notification':new_notification})
 
 
