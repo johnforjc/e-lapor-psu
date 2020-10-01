@@ -598,7 +598,7 @@ def update_data_perusahaan(request, id):
             return render(request, 'pengembang_pelaporan/update_data_perusahaan.html', {'dataPerusahaan':dataPerusahaan,'notification': notification , 'new_notification':new_notification})
 
 ## update data proyek FIX
-def update_data_proyek(request, id, is_back):
+def update_data_proyek(request, id):
     
     if not request.user.is_authenticated:
         return redirect('/')
@@ -636,13 +636,7 @@ def update_data_proyek(request, id, is_back):
             target_pembangunan = target_pembangunan,
         )
 
-        if is_back == 1:
-            if jenis_produk == "Rumah Tapak":
-                return redirect('tipe_rumah_tapak', id=id)
-            elif jenis_produk == "Rumah Susun":
-                return redirect('tipe_rumah_susun', id=id)
-        else:
-            return redirect('detail_proyek', id=id)
+        return redirect('detail_proyek', id=id)
 
     else:
         if dataProyek.verified_admin_data_proyek:
