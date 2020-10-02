@@ -245,7 +245,7 @@ def tipe_rumah_tapak(request, id):
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
             new_notification = bring_some_notification(request.user.id)
             notification = bring_some_read_notification(request.user.id)
-            return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id,'notification': notification , 'new_notification':new_notification})
+            return render(request, 'pengembang_pelaporan/tipe_rumah_tapak.html', {'jumlah_tipe' : jumlah_tipe, 'notification': notification , 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -293,7 +293,7 @@ def tipe_rumah_susun(request, id):
             jumlah_tipe = data_proyek.jumlah_tipe_rumah
             new_notification = bring_some_notification(request.user.id)
             notification = bring_some_read_notification(request.user.id)
-            return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe, 'id_data_proyek' : id,'notification': notification , 'new_notification':new_notification})
+            return render(request, 'pengembang_pelaporan/tipe_rumah_susun.html', {'jumlah_tipe' : jumlah_tipe, 'notification': notification , 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -356,7 +356,7 @@ def jenis_psu(request, id):
         if data_proyek.verified_jenis_psu == False:
             new_notification = bring_some_notification(request.user.id)
             notification = bring_some_read_notification(request.user.id)
-            return render(request, 'pengembang_pelaporan/jenis_psu.html', {'dataProyek' : data_proyek,'notification': notification , 'new_notification':new_notification})
+            return render(request, 'pengembang_pelaporan/jenis_psu.html', {'notification': notification , 'new_notification':new_notification})
         else:
             return redirect('detail_proyek', id=id)
 
@@ -403,10 +403,10 @@ def list_proyek(request):
         new_notification = bring_some_notification(request.user.id)
         notification = bring_some_read_notification(request.user.id)
         return render(request, 'pengembang_pelaporan/error.html', {'message': message,'notification': notification , 'new_notification':new_notification})
-    query = DataProyek.objects.filter(id_data_perusahaan_id=dataPerusahaan.id_data_perusahaan)
+    query = DataProyek.objects.filter(id_data_perusahaan_id=dataPerusahaan.id_data_perusahaan_id)
     new_notification = bring_some_notification(request.user.id)
     notification = bring_some_read_notification(request.user.id)
-    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : id,'notification': notification , 'new_notification':new_notification})
+    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : dataPerusahaan.id_data_perusahaan_id,'notification': notification , 'new_notification':new_notification})
 
 def folder_proyek(request, id):
     
@@ -682,7 +682,7 @@ def update_data_proyek(request, id):
         else:
             new_notification = bring_some_notification(request.user.id)
             notification = bring_some_read_notification(request.user.id)
-            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek, 'is_back' : is_back,'notification': notification , 'new_notification':new_notification})
+            return render(request, 'pengembang_pelaporan/update_data_proyek.html', {'dataProyek': dataProyek, 'notification': notification , 'new_notification':new_notification})
 
 # update data perizinan FIX
 def update_data_perizinan(request, id):
