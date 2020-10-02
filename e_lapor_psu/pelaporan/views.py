@@ -26,11 +26,11 @@ def increment(value):
     return value
 
 def bring_some_notification(id):
-    notification = Notifikasi.objects.filter(id_data_perusahaan = id, is_read=False)
+    notification = Notifikasi.objects.filter(id_data_perusahaan_id = id, is_read=False)
     return notification
 
 def update_notification(request, id):
-    notification = Notifikasi.objects.filter(id_data_perusahaan = id).update(is_read=True)
+    notification = Notifikasi.objects.filter(id_data_perusahaan_id = id).update(is_read=True)
     return HttpResponse(200)
 
 # Create your views here.
@@ -57,7 +57,7 @@ def form_data_perusahaan(request):
     if request.user.is_superuser == 1:
         return redirect('index')
 
-    if DataPerusahaan.objects.filter(id_user_id=request.user.id):
+    if DataPerusahaan.objects.filter(id_data_perusahaan_id=request.user.id):
         message = "Anda hanya bisa memiliki 1 data perusahaan"
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
 
@@ -76,7 +76,7 @@ def form_data_perusahaan(request):
         akta = request.FILES['akta_pendirian_badan_usaha_atau_badan_hukum']
 
         dataPerusahaan = DataPerusahaan.objects.create(
-            id_user_id = request.user.id,
+            id_data_perusahaan_id = request.user.id,
             nama_perusahaan = nama_perusahaan,
             akta_pendirian_badan_usaha = akta,
             nama_pemilik   = nama_pemilik,
@@ -104,7 +104,7 @@ def form_data_proyek(request):
         return redirect('index')
     
     try:
-        dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan_id=request.user.id)
     except:
         message = "Anda belum mempunyai data perusahaan"
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
@@ -116,7 +116,7 @@ def form_data_proyek(request):
         jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
         target_pembangunan = request.POST['target_pembangunan']
         
-        id_data_perusahaan = dataPerusahaan.id_data_perusahaan
+        id_data_perusahaan = dataPerusahaan.id_data_perusahaan_id
         
         # POST data upload here
         dataProyek = DataProyek.objects.create(
@@ -339,7 +339,7 @@ def detail_perusahaan(request):
         return redirect('index')
     
     try:
-        dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan_id=request.user.id)
     except:
         message = "Anda belum mempunyai data perusahaan"
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
@@ -360,12 +360,12 @@ def list_proyek(request):
         return redirect('index')
 
     try:
-        dataPerusahaan = DataPerusahaan.objects.get(id_user_id=request.user.id)
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan_id=request.user.id)
     except:
         message = "Anda belum mempunyai data proyek"
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
-    query = DataProyek.objects.filter(id_data_perusahaan_id=dataPerusahaan.id_data_perusahaan)
-    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : id})
+    query = DataProyek.objects.filter(id_data_perusahaan_id=dataPerusahaan.id_data_perusahaan_id)
+    return render(request, 'pengembang_pelaporan/list_proyek.html', {'dataProyeks' : query, 'id_data_perusahaan' : dataPerusahaan.id_data_perusahaan_id})
 
 def folder_proyek(request, id):
     
@@ -478,7 +478,7 @@ def update_data_perusahaan(request, id):
         return redirect('index')
     
     try:
-        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan_id=id)
     except:
         message = "Anda belum mempunyai data perusahaan"
         return render(request, 'pengembang_pelaporan/error.html', {'message': message})
@@ -493,7 +493,7 @@ def update_data_perusahaan(request, id):
         website = request.POST['website']
         nomor_telp = request.POST['no_telp']
 
-        dataPerusahaan = DataPerusahaan.objects.filter(id_data_perusahaan=id).update(
+        dataPerusahaan = DataPerusahaan.objects.filter(id_data_perusahaan_id=id).update(
             nama_perusahaan= nama_perusahaan,
             nama_pemilik   = nama_pemilik,
             bentuk_perusahaan  = bentuk_perusahaan,
@@ -505,7 +505,7 @@ def update_data_perusahaan(request, id):
         )
 
         ## Check apakah ada file yang diupdate
-        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan_id=id)
         if request.FILES.get('foto_pemilik', False):
             foto_pemilik = request.FILES['foto_pemilik']
             default_storage.delete(dataPerusahaan.foto_pemilik.path)
@@ -554,12 +554,50 @@ def update_data_proyek(request, id):
         luas_total_area_proyek = request.POST['luas_total_area_proyek']
         jumlah_total_unit = request.POST['jumlah_total_unit_yang_akan_dibangun']
         jenis_produk = request.POST['jenis_produk']
-        jumlah_tipe_rumah = request.POST['jumlah_tipe_rumah']
+        jumlah_tipe_rumah = int(request.POST['jumlah_tipe_rumah'])
         target_pembangunan = request.POST['target_pembangunan']
         
         # kalau sudah ada perusahaan idnya
         id_data_perusahaan = request.POST['id_data_perusahaan']
         
+        query = DataProyek.objects.get(id_data_proyek=id)
+
+        if jumlah_tipe_rumah < query.jumlah_tipe_rumah:
+            for index in range(query.jumlah_tipe_rumah, jumlah_tipe_rumah, -1):
+                if query.jenis_produk == "Rumah Tapak":
+                    RumahTapak.objects.filter(id_data_proyek_id=id, tipe_rumah_tapak=index).delete()
+                else:
+                    RumahSusun.objects.filter(id_data_proyek_id=id, tipe_rumah_susun=index).delete()
+            DataProyek.objects.filter(id_data_proyek=id).update(
+                verified_admin_tipe_rumah = False
+            )
+                    
+        elif jumlah_tipe_rumah > query.jumlah_tipe_rumah:
+            for index in range(query.jumlah_tipe_rumah+1, jumlah_tipe_rumah+1):
+                tipeRumah = []
+                if query.jenis_produk == "Rumah Tapak":
+                    tipeRumah.append(
+                        RumahTapak.objects.create(
+                            tipe_rumah_tapak = index,
+                            lb_rumah_tapak = 0,
+                            lt_rumah_tapak = 0,
+                            jumlah_unit_rumah_tapak = 0,
+                            id_data_proyek_id = id,
+                        )
+                    )
+                else:
+                    tipeRumah.append(
+                        RumahSusun.objects.create(
+                            tipe_rumah_susun = index,
+                            lb_rumah_susun = 0,
+                            jumlah_unit_rumah_susun = 0,
+                            id_data_proyek_id = id,
+                        )
+                    )
+            DataProyek.objects.filter(id_data_proyek=id).update(
+                verified_admin_tipe_rumah = False
+            )
+
         # POST data upload here
         dataProyek = DataProyek.objects.filter(id_data_proyek=id).update(
             id_data_perusahaan_id = id_data_perusahaan,

@@ -161,7 +161,7 @@
                             {% if dataPerusahaan.verified_admin %}
                                 <div class="btn btn-primary">Data anda telah diverifikasi</div>
                             {% else %}
-                                <a href="{% url 'update_data_perusahaan' dataPerusahaan.id_data_perusahaan %}" class="btn btn-primary"> Update Data Perusahaan</a>
+                                <a href="{% url 'update_data_perusahaan' dataPerusahaan.id_data_perusahaan_id %}" class="btn btn-primary"> Update Data Perusahaan</a>
                             {% endif%}
                         </div>
 

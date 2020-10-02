@@ -165,12 +165,12 @@
                             <h2 class="sub-header"> Daftar Proyek </h2>
                         </div>
 
-                        <a href="{% url 'listing_proyek' entry.id_data_perusahaan %}" class="btn btn-primary" id="lihat-daftar-proyek"> Lihat Daftar Proyek </a>
+                        <a href="{% url 'listing_proyek' entry.id_data_perusahaan_id %}" class="btn btn-primary" id="lihat-daftar-proyek"> Lihat Daftar Proyek </a>
 
                         <div class="row" id="admin-verify-back">
-                            <a href="{% url 'verifikasi_perusahaan_berhasil' entry.id_data_perusahaan %}" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
-                            <a href="{% url 'kirim_notifikasi' entry.id_data_perusahaan %}" class="btn btn-danger" id="kirim-notifikasi"> Kirim Notifikasi </a>
-                            <form action="{% url 'delete_data_perusahaan' entry.id_data_perusahaan %}" method="POST" enctype="multipart/form-data">
+                            <a href="{% url 'verifikasi_perusahaan_berhasil' entry.id_data_perusahaan_id %}" class="btn btn-primary" id="verify-admin"> Lakukan Verifikasi </a>
+                            <a href="{% url 'kirim_notifikasi' entry.id_data_perusahaan_id %}" class="btn btn-danger" id="kirim-notifikasi"> Kirim Notifikasi </a>
+                            <form action="{% url 'delete_data_perusahaan' entry.id_data_perusahaan_id %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="submit" value="Delete" class="btn btn-danger" id="delete-data" name="submit" />
                             </form>

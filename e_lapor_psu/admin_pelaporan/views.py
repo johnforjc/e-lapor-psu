@@ -71,7 +71,7 @@ def read_perusahaan(request, id):
     if not request.user.is_superuser:
         return redirect('/')
 
-    entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
+    entry = DataPerusahaan.objects.get(id_data_perusahaan_id = id)
     
     ktpPDF = 0
     aktaPDF = 0   
@@ -198,7 +198,7 @@ def kirim_notifikasi(request, id):
     if not request.user.is_superuser:
         return redirect('/')
     
-    entry = DataPerusahaan.objects.get(id_data_perusahaan = id)
+    entry = DataPerusahaan.objects.get(id_data_perusahaan_id = id)
     if request.method == 'POST':
         isi_notifikasi = request.POST['notifikasi']
         subject_notifikasi = request.POST['subject']
@@ -221,7 +221,7 @@ def verifikasi_perusahaan_berhasil(request, id):
     if not request.user.is_superuser:
         return redirect('/')
     
-    DataPerusahaan.objects.filter(id_data_perusahaan=id).update(verified_admin=True)
+    DataPerusahaan.objects.filter(id_data_perusahaan_id=id).update(verified_admin=True)
     return render(request, 'admin_pelaporan/verifikasi_perusahaan_berhasil.html', {'entry': id})
 
 def verifikasi_data_proyek(request, id):
@@ -272,7 +272,7 @@ def delete_data_perusahaan(request, id):
         return redirect('/')
     
     if request.method == 'POST':
-        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan=id)
+        dataPerusahaan = DataPerusahaan.objects.get(id_data_perusahaan_id=id)
 
         list_proyek = DataProyek.objects.filter(id_data_perusahaan_id=id)
 
