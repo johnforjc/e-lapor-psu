@@ -210,6 +210,7 @@ def kirim_notifikasi(request, id):
         )
         notifikasi = Notifikasi.objects.create(
             isi_notifikasi = isi_notifikasi,
+            subject_notifikasi = subject_notifikasi,
             id_data_perusahaan_id = id,
         )
         return redirect('read_perusahaan', id)
