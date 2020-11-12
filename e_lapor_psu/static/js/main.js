@@ -85,7 +85,6 @@ function remover()
   {
     // // AJAX MULAI DARI SINI
     var idList = document.querySelectorAll('.list_id');
-    // var idArray = []
     var form = document.getElementById('list_id_form');
     var inputList = document.querySelectorAll('input');
 

@@ -127,7 +127,7 @@
                                 <div class="notification-text">Notifikasi</div>
                                 <form action="update_notification" method="post" id="list_id_form">
                                     {% csrf_token %}
-                                    {% for notif in notification %}
+                                    {% for notif in new_notification %}
                                         <input type="hidden" class="list_id" value="{{notif.id_notifikasi}}">
                                     {% endfor %}
                                     <div class="dropdown-menu dropdown-menu-right notification-div" aria-labelledby="navbarDropdown">

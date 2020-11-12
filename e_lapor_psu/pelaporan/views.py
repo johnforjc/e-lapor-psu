@@ -43,15 +43,6 @@ def index_lapor_pengembang(request):
 
     if request.user.is_superuser == 1:
         return redirect('index')
-
-    print('------------------------------------------')
-    path = os.getcwd()
-    print(path)
-    print('------------------------------------------')
-    new_notification = bring_some_notification(request.user.id)
-    notification = bring_some_read_notification(request.user.id)
-    # new_notification = bring_some_notification(1)
-    # notification = bring_some_read_notification(1)
     new_notification = bring_some_notification(request.user.id)
     notification = bring_some_read_notification(request.user.id)
     return render(request, 'pengembang_pelaporan/index_lapor_pengembang.html', {'notification': notification , 'new_notification':new_notification})
