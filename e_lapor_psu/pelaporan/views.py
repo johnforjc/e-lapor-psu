@@ -578,7 +578,7 @@ def update_data_perusahaan(request, id):
             path = default_storage.save(new_path, akta)
         dataPerusahaan.save()
 
-        return redirect('/')
+        return redirect('detail_perusahaan')
 
     else:
         if dataPerusahaan.verified_admin:
@@ -721,7 +721,7 @@ def update_data_perizinan(request, id):
             path = default_storage.save(new_path, izin_penggunaan_bangunan)
         dataPerizinan.save()
       
-        return redirect('/')
+        return redirect('detail_perizinan', id=id)
 
     else:
         dataProyek = DataProyek.objects.get(id_data_proyek=id)
