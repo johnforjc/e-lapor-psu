@@ -1,5 +1,6 @@
 # E-Lapor-PSU
 
+## Description
 This is a one of the core feature of the project for "E-Pengelolaan Aset Prasarana, Sarana dan Utilitas (PSU) Perumahan Berbasis Web di Kabupaten Sidoarjo". 
 This feature focuses on checking the input data from "Pengembang" by the admin. If the admin finds a problem with the input, admin can send notifications to "Pengembang" so that they can fix the input. Those data includes:
 * Data Perusahaan
@@ -8,6 +9,11 @@ This feature focuses on checking the input data from "Pengembang" by the admin. 
 * Jenis PSU
 
 ![E-PSU Diagram](./e-psu-chart.jpg)
+
+## Contributors
+1. Patrick Sungkharisma 05111740000041
+2. Jonathan Alphabert Sutanto 05111740000053
+3. Fandi Pranata Jaya 05111740000056
 
 ## Install Guide
 1. Create virtual environment by typing ``` virtualenv ENVIRONMENT_NAME ``` on the cmd
