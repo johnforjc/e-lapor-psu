@@ -1,6 +1,6 @@
 # E-Lapor-PSU
 
-##Install Guide
+## Install Guide
 1. Create virtual environment by typing ``` virtualenv ENVIRONMENT_NAME ``` on the cmd
 
 2. Activate the virtual environment by using ``` ENVIRONMENT_NAME\scripts\activate ```
