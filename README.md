@@ -7,6 +7,8 @@ This feature focuses on checking the input data from "Pengembang" by the admin. 
 * Data Perizinan
 * Jenis PSU
 
+![E-PSU Diagram](./e-psu-chart.jpg)
+
 ## Install Guide
 1. Create virtual environment by typing ``` virtualenv ENVIRONMENT_NAME ``` on the cmd
 
