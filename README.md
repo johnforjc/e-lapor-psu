@@ -1,61 +1,24 @@
-# Install Project Tutorial
+# E-Lapor-PSU
 
-1. Create virtual environment
-```
-virtualenv ENVIRONMENT_NAME
-```
+##Install Guide
+1. Create virtual environment by typing ``` virtualenv ENVIRONMENT_NAME ``` on the cmd
 
+2. Activate the virtual environment by using ``` ENVIRONMENT_NAME\scripts\activate ```
 
-2. Activate the virtual environment
-```
-ENVIRONMENT_NAME\scripts\activate
-```
-
-
-3. Install django
+3. Install the neccessary dependencies (Django, Pillow, MySQLClient)
 ```
 python -m pip install Django
-```
-
-
-4. Install Pillow for ImageField
-```
 python -m pip install Pillow
+python -m pip install mysqlclient
 ```
 
+4. Go to e_lapor_psu folder ``` cd e_lapor_psu ```
 
-5. Install mysqlclient
-```
-pip install mysqlclient
-```
+5. Open xampp first, then open phpmyadmin and create e-lapor-psu database on ``` localhost/phpmyadmin ```
 
+6. Migrate data to the database using ``` python manage.py migrate ```
 
-6. Go to e_lapor_psu folder
-```
-cd e_lapor_psu
-```
+7. Create superuser to be the first admin using ``` python manage.py createsuperuser ```. More admin can be created by using this admin account.
 
-
-7. Open xampp first, then open phpmyadmin and create e-lapor-psu database
-```
-localhost/phpmyadmin
-```
-
-
-8. Migrate data to database
-```
-python manage.py migrate
-```
-
-
-9. Create superuser to be the first admin
-```
-python manage.py createsuperuser
-```
-
-
-10. Run the server
-```
-python manage.py runserver
-```
+8. Run the development server simply by typing ``` python manage.py runserver ```
 
